@@ -56,7 +56,7 @@ struct Edge {
 	/**
 	 * Gibt halbierte Kante an einem Punkt zurück
 	 */
-	Edge* get_subedge_at (Vertex* v) {
+	Edge* subedge (Vertex* v) {
 		if (v == this->v1) {
 			return this->s1;
 		} else {
@@ -110,8 +110,8 @@ class Net {
 	}
 	Triangle* new_triangle (Vertex* v1, Vertex* v2, Vertex* v3, Edge* e1, Edge* e2, Edge* e3) {
 		Triangle t (v1, v2, v3, e1, e2, e3);
-		this->triangles.push_back(t);
-		return &this->triangles.back();
+		this->triangles.push_front(t);
+		return &this->triangles.front();
 	}
 
 	/**
@@ -165,18 +165,40 @@ class Net {
 	}
 
 	void refine_mesh () {
-		for (std::list<Triangle>::iterator it = this->triangles.begin(); it != this->triangles.end(); it++)	{
-			// Kanten halbieren
+		for (
+			std::list<Triangle>::iterator it = this->triangles.begin();
+		   	it != this->triangles.end(); 
+		)	{
+			Triangle* t = &(*it);	// Aktuelles Dreieck
+
+			// Kanten halbieren (dabei werden die Teilkanten erstellt)
 			this->halve_edge(it->e1);
 			this->halve_edge(it->e2);
 			this->halve_edge(it->e3);
-			// Neue Kanten erzeugen
-			Edge ei1 (it->e2->m, it->e3->m);
-			Edge ei2 (it->e1->m, it->e3->m);
-			Edge ei3 (it->e1->m, it->e2->m);
-
+			// Neue innere Kanten erzeugen
+			Edge* ei1 = this->new_edge(it->e2->m, it->e3->m);
+			Edge* ei2 = this->new_edge(it->e1->m, it->e3->m);
+			Edge* ei3 = this->new_edge(it->e1->m, it->e2->m);
 			// Neue Dreiecke erzeugen
-			//Triangle t1 (e1
+			
+			
+			this->new_triangle(		// Linkes Dreieck
+					t->v1, t->e3->m, t->e2->m,
+					ei1, t->e2->subedge(t->v1), t->e3->subedge(t->v1)
+				);
+			this->new_triangle(		// Rechtes Dreieck
+					t->v2, t->e1->m, t->e3->m,
+					ei2, t->e3->subedge(t->v2), t->e1->subedge(t->v2)
+				);
+			this->new_triangle(		// Oberes Dreieck
+					t->v3, t->e2->m, t->e1->m,
+					ei3, t->e1->subedge(t->v3), t->e2->subedge(t->v3)
+				);
+			this->new_triangle(		// Inneres Dreieck
+					t->e1->m, t->e2->m, t->e3->m,
+					ei1, ei2, ei3
+				);
+			this->triangles.erase(it++);
 		}
 	}
 
@@ -207,8 +229,10 @@ class Net {
 		e->m = m;
 
 		// Neue Kanten erzeugen
-		e->s1 = this->new_edge(e->v1, e->m);
-		e->s2 = this->new_edge(e->m, e->v2);
+		// Die Teilkanten sind genau dann Randkanten, wenn die
+		// aktuelle Kante eine Randkante ist
+		e->s1 = this->new_edge(e->v1, e->m, e->is_margin());
+		e->s2 = this->new_edge(e->m, e->v2, e->is_margin());
 	}
 };
 
@@ -221,7 +245,7 @@ class CircleNet : public Net {
 		Vertex v(
 			std::cos(2 * M_PI * t),		// x-Koordinate
 			std::sin(2 * M_PI * t),		// y-Koordinate
-			0,							// z-Koordinate
+			t,							// z-Koordinate
 			t
 		);
 		return v;
@@ -236,6 +260,8 @@ int main () {
 	
 	my_circle.init();
 
+	my_circle.refine_mesh();
+	my_circle.refine_mesh();
 	my_circle.refine_mesh();
 
 	

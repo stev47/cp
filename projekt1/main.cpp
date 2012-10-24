@@ -26,6 +26,9 @@ struct Vertex {
 	bool is_margin () {
 		return (this->t >= 0);
 	}
+	void add_triangle (Triangle* t) {
+		this->triangles.push_back(t);		
+	}
 };
 
 /**
@@ -91,8 +94,8 @@ class Net {
 	 */
 	virtual Vertex f (double t) = 0;
 
-	Vertex* new_vertex (double x, double y, double z, double t) {
-		Vertex v (x, y, z, t);
+	Vertex* new_vertex (double x, double y, double z) {
+		Vertex v (x, y, z);
 		this->vertices.push_back(v);
 		return &this->vertices.back();
 	}
@@ -100,7 +103,7 @@ class Net {
 		this->vertices.push_back(this->f(t));
 		return &this->vertices.back();
 	}
-	Edge* new_edge (Vertex* v1, Vertex* v2, bool margin) {
+	Edge* new_edge (Vertex* v1, Vertex* v2, bool margin = false) {
 		Edge e (v1, v2, margin);
 		this->edges.push_back(e);
 		return &this->edges.back();
@@ -125,9 +128,9 @@ class Net {
 
 		Triangle* t = this->new_triangle(v1, v2, v3, e1, e2, e3);
 		
-		v1->triangles.push_back(t);
-		v2->triangles.push_back(t);
-		v3->triangles.push_back(t);
+		v1->add_triangle(t);
+		v2->add_triangle(t);
+		v3->add_triangle(t);
 	}
 
 	void print () {
@@ -173,12 +176,14 @@ class Net {
 
 			// Neue Dreiecke erzeugen
 			//Triangle t1 (e1
-			
 		}
 	}
 
 	void halve_edge (Edge* e) {
+		Vertex* m;
+
 		if (e->is_margin()) {
+			// Neuen Punkt auf der Kurve berechnen
 			double t1 = e->v1->t;
 			double t2 = e->v2->t;
 
@@ -188,27 +193,21 @@ class Net {
 			if (t > 1)
 				t -= 1;
 
-			Vertex v = this->f (t);
-			this->vertices.push_back(v);
+			m = this->new_vertex(t);
 		} else {
-			Vertex v(
+			// Mittelpunkt
+			m = this->new_vertex(
 				(e->v1->x + e->v2->x) / 2,
 				(e->v1->y + e->v2->y) / 2,
 				(e->v1->z + e->v2->z) / 2
 			);
-			this->vertices.push_back(v);
 		}
 		// Der Kante den Mittelpunkt zuweisen
-		Vertex* vp = &this->vertices.back();
-		e->m = vp;
+		e->m = m;
 
 		// Neue Kanten erzeugen
-		Edge s1(e->v1, e->m);
-		this->edges.push_back(s1);
-		e->s1 = &this->edges.back();
-		Edge s2(e->m, e->v2);
-		this->edges.push_back(s2);
-		e->s2 = &this->edges.back();
+		e->s1 = this->new_edge(e->v1, e->m);
+		e->s2 = this->new_edge(e->m, e->v2);
 	}
 };
 

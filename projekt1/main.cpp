@@ -138,21 +138,22 @@ class Net {
 		std::cout.setf(std::ios::fixed, std::ios::floatfield);
 		std::cout.precision(3);
 		for (std::list<Vertex>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
-			it->id = i++;
 			std::cout << "v " << it->x << " " << it->y << " " << it->z << std::endl;
+			it->id = i++;
 		}
-		int curve_begin = i + 1;
+		int curve_begin = i;
 		for (float t = 0; t < 1; t += 0.01) {
-			i++;
 			Vertex v = this->f(t);
 			std::cout << "v " << v.x << " " << v.y << " " << v.z << std::endl;
+			i++;
 		}
-		int curve_end = i;
+		int curve_end = i - 1;
 		std::cout << "l";
 		for (int i = curve_begin; i <= curve_end; i++) {
 			std::cout << " " << i;
 		}
-		std::cout << curve_begin << std::endl;
+		//std::cout << " " << curve_begin; // Zurück zum Anfangspunkt der Kurve verbinden
+		std::cout << std::endl;
 
 		
 		for (std::list<Triangle>::iterator it = this->triangles.begin(); it != this->triangles.end(); it++) {

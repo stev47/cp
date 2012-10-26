@@ -234,6 +234,15 @@ class Net {
 		e->s1 = this->new_edge(e->v1, e->m, e->is_margin());
 		e->s2 = this->new_edge(e->m, e->v2, e->is_margin());
 	}
+
+	Vertex cross_product(Vertex v1, Vertex v2) {
+	  //Kreuzprodukt
+	    Vertex v((v1.y*v2.z)-(v1.z*v2.y),(v1.z*v2.x)-(v1.x*v2.z), (v1.x*v2.y)-(v1.y*v2.x)) ;
+	  
+	    return v;
+	    
+	}
+  
 };
 
 /**
@@ -263,10 +272,7 @@ int main () {
 	my_circle.refine_mesh();
 	my_circle.refine_mesh();
 	my_circle.refine_mesh();
-
-	
 	my_circle.print();
-
 
 	return 0;
 }

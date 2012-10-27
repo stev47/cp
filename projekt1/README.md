@@ -20,3 +20,9 @@ Minimierung
 -----------
 
 Gradientenverfahren?
+
+Ausgabe
+-------
+
+Die Ausgabe erfolgt in Form von Wavefront .obj-Dateien.
+Siehe http://www.martinreddy.net/gfx/3d/OBJ.spec für die Spezifikation.

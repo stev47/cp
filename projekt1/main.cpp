@@ -2,14 +2,10 @@
 #include <iostream>
 #include <cmath>
 #include <list>
-#include <set>
-
 
 using namespace std;
 
-
-struct Triangle;
-
+struct Triangle;	// forward declaration: wird in Vertex gebraucht
 /**
  * Knotenpunkt
  */
@@ -19,10 +15,11 @@ struct Vertex {
 	double t;			//<! Stelle auf der parametrisierten Kurve
 	list<Triangle*> triangles;	//<! Liste von zugehörigen Dreiecken
 
-	Vertex (double x, double y, double z) : x(x), y(y), z(z), t(-1) {
-	}
-	Vertex (double x, double y, double z, double t) : x(x), y(y), z(z), t(t) {
-	}
+	Vertex (double x, double y, double z) 
+		: x(x), y(y), z(z), t(-1) {}
+	Vertex (double x, double y, double z, double t)
+		: x(x), y(y), z(z), t(t) {}
+
 	bool is_margin () {
 		return (this->t >= 0);
 	}
@@ -42,10 +39,10 @@ struct Edge {
 	Vertex* m;				//<! Neuer Mittelpunkt bei Halbierung
 	Edge *s1, *s2;			//<! Neue Kanten bei Halbierung
 
-	Edge (Vertex* v1, Vertex* v2) : v1(v1), v2(v2), margin(false), m(NULL) {
-	}
-	Edge (Vertex* v1, Vertex* v2, bool margin) : v1(v1), v2(v2), margin(margin), m(NULL) {
-	}
+	Edge (Vertex* v1, Vertex* v2)
+		: v1(v1), v2(v2), margin(false), m(NULL) {}
+	Edge (Vertex* v1, Vertex* v2, bool margin) 
+		: v1(v1), v2(v2), margin(margin), m(NULL) {}
 
 	bool is_halved () {
 		return (this->m != NULL);
@@ -57,11 +54,11 @@ struct Edge {
 	 * Gibt halbierte Kante an einem Punkt zurück
 	 */
 	Edge* subedge (Vertex* v) {
-		if (v == this->v1) {
+		if (v == this->v1) 
 			return this->s1;
-		} else {
+		if (v == this->v2)
 			return this->s2;
-		}		
+		return NULL;
 	}
 };
 
@@ -74,16 +71,15 @@ struct Triangle {
 	Triangle *t1, *t2, *t3;		//<! Angrenzende Dreiecke
 
 	Triangle (Vertex* v1, Vertex* v2, Vertex* v3, Edge* e1, Edge* e2, Edge* e3) 
-		: v1(v1), v2(v2), v3(v3), e1(e1), e2(e2), e3(e3) {
-	}
+		: v1(v1), v2(v2), v3(v3), e1(e1), e2(e2), e3(e3) {}
 };
 
 
 class Net {
 	protected:
 	list<Vertex*> vertices;		//!< Knotenliste
-	list<Triangle*> triangles;	//!< Dreiecksliste
 	list<Edge*> edges;			//!< Kantenliste
+	list<Triangle*> triangles;	//!< Dreiecksliste
 	
 	public:
 	/**
@@ -149,10 +145,8 @@ class Net {
 		for (int i = curve_begin; i <= curve_end; i++) {
 			cout << " " << i;
 		}
-		//cout << " " << curve_begin; // Zurück zum Anfangspunkt der Kurve verbinden
 		cout << endl;
 
-		
 		for (list<Triangle*>::iterator it = this->triangles.begin(); it != this->triangles.end(); it++) {
 			cout << "f " << (*it)->v1->id << " " << (*it)->v2->id << " " << (*it)->v3->id << endl;
 		}
@@ -282,9 +276,6 @@ class CircleNet : public Net {
 		return v;
 	}
 };
-
-void m(const char* x) {
-}
 
 int main () {
 	CircleNet my_circle;

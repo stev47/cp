@@ -81,9 +81,9 @@ struct Triangle {
 
 class Net {
 	protected:
-	std::list<Vertex> vertices;		//!< Knotenliste
-	std::list<Triangle> triangles;	//!< Dreiecksliste
-	std::list<Edge> edges;			//!< Kantenliste
+	std::list<Vertex*> vertices;		//!< Knotenliste
+	std::list<Triangle*> triangles;	//!< Dreiecksliste
+	std::list<Edge*> edges;			//!< Kantenliste
 	
 	public:
 	/**
@@ -95,23 +95,20 @@ class Net {
 	virtual Vertex f (double t) = 0;
 
 	Vertex* new_vertex (double x, double y, double z) {
-		Vertex v (x, y, z);
-		this->vertices.push_back(v);
-		return &this->vertices.back();
+		this->vertices.push_back(new Vertex(x,y,z));
+		return this->vertices.back();
 	}
 	Vertex* new_vertex (double t) {
-		this->vertices.push_back(this->f(t));
-		return &this->vertices.back();
+		this->vertices.push_back(new Vertex(this->f(t)));
+		return this->vertices.back();
 	}
 	Edge* new_edge (Vertex* v1, Vertex* v2, bool margin = false) {
-		Edge e (v1, v2, margin);
-		this->edges.push_back(e);
-		return &this->edges.back();
+		this->edges.push_back(new Edge(v1, v2, margin));
+		return this->edges.back();
 	}
 	Triangle* new_triangle (Vertex* v1, Vertex* v2, Vertex* v3, Edge* e1, Edge* e2, Edge* e3) {
-		Triangle t (v1, v2, v3, e1, e2, e3);
-		this->triangles.push_front(t);
-		return &this->triangles.front();
+		this->triangles.push_front(new Triangle(v1, v2, v3, e1, e2, e3));
+		return this->triangles.front();
 	}
 
 	/**
@@ -137,9 +134,9 @@ class Net {
 		unsigned int i = 1;
 		std::cout.setf(std::ios::fixed, std::ios::floatfield);
 		std::cout.precision(3);
-		for (std::list<Vertex>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
-			std::cout << "v " << it->x << " " << it->y << " " << it->z << std::endl;
-			it->id = i++;
+		for (std::list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
+			std::cout << "v " << (*it)->x << " " << (*it)->y << " " << (*it)->z << std::endl;
+			(*it)->id = i++;
 		}
 		int curve_begin = i;
 		for (float t = 0; t < 1; t += 0.01) {
@@ -156,29 +153,29 @@ class Net {
 		std::cout << std::endl;
 
 		
-		for (std::list<Triangle>::iterator it = this->triangles.begin(); it != this->triangles.end(); it++) {
-			std::cout << "f " << it->v1->id << " " << it->v2->id << " " << it->v3->id << std::endl;
+		for (std::list<Triangle*>::iterator it = this->triangles.begin(); it != this->triangles.end(); it++) {
+			std::cout << "f " << (*it)->v1->id << " " << (*it)->v2->id << " " << (*it)->v3->id << std::endl;
 		}
-		for (std::list<Vertex>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
-			std::cout << "p " << it->id << std::endl;
+		for (std::list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
+			std::cout << "p " << (*it)->id << std::endl;
 		}
 	}
 
 	void refine_mesh () {
 		for (
-			std::list<Triangle>::iterator it = this->triangles.begin();
+			std::list<Triangle*>::iterator it = this->triangles.begin();
 		   	it != this->triangles.end(); 
 		)	{
-			Triangle* t = &(*it);	// Aktuelles Dreieck
+			Triangle* t = (*it);	// Aktuelles Dreieck
 
 			// Kanten halbieren (dabei werden die Teilkanten erstellt)
-			this->halve_edge(it->e1);
-			this->halve_edge(it->e2);
-			this->halve_edge(it->e3);
+			this->halve_edge(t->e1);
+			this->halve_edge(t->e2);
+			this->halve_edge(t->e3);
 			// Neue innere Kanten erzeugen
-			Edge* ei1 = this->new_edge(it->e2->m, it->e3->m);
-			Edge* ei2 = this->new_edge(it->e1->m, it->e3->m);
-			Edge* ei3 = this->new_edge(it->e1->m, it->e2->m);
+			Edge* ei1 = this->new_edge(t->e2->m, t->e3->m);
+			Edge* ei2 = this->new_edge(t->e1->m, t->e3->m);
+			Edge* ei3 = this->new_edge(t->e1->m, t->e2->m);
 			// Neue Dreiecke erzeugen
 			
 			

@@ -17,7 +17,7 @@ struct Vertex {
 	unsigned int id;	//<! Index, nur für die Ausgabefunktion nötig
 	double x, y, z;		//<! Koordinaten (public für die Ausgabe)
 	double t;			//<! Stelle auf der parametrisierten Kurve
-	std::list<Triangle*> triangles;	//<! Liste von zugehörigen Dreiecken
+	list<Triangle*> triangles;	//<! Liste von zugehörigen Dreiecken
 
 	Vertex (double x, double y, double z) : x(x), y(y), z(z), t(-1) {
 	}
@@ -81,9 +81,9 @@ struct Triangle {
 
 class Net {
 	protected:
-	std::list<Vertex*> vertices;		//!< Knotenliste
-	std::list<Triangle*> triangles;	//!< Dreiecksliste
-	std::list<Edge*> edges;			//!< Kantenliste
+	list<Vertex*> vertices;		//!< Knotenliste
+	list<Triangle*> triangles;	//!< Dreiecksliste
+	list<Edge*> edges;			//!< Kantenliste
 	
 	public:
 	/**
@@ -132,38 +132,38 @@ class Net {
 
 	void print () {
 		unsigned int i = 1;
-		std::cout.setf(std::ios::fixed, std::ios::floatfield);
-		std::cout.precision(3);
-		for (std::list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
-			std::cout << "v " << (*it)->x << " " << (*it)->y << " " << (*it)->z << std::endl;
+		cout.setf(ios::fixed, ios::floatfield);
+		cout.precision(3);
+		for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
+			cout << "v " << (*it)->x << " " << (*it)->y << " " << (*it)->z << endl;
 			(*it)->id = i++;
 		}
 		int curve_begin = i;
 		for (float t = 0; t < 1; t += 0.01) {
 			Vertex v = this->f(t);
-			std::cout << "v " << v.x << " " << v.y << " " << v.z << std::endl;
+			cout << "v " << v.x << " " << v.y << " " << v.z << endl;
 			i++;
 		}
 		int curve_end = i - 1;
-		std::cout << "l";
+		cout << "l";
 		for (int i = curve_begin; i <= curve_end; i++) {
-			std::cout << " " << i;
+			cout << " " << i;
 		}
-		//std::cout << " " << curve_begin; // Zurück zum Anfangspunkt der Kurve verbinden
-		std::cout << std::endl;
+		//cout << " " << curve_begin; // Zurück zum Anfangspunkt der Kurve verbinden
+		cout << endl;
 
 		
-		for (std::list<Triangle*>::iterator it = this->triangles.begin(); it != this->triangles.end(); it++) {
-			std::cout << "f " << (*it)->v1->id << " " << (*it)->v2->id << " " << (*it)->v3->id << std::endl;
+		for (list<Triangle*>::iterator it = this->triangles.begin(); it != this->triangles.end(); it++) {
+			cout << "f " << (*it)->v1->id << " " << (*it)->v2->id << " " << (*it)->v3->id << endl;
 		}
-		for (std::list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
-			std::cout << "p " << (*it)->id << std::endl;
+		for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
+			cout << "p " << (*it)->id << endl;
 		}
 	}
 
 	void refine_mesh () {
 		for (
-			std::list<Triangle*>::iterator it = this->triangles.begin();
+			list<Triangle*>::iterator it = this->triangles.begin();
 		   	it != this->triangles.end(); 
 		)	{
 			Triangle* t = (*it);	// Aktuelles Dreieck
@@ -274,8 +274,8 @@ class CircleNet : public Net {
 	public:
 	virtual Vertex f (double t) {
 		Vertex v(
-			std::cos(2 * M_PI * t),		// x-Koordinate
-			std::sin(2 * M_PI * t),		// y-Koordinate
+			cos(2 * M_PI * t),		// x-Koordinate
+			sin(2 * M_PI * t),		// y-Koordinate
 			t,							// z-Koordinate
 			t
 		);

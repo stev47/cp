@@ -2,8 +2,10 @@
 #include <iostream>
 #include <cmath>
 #include <list>
+#include <math.h>
 
 using namespace std;
+
 
 struct Triangle;	// forward declaration: wird in Vertex gebraucht
 /**
@@ -258,6 +260,11 @@ class Net {
 	    return v;
 	    
 	}
+	
+	double Vertex_Value(Vertex v1) {
+	  //Betrag eines Vektors
+	    return sqrt((v1.x*v1.x)+(v1.y*v1.y)+(v1.z*v1.z));
+	}
   
 };
 
@@ -286,6 +293,6 @@ int main () {
 	my_circle.refine_mesh();
 	my_circle.refine_mesh();
 	my_circle.print();
-
 	return 0;
+
 }

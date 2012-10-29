@@ -42,9 +42,9 @@ struct Edge {
 	Vertex* m;				//<! Neuer Mittelpunkt bei Halbierung
 	Edge *s1, *s2;			//<! Neue Kanten bei Halbierung
 
-	Edge (Vertex* v1, Vertex* v2) : v1(v1), v2(v2), margin(false) {
+	Edge (Vertex* v1, Vertex* v2) : v1(v1), v2(v2), margin(false), m(NULL) {
 	}
-	Edge (Vertex* v1, Vertex* v2, bool margin) : v1(v1), v2(v2), margin(margin) {
+	Edge (Vertex* v1, Vertex* v2, bool margin) : v1(v1), v2(v2), margin(margin), m(NULL) {
 	}
 
 	bool is_halved () {
@@ -169,16 +169,14 @@ class Net {
 			Triangle* t = (*it);	// Aktuelles Dreieck
 
 			// Kanten halbieren (dabei werden die Teilkanten erstellt)
-			this->halve_edge(t->e1);
-			this->halve_edge(t->e2);
-			this->halve_edge(t->e3);
+			bool e1_halved = this->halve_edge(t->e1);
+			bool e2_halved = this->halve_edge(t->e2);
+			bool e3_halved = this->halve_edge(t->e3);
 			// Neue innere Kanten erzeugen
 			Edge* ei1 = this->new_edge(t->e2->m, t->e3->m);
 			Edge* ei2 = this->new_edge(t->e1->m, t->e3->m);
 			Edge* ei3 = this->new_edge(t->e1->m, t->e2->m);
 			// Neue Dreiecke erzeugen
-			
-			
 			this->new_triangle(		// Linkes Dreieck
 					t->v1, t->e3->m, t->e2->m,
 					ei1, t->e2->subedge(t->v1), t->e3->subedge(t->v1)
@@ -195,11 +193,36 @@ class Net {
 					t->e1->m, t->e2->m, t->e3->m,
 					ei1, ei2, ei3
 				);
+
+			// Aufräumen
 			this->triangles.erase(it++);
+			delete t;
+			
+			if (!e1_halved) {
+				this->edges.remove(t->e1);
+				delete t->e1;
+			}
+			if (!e2_halved) {
+				this->edges.remove(t->e2);
+				delete t->e2;
+			}
+			if (!e3_halved) {
+				this->edges.remove(t->e3);
+				delete t->e3;
+			}
 		}
 	}
 
-	void halve_edge (Edge* e) {
+	/**
+	 * Halbiert eine Kante
+	 *
+	 * Erstellt Mittelpunkt und Teilkanten. Gibt true zurück, falls halbiert wurde
+	 * und false, falls die Kante bereits halbiert war.
+	 */
+	bool halve_edge (Edge* e) {
+		if (e->is_halved())
+			return false;
+
 		Vertex* m;
 
 		if (e->is_margin()) {
@@ -230,6 +253,8 @@ class Net {
 		// aktuelle Kante eine Randkante ist
 		e->s1 = this->new_edge(e->v1, e->m, e->is_margin());
 		e->s2 = this->new_edge(e->m, e->v2, e->is_margin());
+
+		return true;
 	}
 
 	Vertex cross_product(Vertex v1, Vertex v2) {

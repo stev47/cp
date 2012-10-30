@@ -3,6 +3,7 @@
 #include <cmath>
 #include <list>
 #include <math.h>
+#include <fstream>
 
 using namespace std;
 
@@ -130,31 +131,41 @@ class Net {
 
 	void print () {
 		unsigned int i = 1;
+		fstream f("test.dat");
+		f.open("test.dat", ios::out);
 		cout.setf(ios::fixed, ios::floatfield);
 		cout.precision(3);
 		for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
 			cout << "v " << (*it)->x << " " << (*it)->y << " " << (*it)->z << endl;
+			f << "v " << (*it)->x << " " << (*it)->y << " " << (*it)->z << endl;
 			(*it)->id = i++;
 		}
 		int curve_begin = i;
 		for (float t = 0; t < 1; t += 0.01) {
 			Vertex v = this->f(t);
 			cout << "v " << v.x << " " << v.y << " " << v.z << endl;
+			f << "v " << v.x << " " << v.y << " " << v.z << endl;
 			i++;
 		}
 		int curve_end = i - 1;
 		cout << "l";
+		f << "l";
 		for (int i = curve_begin; i <= curve_end; i++) {
 			cout << " " << i;
+			f << " " << i;
 		}
 		cout << endl;
+		f << endl;
 
 		for (list<Triangle*>::iterator it = this->triangles.begin(); it != this->triangles.end(); it++) {
 			cout << "f " << (*it)->v1->id << " " << (*it)->v2->id << " " << (*it)->v3->id << endl;
+			f << "f " << (*it)->v1->id << " " << (*it)->v2->id << " " << (*it)->v3->id << endl;
 		}
 		for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
 			cout << "p " << (*it)->id << endl;
+			f << "p " << (*it)->id << endl;
 		}
+		f.close();
 	}
 
 	void refine_mesh () {

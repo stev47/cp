@@ -75,6 +75,15 @@ struct Triangle {
 
 	Triangle (Vertex* v1, Vertex* v2, Vertex* v3, Edge* e1, Edge* e2, Edge* e3) 
 		: v1(v1), v2(v2), v3(v3), e1(e1), e2(e2), e3(e3) {}
+		
+	pair<Vertex*&,Vertex*&> rem_points(Vertex* v) {
+		if (v == this->v1) 
+			return pair<Vertex*&,Vertex*&>(this->v2,this->v3);
+		if (v == this->v2)
+			return pair<Vertex*&,Vertex*&>(this->v1,this->v3);
+		else
+		      return pair<Vertex*&,Vertex*&>(this->v2,this->v1);
+	}
 };
 
 
@@ -131,8 +140,8 @@ class Net {
 
 	void print () {
 		unsigned int i = 1;
-		fstream f("test.dat");
-		f.open("test.dat", ios::out);
+		fstream f("test.obj");
+		f.open("test.obj", ios::out);
 		cout.setf(ios::fixed, ios::floatfield);
 		cout.precision(3);
 		for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
@@ -165,6 +174,14 @@ class Net {
 			cout << "p " << (*it)->id << endl;
 			f << "p " << (*it)->id << endl;
 		}
+		//anfang Gradienten Test (fügt Test Gradient als Punkt ein) (später löschen) 
+		
+		Triangle* t=this->triangles.front();
+		Vertex* v=this->vertices.front();
+		Vertex g=Gradient(v,t);
+		f << "v " << g.x <<" "<< g.y << " " << g.z << endl ;
+		f <<"p 105";
+		//ende
 		f.close();
 	}
 
@@ -276,6 +293,36 @@ class Net {
 	  //Betrag eines Vektors
 	    return sqrt((v1.x*v1.x)+(v1.y*v1.y)+(v1.z*v1.z));
 	}
+	
+	Vertex sub(Vertex v1, Vertex v2){
+	 Vertex v (v1.x-v2.x,v1.y-v2.y,v1.z-v2.z); 
+	 return v;
+	}
+	
+	Vertex norm(Vertex v) {
+	 double n= Vertex_Value(v);
+	 Vertex r (v.x/n,v.y/n,v.z/n);
+	 return r;
+	}
+	
+	Vertex Gradient(Vertex* v1, Triangle* t1) {
+	  //Gradient
+	    Triangle t=*t1;
+	    pair<Vertex*&,Vertex*&> p =t.rem_points(v1);
+	    Vertex p1= *p.first;
+	    Vertex p2=*p.second;
+	    Vertex v= *v1;
+	    Vertex n=cross_product(sub(v,p1),sub(v,p2));
+	    Vertex g=cross_product(norm(n),sub(p1,p2));
+	    return g;
+	}
+	
+	void minimize_mesh(){
+	  Triangle* t=this->triangles.front();
+	  Vertex* v=this->vertices.front();
+	  Vertex g=Gradient(v,t);
+	  cout << g.x <<" "<< g.y << " " << g.z << endl ;
+	}
   
 };
 
@@ -288,7 +335,7 @@ class CircleNet : public Net {
 		Vertex v(
 			cos(2 * M_PI * t),		// x-Koordinate
 			sin(2 * M_PI * t),		// y-Koordinate
-			t,							// z-Koordinate
+			0,							// z-Koordinate
 			t
 		);
 		return v;
@@ -300,10 +347,12 @@ int main () {
 	
 	my_circle.init();
 
-	my_circle.refine_mesh();
-	my_circle.refine_mesh();
-	my_circle.refine_mesh();
+	//my_circle.refine_mesh();
+	//my_circle.refine_mesh();
+	//my_circle.refine_mesh();
+	my_circle.minimize_mesh();
 	my_circle.print();
+	my_circle.minimize_mesh();
 	return 0;
 
 }

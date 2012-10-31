@@ -66,8 +66,11 @@ class Net {
 
 	void print () {
 		unsigned int i = 1;
+		remove("test.obj");
 		fstream f("test.obj");
 		f.open("test.obj", ios::out);
+		f.setf(ios::fixed, ios::floatfield);
+		f.precision(3);
 		cout.setf(ios::fixed, ios::floatfield);
 		cout.precision(3);
 		for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
@@ -298,13 +301,45 @@ class Net {
 class CircleNet : public Net {
 	public:
 	virtual Vertex f (double t) {
-		Vertex v(
-			cos(2 * M_PI * t),		// x-Koordinate
-			sin(2 * M_PI * t),		// y-Koordinate
-			t,							// z-Koordinate
-			t
-		);
-		return v;
+		if(t>=0.0 && t<=1.0/4) {
+			Vertex v(
+				cos(M_PI * 4 * t),		// x-Koordinate
+				sin(M_PI * 4 * t),		// y-Koordinate
+				0,						// z-Koordinate
+				t
+			);
+			return v;
+		}
+		if(t>=1.0/4 && t<=1.0/2){
+			t -= 1.0/4;
+			Vertex v(
+				-1,						// x-Koordinate
+				-sin(M_PI * 4 * t),		// y-Koordinate
+				-cos(M_PI * 4 * t)+1,		// z-Koordinate
+				t + 1.0/4
+			);
+			return v;
+		}
+		if(t>=1.0/2 && t<=3.0/4) {
+			t -= 1.0/2;
+			Vertex v(
+				-cos(M_PI * 4 * t),		// x-Koordinate
+				sin(M_PI * 4 * t),		// y-Koordinate
+				2,						// z-Koordinate
+				t + 1.0/2
+			);
+			return v;
+		}
+		if(t>=3.0/4 && t<1.0){
+			t -= 3.0/4;
+			Vertex v(
+				1,						// x-Koordinate
+				-sin(M_PI * 4 * t),		// y-Koordinate
+				cos(M_PI * 4 * t)+1,		// z-Koordinate
+				t + 3.0/4
+			);
+			return v;
+		}
 	}
 };
 
@@ -316,6 +351,7 @@ int main () {
 	my_circle.refine_mesh();
 	my_circle.refine_mesh();
 	my_circle.refine_mesh();
+<<<<<<< HEAD
 	cout << my_circle.Surface() <<endl;
 	my_circle.minimize_mesh();
 	cout << my_circle.Surface() <<endl;
@@ -324,6 +360,13 @@ int main () {
 
 	//my_circle.print();
 	
+=======
+
+	//my_circle.minimize_mesh();
+	my_circle.print();
+	//my_circle.minimize_mesh();
+
+>>>>>>> 151c3b36a62ca67ebc68097b14c1cee334d426ff
 	return 0;
 
 }

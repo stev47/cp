@@ -76,13 +76,14 @@ struct Triangle {
 	Triangle (Vertex* v1, Vertex* v2, Vertex* v3, Edge* e1, Edge* e2, Edge* e3) 
 		: v1(v1), v2(v2), v3(v3), e1(e1), e2(e2), e3(e3) {}
 		
-	pair<Vertex*&,Vertex*&> rem_points(Vertex* v) {
+	pair<Vertex*,Vertex*> rem_points(Vertex* v) {
+	  // gibt die zwei im Dreieck gegenüberliegenden Punkte zurück
 		if (v == this->v1) 
-			return pair<Vertex*&,Vertex*&>(this->v2,this->v3);
+			return pair<Vertex*,Vertex*>(this->v2,this->v3);
 		if (v == this->v2)
-			return pair<Vertex*&,Vertex*&>(this->v1,this->v3);
+			return pair<Vertex*,Vertex*>(this->v1,this->v3);
 		else
-		      return pair<Vertex*&,Vertex*&>(this->v2,this->v1);
+			return pair<Vertex*,Vertex*>(this->v2,this->v1);
 	}
 };
 
@@ -116,7 +117,12 @@ class Net {
 	}
 	Triangle* new_triangle (Vertex* v1, Vertex* v2, Vertex* v3, Edge* e1, Edge* e2, Edge* e3) {
 		this->triangles.push_front(new Triangle(v1, v2, v3, e1, e2, e3));
-		return this->triangles.front();
+		Triangle* t = this->triangles.front();
+		//Dreieck in Knoten-Dreieckslisten eintragen 
+		t->v1->add_triangle(t);
+		t->v2->add_triangle(t);
+		t->v3->add_triangle(t);
+		return t;
 	}
 
 	/**
@@ -219,7 +225,11 @@ class Net {
 				);
 
 			// Aufräumen
+			
 			this->triangles.erase(it++);
+			t->v1->triangles.remove(t);
+			t->v2->triangles.remove(t);
+			t->v3->triangles.remove(t);
 			delete t;
 			
 			if (!e1_halved) {
@@ -298,6 +308,10 @@ class Net {
 	 Vertex v (v1.x-v2.x,v1.y-v2.y,v1.z-v2.z); 
 	 return v;
 	}
+	Vertex add(Vertex v1, Vertex v2){
+	 Vertex v (v1.x+v2.x,v1.y+v2.y,v1.z+v2.z); 
+	 return v;
+	}
 	
 	Vertex norm(Vertex v) {
 	 double n= Vertex_Value(v);
@@ -308,7 +322,7 @@ class Net {
 	Vertex Gradient(Vertex* v1, Triangle* t1) {
 	  //Gradient
 	    Triangle t=*t1;
-	    pair<Vertex*&,Vertex*&> p =t.rem_points(v1);
+	    pair<Vertex*,Vertex*> p =t.rem_points(v1);
 	    Vertex p1= *p.first;
 	    Vertex p2=*p.second;
 	    Vertex v= *v1;
@@ -317,11 +331,30 @@ class Net {
 	    return g;
 	}
 	
-	void minimize_mesh(){
-	  Triangle* t=this->triangles.front();
-	  Vertex* v=this->vertices.front();
-	  Vertex g=Gradient(v,t);
-	  cout << g.x <<" "<< g.y << " " << g.z << endl ;
+	void minimize_mesh(){ //list<Vertex*> vertices;
+	for (  list<Vertex*>::iterator it = this->vertices.begin();
+			  it != this->vertices.end(); it++)	{ 
+	  Vertex* v = *it;
+	  if (!v->is_margin()){
+	    cout << "is margin" << endl;
+	    Vertex gradient(0,0,0);
+	    //cout << gradient.x << endl;
+	    for (list<Triangle*>::iterator t=v->triangles.begin();  t!=v->triangles.end(); t++) {
+	     //cout << gradient.x <<endl;
+			gradient=add(gradient,Gradient(v,*t));
+	     //cout << gradient.x <<endl;
+	    }
+	    v->x+=gradient.x*1e-1;
+	    v->y+=gradient.y*1e-1;
+	    v->z+=gradient.z*1e-1;
+	    
+	  }
+	    
+	  
+	 
+	    
+		
+	}
 	}
   
 };
@@ -335,7 +368,7 @@ class CircleNet : public Net {
 		Vertex v(
 			cos(2 * M_PI * t),		// x-Koordinate
 			sin(2 * M_PI * t),		// y-Koordinate
-			0,							// z-Koordinate
+			t,							// z-Koordinate
 			t
 		);
 		return v;
@@ -347,12 +380,15 @@ int main () {
 	
 	my_circle.init();
 
-	//my_circle.refine_mesh();
-	//my_circle.refine_mesh();
-	//my_circle.refine_mesh();
+	my_circle.refine_mesh();
+	my_circle.refine_mesh();
+	my_circle.refine_mesh();
 	my_circle.minimize_mesh();
+	my_circle.minimize_mesh();
+
+
 	my_circle.print();
-	my_circle.minimize_mesh();
+	
 	return 0;
 
 }

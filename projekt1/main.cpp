@@ -256,7 +256,7 @@ class Net {
 			  it != this->vertices.end(); it++)	{ 
 	  Vertex* v = *it;
 	  if (!v->is_margin()){
-	    cout << "is margin" << endl;
+	    //cout << "is margin" << endl;
 	    Vertex gradient(0,0,0);
 	    //cout << gradient.x << endl;
 	    for (list<Triangle*>::iterator t=v->triangles.begin();  t!=v->triangles.end(); t++) {
@@ -269,13 +269,26 @@ class Net {
 	    v->z+=gradient.z*1e-1;
 	    
 	  }
-	    
-	  
-	 
-	    
-		
+
 	}
 	}
+
+	 double Surface() {
+		 double surf=0;
+		for (list<Triangle*>::iterator it = this->triangles.begin();
+		   	it != this->triangles.end();it++){
+			Triangle* t=*it;
+			//Vertex v1=t.v1;
+			pair<Vertex*,Vertex*> p =t->rem_points(t->v1);
+			Vertex p1= *p.first;
+			Vertex p2=*p.second;
+			Vertex v= *t->v1;
+			Vertex n=cross_product(sub(v,p1),sub(v,p2));
+			surf+=Vertex_Value(n)/2;
+		}
+		return surf;
+	 }
+
   
 };
 
@@ -303,11 +316,13 @@ int main () {
 	my_circle.refine_mesh();
 	my_circle.refine_mesh();
 	my_circle.refine_mesh();
+	cout << my_circle.Surface() <<endl;
 	my_circle.minimize_mesh();
+	cout << my_circle.Surface() <<endl;
 	my_circle.minimize_mesh();
+	cout << my_circle.Surface() <<endl;
 
-
-	my_circle.print();
+	//my_circle.print();
 	
 	return 0;
 

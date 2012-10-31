@@ -3,8 +3,8 @@ CXX ?= g++
 # Compilerflags, "-g" debug
 CXXFLAGS = -g
 
-CPP_FILES= $(wildcard *.cpp)
-OBJ_FILES= $(patsubst %.cpp,%.o,$(CPP_FILES))
+CPP_FILES = $(wildcard *.cpp)
+OBJ_FILES = $(patsubst %.cpp,%.o,$(CPP_FILES))
 
 
 # Object Dateien

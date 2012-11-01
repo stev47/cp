@@ -351,7 +351,6 @@ int main () {
 	my_circle.refine_mesh();
 	my_circle.refine_mesh();
 	my_circle.refine_mesh();
-<<<<<<< HEAD
 	cout << my_circle.Surface() <<endl;
 	my_circle.minimize_mesh();
 	cout << my_circle.Surface() <<endl;
@@ -360,13 +359,9 @@ int main () {
 
 	//my_circle.print();
 	
-=======
 
-	//my_circle.minimize_mesh();
 	my_circle.print();
-	//my_circle.minimize_mesh();
 
->>>>>>> 151c3b36a62ca67ebc68097b14c1cee334d426ff
 	return 0;
 
 }

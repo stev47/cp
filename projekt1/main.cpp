@@ -1,8 +1,7 @@
 #define _USE_MATH_DEFINES	// Nötig für die Konstante M_PI
-#include <iostream>
 #include <cmath>
 #include <list>
-#include <math.h>
+#include <iostream>
 #include <fstream>
 #include "datastructures.h"
 
@@ -103,14 +102,6 @@ class Net {
 				cout << "p " << (*it)->id << endl;
 				f << "p " << (*it)->id << endl;
 			}
-			//anfang Gradienten Test (fügt Test Gradient als Punkt ein) (später löschen) 
-
-			Triangle* t=this->triangles.front();
-			Vertex* v=this->vertices.front();
-			Vertex g=Gradient(v,t);
-			f << "v " << g.x <<" "<< g.y << " " << g.z << endl ;
-			f <<"p 105";
-			//ende
 			f.close();
 		}
 
@@ -291,14 +282,23 @@ class Net {
 			}
 			return surf;
 		}
-
-
 };
 
 /**
  * Kreiskurve mit Radius 1
  */
 class CircleNet : public Net {
+	virtual Vertex f (double t) {
+		Vertex v (cos(M_PI * t), sin(M_PI * t), 0, t);
+		return v;
+	}
+};
+
+/**
+ * Annähernd eine Tennisballkurve, zusammengesetzt aus vier
+ * Halbkreisen mit Radius 1.
+ */
+class TennisBallCurveNet : public Net {
 	public:
 		virtual Vertex f (double t) {
 			if(t>=0.0 && t<=1.0/4) {
@@ -344,24 +344,23 @@ class CircleNet : public Net {
 };
 
 int main () {
-	CircleNet my_circle;
+	TennisBallCurveNet my_curve;
 
-	my_circle.init();
+	my_curve.init();
 
-	my_circle.refine_mesh();
-	my_circle.refine_mesh();
-	my_circle.refine_mesh();
-	cout << my_circle.Surface() <<endl;
-	my_circle.minimize_mesh();
-	cout << my_circle.Surface() <<endl;
-	my_circle.minimize_mesh();
-	cout << my_circle.Surface() <<endl;
+	my_curve.refine_mesh();
+	my_curve.refine_mesh();
+	my_curve.refine_mesh();
+	cout << my_curve.Surface() <<endl;
+	my_curve.minimize_mesh();
+	cout << my_curve.Surface() <<endl;
+	my_curve.minimize_mesh();
+	cout << my_curve.Surface() <<endl;
 
-	//my_circle.print();
+	//my_curve.print();
 
 
-	my_circle.print();
+	my_curve.print();
 
 	return 0;
-
 }

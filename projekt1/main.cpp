@@ -150,9 +150,9 @@ class Net {
 				// Aufräumen
 
 				this->triangles.erase(it++);
-				t->v1->triangles.remove(t);
-				t->v2->triangles.remove(t);
-				t->v3->triangles.remove(t);
+				t->v1->remove_triangle(t);
+				t->v2->remove_triangle(t);
+				t->v3->remove_triangle(t);
 				delete t;
 
 				if (!e1_halved) {

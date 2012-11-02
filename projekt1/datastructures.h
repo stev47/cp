@@ -27,6 +27,9 @@ struct Vertex {
 	void add_triangle (Triangle* t) {
 		this->triangles.push_back(t);		
 	}
+	void remove_triangle (Triangle* t) {
+		this->triangles.remove(t);		
+	}
 };
 
 /**

@@ -52,9 +52,9 @@ void Net::print () {
 	fstream f("test.obj");
 	f.open("test.obj", ios::out);
 	f.setf(ios::fixed, ios::floatfield);
-	f.precision(3);
+	f.precision(5);
 	cout.setf(ios::fixed, ios::floatfield);
-	cout.precision(3);
+	cout.precision(5);
 	for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
 		cout << "v " << (*it)->x << " " << (*it)->y << " " << (*it)->z << endl;
 		f << "v " << (*it)->x << " " << (*it)->y << " " << (*it)->z << endl;

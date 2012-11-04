@@ -14,6 +14,20 @@ class CircleNet : public Net {
 };
 
 /**
+ * Viviani's Curve
+ * http://en.wikipedia.org/wiki/Viviani%27s_curve
+ */
+class VivianiCurveNet : public Net {
+	double a;
+	public:
+	VivianiCurveNet (double a = 5) : a(a) {}
+	virtual Vertex f (double t) {
+		Vertex v (a * (1 + cos(4 * M_PI * t)), a * sin(4 * M_PI * t), 2 * a * sin(2 * M_PI * t), t);
+		return v;
+	}
+};
+
+/**
  * Annähernd eine Tennisballkurve, zusammengesetzt aus vier
  * Halbkreisen mit Radius 1.
  */

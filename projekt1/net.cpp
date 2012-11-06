@@ -1,4 +1,3 @@
-#define _USE_MATH_DEFINES	// Nötig für die Konstante M_PI
 #include <cmath>
 #include <list>
 #include <iostream>

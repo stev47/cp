@@ -1,44 +1,43 @@
 #include <iostream>
+#include "net.h"
 #include "curves.h"
 
 using namespace std;
 
-
-
 int main () {
-	TennisBallCurveNet my_curve;
+	Curves::Test my_curve;
+	Net my_net( my_curve );
 
-	my_curve.init();
+	my_net.init();
 
-	my_curve.refine_mesh();
-	my_curve.refine_mesh();
-	cout << my_curve.Surface() <<endl;
-	my_curve.minimize_mesh();
-	my_curve.minimize_mesh();
-	my_curve.minimize_mesh();
+	my_net.refine_mesh();
+	my_net.refine_mesh();
+	cout << my_net.Surface() <<endl;
+	my_net.minimize_mesh();
+	my_net.minimize_mesh();
+	my_net.minimize_mesh();
 
-	my_curve.refine_mesh();
-	cout << my_curve.Surface() <<endl;
-	my_curve.minimize_mesh();
-	my_curve.minimize_mesh();
-	my_curve.minimize_mesh();
+	my_net.refine_mesh();
+	cout << my_net.Surface() <<endl;
+	my_net.minimize_mesh();
+	my_net.minimize_mesh();
+	my_net.minimize_mesh();
 	
-	my_curve.refine_mesh();
-	cout << my_curve.Surface() <<endl;
-	my_curve.minimize_mesh();
-	my_curve.minimize_mesh();
-	my_curve.minimize_mesh();
-	cout << my_curve.Surface() <<endl;
+	my_net.refine_mesh();
+	cout << my_net.Surface() <<endl;
+	my_net.minimize_mesh();
+	my_net.minimize_mesh();
+	my_net.minimize_mesh();
+	cout << my_net.Surface() <<endl;
 
-	my_curve.refine_mesh();
-	cout << my_curve.Surface() <<endl;
-	my_curve.minimize_mesh();
-	my_curve.minimize_mesh();
-	my_curve.minimize_mesh();
+	my_net.refine_mesh();
+	cout << my_net.Surface() <<endl;
+	my_net.minimize_mesh();
+	my_net.minimize_mesh();
+	my_net.minimize_mesh();
+	cout << my_net.Surface() <<endl;
 
-
-
-	my_curve.print();
+	my_net.print();
 
 	return 0;
 }

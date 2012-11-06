@@ -2,21 +2,25 @@
 #define NET_H
 
 #include "datastructures.h"
+#include "curves.h"
 
+//template <Curve& curve>
 class Net {
+	Curves::Curve &curve;
 	protected:
 		list<Vertex*> vertices;		//!< Knotenliste
 		list<Edge*> edges;			//!< Kantenliste
 		list<Triangle*> triangles;	//!< Dreiecksliste
 
 	public:
+		Net (Curves::Curve &curve) : curve(curve) {};
 		/**
 		 * Berechne einen Randpunkt auf der Kurve an der Stelle t.
 		 * Es muss stets 0 <= t <= 1 gelten.
 		 * Wird von einer anderen Klasse implementiert
 		 * Mathematisch betrachtet, ist das hier unsere parametrisierte Kurvenfunktion
 		 */
-		virtual Vertex f (double t) = 0;
+		Vertex f (double t) { return curve.f(t); };
 
 		Vertex* new_vertex (double x, double y, double z);
 		Vertex* new_vertex (double t);

@@ -7,25 +7,13 @@ class Vector {
 	public:
 		double x, y, z;
 	
-		Vector (double x, double y, double z) : x(x), y(y), z(z) {
-		}
+		Vector (double x, double y, double z) : x(x), y(y), z(z) {}
 
 		Vector operator+ (const Vector &v);
 		Vector operator- (const Vector &v);
-
-		/**
-		 * Additives Inverses
-		 */
 		Vector operator- ();
-
-		/**
-		 * Kreuzprodukt
-		 */
 		Vector operator^ (const Vector &v);			
 
-		/**
-		 * Vektorlänge
-		 */
 		double norm ();
 };
 

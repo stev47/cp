@@ -26,3 +26,4 @@ Vector Vector::operator^ (const Vector &v) {
 double Vector::norm () {
 	return sqrt((this->x * this->x) + (this->y * this->y) + (this->z * this->z));
 }
+

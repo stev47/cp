@@ -38,7 +38,7 @@ namespace Curves {
 			Vertex v(
 					cos(M_PI * 4 * t),		// x-Koordinate
 					sin(M_PI * 4 * t),		// y-Koordinate
-					2*sin(M_PI*4*t),						// z-Koordinate
+					0,						// z-Koordinate
 					t
 					);
 			return v;
@@ -58,7 +58,7 @@ namespace Curves {
 			Vertex v(
 					-cos(M_PI * 4 * t),		// x-Koordinate
 					sin(M_PI * 4 * t),		// y-Koordinate
-					2-2*sin(M_PI*4*t),						// z-Koordinate
+					2,						// z-Koordinate
 					t + 1.0/2
 					);
 			return v;

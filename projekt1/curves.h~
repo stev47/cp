@@ -24,9 +24,8 @@ namespace Curves {
 
 	class Viviani : public Curve {
 		double a;
-		public:
-			Viviani (double a = 5) : a(a) {}
-			virtual Vertex f (double t);
+		Viviani (double a = 5) : a(a) {}
+		virtual Vertex f (double t);
 	};
 
 	class TennisBall : public Curve {

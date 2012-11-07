@@ -9,7 +9,14 @@ namespace Curves {
 	 * Kurve zum Testen
 	 */
 	Vertex Test::f (double t) {
-		return Vertex (cos(M_PI * 2 * t), sin(M_PI * 2 * t), 0.5 * sin(M_PI * 8 * t), t);
+		return Vertex ((sin(M_PI * 8 * t)+2.0) * cos(M_PI * 2 * t), (sin(M_PI * 8 * t)+2.0) * sin(M_PI * 2 * t), cos(M_PI * 4 * t)  , t);
+	}
+
+	/**
+	 * Eine sich selbst schneidende Kreiskurve, die mit unsrem Algorithmus funktioniert
+	 */
+	Vertex Schnitt::f (double t) {
+		return Vertex (cos(M_PI * 4 * t), sin(M_PI * 4 * t), sin(M_PI * 6 * t) * 0.5, t);
 	}
 
 	/**

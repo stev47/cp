@@ -17,6 +17,10 @@ namespace Curves {
 	class Test : public Curve {
 		virtual Vertex f (double t);
 	};
+	
+	class Schnitt : public Curve {
+		virtual Vertex f (double t);
+	};
 
 	class Circle : public Curve {
 		virtual Vertex f (double t);

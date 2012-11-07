@@ -52,14 +52,12 @@ void Net::print () {
 	f.open("test.obj", ios::out);
 	f.setf(ios::fixed, ios::floatfield);
 	f.precision(5);
-	cout.setf(ios::fixed, ios::floatfield);
-	cout.precision(5);
 	for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
 		f << "v " << (*it)->x << " " << (*it)->y << " " << (*it)->z << endl;
 		(*it)->id = i++;
 	}
 	int curve_begin = i;
-	for (float t = 0; t < 1; t += 0.01) {
+	for (double t = 0; t < 1; t += 0.008) {
 		Vertex v = this->f(t);
 		f << "v " << v.x << " " << v.y << " " << v.z << endl;
 		i++;
@@ -199,29 +197,17 @@ void Net::minimize_mesh(){ //list<Vertex*> vertices;
 		Vertex* v = *it;
 	
 		if (!v->is_margin()){
-			Vector gradient(0,0,0);
-			//cout << gradient.x << endl;
-			for (list<Triangle*>::iterator t = v->triangles.begin(); t != v->triangles.end(); t++) {
-				//cout << gradient.x <<endl;
+			Vector gradient(0, 0, 0);
+			// Gradienten der umliegenden Dreiecksflächen aufsummieren
+			for (list<Triangle*>::iterator t = v->triangles.begin(); t != v->triangles.end(); t++)
 				gradient += Gradient(v, *t);
-				//cout << gradient.x <<endl;
-			}
-			double n = 1;
-			/*v->x += gradient.x * 1e-1;
-			v->y += gradient.y * 1e-1;
-			v->z += gradient.z * 1e-1;
-			*/
-			
-			for (int i=1;i<=10;i++) {
-				Vector delta = gradient * n;
-				if(VSurface(v, delta) < VSurface(v, Vertex(0,0,0) ) ) {
-					*v += delta;
-				}
-				n *= 0.5;
-			}
 
+			Vector delta = gradient;
+			while (VSurface(v, delta) > VSurface(v, Vertex(0, 0, 0)))
+				delta *= 0.5;
+
+			*v += delta;
 		}
-
 	}
 }
 

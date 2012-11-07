@@ -27,6 +27,12 @@ Vector Vector::operator* (const double lambda) {
 	return Vector(this->x * lambda, this->y * lambda, this->z * lambda);
 }
 
+Vector Vector::operator*= (const double lambda) {
+	this->x *= lambda;
+	this->y *= lambda;
+	this->z *= lambda;
+}
+
 Vector Vector::operator/ (const double lambda) {
 	return Vector(this->x / lambda, this->y / lambda, this->z / lambda);
 }

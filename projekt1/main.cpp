@@ -6,23 +6,30 @@ using namespace std;
 
 int main (int argc, char* argv[]) {
 
-	Curves::Circle my_curve;
+	Curves::Test my_curve;
 	Net my_net( my_curve );
 
 	my_net.init();
 
 	my_net.refine_mesh();
 	
-	double area_before;
+	double area_before, area_new, improvement;
+	cout.setf(ios::fixed, ios::floatfield);
+	cout.precision(6);
+
 	cout << my_net.Surface() <<endl;
-	for (int i = 1; i <= 4; i++) {
+	for (int i = 1; i <= 5; i++) {
+		cout << "Verfeinere ... ";
 		my_net.refine_mesh();
-		cout << "Verfeinere" <<endl;
+		cout << "fertig" << endl;
 		do {
-				area_before = my_net.Surface();
-				my_net.minimize_mesh();
-				cout << my_net.Surface() <<endl;
-		} while (my_net.Surface() / area_before <  1 - 1e-3);
+			area_before = my_net.Surface();
+			cout << "Minimiere ... ";
+			my_net.minimize_mesh();
+			cout << (area_new = my_net.Surface());
+			improvement = (1 - (area_new / area_before));
+			cout << " (" << improvement << "%)" << endl;
+		} while (improvement > 1e-3);
 	}
 
 

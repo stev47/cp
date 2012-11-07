@@ -3,6 +3,7 @@
 
 #include <list>
 #include <cstddef>
+#include "math.h"
 
 using namespace std;
 
@@ -10,19 +11,18 @@ class Triangle;	// forward declaration: wird in Vertex gebraucht
 /**
  * Knotenpunkt
  */
-class Vertex {
+class Vertex : public Vector {
 	public:
-		double x, y, z;		//<! Koordinaten (public für die Ausgabe)
 		list<Triangle*> triangles;	//<! Liste von zugehörigen Dreiecken
 
 		unsigned int id;	//<! Index, nur für die Ausgabefunktion nötig
 		double t;			//<! Stelle auf der parametrisierten Kurve
 
 		Vertex (double x, double y, double z) 
-			: x(x), y(y), z(z), t(-1) {}
+			: t(-1), Vector(x,y,z) {}
 
 		Vertex (double x, double y, double z, double t)
-			: x(x), y(y), z(z), t(t) {}
+			: t(t), Vector(x,y,z) {}
 
 		bool is_margin ();
 

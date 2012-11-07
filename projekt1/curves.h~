@@ -24,16 +24,11 @@ namespace Curves {
 
 	class Viviani : public Curve {
 		double a;
-		public:
-			Viviani (double a = 5) : a(a) {}
-			virtual Vertex f (double t);
-	};
-
-	class TennisBall : public Curve {
+		Viviani (double a = 5) : a(a) {}
 		virtual Vertex f (double t);
 	};
 
-	class TennisBallB : public Curve {
+	class TennisBall : public Curve {
 		virtual Vertex f (double t);
 	};
 

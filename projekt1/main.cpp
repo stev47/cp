@@ -4,7 +4,8 @@
 
 using namespace std;
 
-int main () {
+int main (int argc, char* argv[]) {
+
 	Curves::Circle my_curve;
 	Net my_net( my_curve );
 

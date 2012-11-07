@@ -55,43 +55,30 @@ void Net::print () {
 	cout.setf(ios::fixed, ios::floatfield);
 	cout.precision(5);
 	for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
-		cout << "v " << (*it)->x << " " << (*it)->y << " " << (*it)->z << endl;
 		f << "v " << (*it)->x << " " << (*it)->y << " " << (*it)->z << endl;
 		(*it)->id = i++;
 	}
 	int curve_begin = i;
 	for (float t = 0; t < 1; t += 0.01) {
 		Vertex v = this->f(t);
-		cout << "v " << v.x << " " << v.y << " " << v.z << endl;
 		f << "v " << v.x << " " << v.y << " " << v.z << endl;
 		i++;
 	}
 	int curve_end = i - 1;
-	cout << "l";
 	f << "l";
 	for (int i = curve_begin; i <= curve_end; i++) {
-		cout << " " << i;
 		f << " " << i;
 	}
 	cout << endl;
 	f << endl;
 
 	for (list<Triangle*>::iterator it = this->triangles.begin(); it != this->triangles.end(); it++) {
-		cout << "f " << (*it)->v1->id << " " << (*it)->v2->id << " " << (*it)->v3->id << endl;
 		f << "f " << (*it)->v1->id << " " << (*it)->v2->id << " " << (*it)->v3->id << endl;
 	}
 	for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
-		cout << "p " << (*it)->id << endl;
 		f << "p " << (*it)->id << endl;
 	}
-	//anfang Gradienten Test (fügt Test Gradient als Punkt ein) (später löschen) 
 
-	Triangle* t=this->triangles.front();
-	Vertex* v=this->vertices.front();
-	Vertex g=Gradient(v,t);
-	f << "v " << g.x <<" "<< g.y << " " << g.z << endl ;
-	f <<"p 105";
-	//ende
 	f.close();
 }
 
@@ -195,43 +182,14 @@ bool Net::halve_edge (Edge* e) {
 	return true;
 }
 
-Vertex Net::cross_product(Vertex v1, Vertex v2) {
-	//Kreuzprodukt
-	Vertex v((v1.y*v2.z)-(v1.z*v2.y),(v1.z*v2.x)-(v1.x*v2.z), (v1.x*v2.y)-(v1.y*v2.x)) ;
-
-	return v;
-
-}
-
-double Net::Vertex_Value(Vertex v1) {
-	//Betrag eines Vektors
-	return sqrt((v1.x*v1.x)+(v1.y*v1.y)+(v1.z*v1.z));
-}
-
-Vertex Net::sub(Vertex v1, Vertex v2){
-	Vertex v (v1.x-v2.x,v1.y-v2.y,v1.z-v2.z); 
-	return v;
-}
-Vertex Net::add(Vertex v1, Vertex v2,double n){
-	Vertex v (v1.x+v2.x*n,v1.y+v2.y*n,v1.z+v2.z*n);
-	return v;
-}
-
-Vertex Net::norm(Vertex v) {
-	double n= Vertex_Value(v);
-	Vertex r (v.x/n,v.y/n,v.z/n);
-	return r;
-}
-
-Vertex Net::Gradient(Vertex* v1, Triangle* t1) {
-	//Gradient
-	Triangle t=*t1;
-	pair<Vertex*,Vertex*> p =t.rem_points(v1);
-	Vertex p1= *p.first;
-	Vertex p2=*p.second;
-	Vertex v= *v1;
-	Vertex n=cross_product(sub(v,p1),sub(v,p2));
-	Vertex g=cross_product(norm(n),sub(p1,p2));
+Vector Net::Gradient(Vertex* v, Triangle* t) {
+		
+	pair<Vertex*,Vertex*> p = t->rem_points(v);
+	Vertex p1 = *p.first;
+	Vertex p2 = *p.second;
+	
+	Vector n = (*v - p1) ^ (*v - p2);
+	Vector g = (n / n.norm()) ^ (p1 - p2);
 	return g;
 }
 
@@ -239,24 +197,27 @@ void Net::minimize_mesh(){ //list<Vertex*> vertices;
 	for (  list<Vertex*>::iterator it = this->vertices.begin();
 			it != this->vertices.end(); it++)	{ 
 		Vertex* v = *it;
+	
 		if (!v->is_margin()){
-			Vertex gradient(0,0,0);
+			Vector gradient(0,0,0);
 			//cout << gradient.x << endl;
-			for (list<Triangle*>::iterator t=v->triangles.begin();  t!=v->triangles.end(); t++) {
+			for (list<Triangle*>::iterator t = v->triangles.begin(); t != v->triangles.end(); t++) {
 				//cout << gradient.x <<endl;
-				gradient=add(gradient,Gradient(v,*t));
+				gradient += Gradient(v, *t);
 				//cout << gradient.x <<endl;
 			}
-			double n= 1;
-			for (int i=1;i<=5;i++) {
-				if(VSurface(v,gradient, 1e-1)) {
-					v->x+=gradient.x*1e-1;
-					v->y+=gradient.y*1e-1;
-					v->z+=gradient.z*1e-1;
-					break;
-				}
-				n*=0.5;
-			}
+			double n = 1e-1;
+			/*v->x += gradient.x * 1e-1;
+			v->y += gradient.y * 1e-1;
+			v->z += gradient.z * 1e-1;
+			*/
+			//for (int i=1;i<=10;i++) {
+				//if(VSurface(v, gradient, n)) {
+				Vector tmp = gradient * n;
+				*v += tmp;
+				//}
+				//n *= 0.5;
+			//}
 
 		}
 
@@ -267,14 +228,14 @@ double Net::Surface() {
 	double surf=0;
 	for (list<Triangle*>::iterator it = this->triangles.begin();
 			it != this->triangles.end();it++){
-		Triangle* t=*it;
+		Triangle* t = *it;
 		//Vertex v1=t.v1;
-		pair<Vertex*,Vertex*> p =t->rem_points(t->v1);
-		Vertex p1= *p.first;
-		Vertex p2=*p.second;
-		Vertex v= *t->v1;
-		Vertex n=cross_product(sub(v,p1),sub(v,p2));
-		surf+=Vertex_Value(n)/2;
+		pair<Vertex*,Vertex*> p = t->rem_points(t->v1);
+		Vertex p1 = *p.first;
+		Vertex p2 = *p.second;
+		Vertex v = *t->v1;
+		Vector n = (v - p1) ^ (v - p2);
+		surf += n.norm() / 2;
 	}
 	return surf;
 }
@@ -284,16 +245,16 @@ bool Net::VSurface(Vertex* v, Vertex delta, double n) {
 	double surf2=0;
 	for (list<Triangle*>::iterator it = v->triangles.begin();
 			it != v->triangles.end();it++){
-		Triangle* t=*it;
-		//Vertex v1=t.v1;
-		pair<Vertex*,Vertex*> p =t->rem_points(t->v1);
-		Vertex p1= *p.first;
-		Vertex p2=*p.second;
-		Vertex v= *t->v1;
-		Vertex m=cross_product(sub(v,p1),sub(v,p2));
-		surf1+=Vertex_Value(m)/2;
-		m=cross_product(sub(add(v,delta,n),p1),sub(add(v,delta,n),p2));
-		surf2+=Vertex_Value(m)/2;
+		Triangle* t = *it;
+	
+		pair<Vertex*,Vertex*> p = t->rem_points(t->v1);
+		Vertex p1 = *p.first;
+		Vertex p2 = *p.second;
+	
+		Vector m = (*v - p1) ^ (*v - p2);
+		surf1 += m.norm() / 2;
+		m = ((*v + (delta * n)) - p1) ^ ((*v + (delta * n)) - p2);
+		surf2 += m.norm() / 2;
 	}
-	return (surf2<surf1);
+	return (surf2 < surf1);
 }

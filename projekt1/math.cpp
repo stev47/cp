@@ -7,8 +7,28 @@ Vector Vector::operator+ (const Vector &v) {
 	return Vector(this->x + v.x, this->y + v.y, this->z + v.z);
 }
 
+Vector Vector::operator+= (const Vector &v) {
+	this->x += v.x;
+	this->y += v.y;
+	this->z += v.z;
+}
+
 Vector Vector::operator- (const Vector &v) {
 	return Vector(this->x - v.x, this->y - v.y, this->z - v.z);
+}
+
+Vector Vector::operator-= (const Vector &v) {
+	this->x -= v.x;
+	this->y -= v.y;
+	this->z -= v.z;
+}
+
+Vector Vector::operator* (const double lambda) {
+	return Vector(this->x * lambda, this->y * lambda, this->z * lambda);
+}
+
+Vector Vector::operator/ (const double lambda) {
+	return Vector(this->x / lambda, this->y / lambda, this->z / lambda);
 }
 
 Vector Vector::operator- () {

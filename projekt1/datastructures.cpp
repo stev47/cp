@@ -1,3 +1,4 @@
+#include <iostream>
 #include <list>
 #include <cstddef>
 #include "datastructures.h"
@@ -12,6 +13,12 @@ void Vertex::add_triangle (Triangle* t) {
 }
 void Vertex::remove_triangle (Triangle* t) {
 	this->triangles.remove(t);		
+}
+Vertex Vertex::operator+= (const Vector &v) {
+	this->x += v.x;
+	this->y += v.y;
+	this->z += v.z;
+	return *this;
 }
 
 bool Edge::is_halved () {
@@ -33,6 +40,7 @@ pair<Vertex*, Vertex*> Triangle::rem_points(Vertex* v) {
 		return pair<Vertex*, Vertex*>(this->v2, this->v3);
 	if (v == this->v2)
 		return pair<Vertex*, Vertex*>(this->v1, this->v3);
-	else
+	if (v == this->v3)
 		return pair<Vertex*, Vertex*>(this->v2, this->v1);
+	cout << "error" << endl;
 }

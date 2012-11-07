@@ -10,7 +10,12 @@ class Vector {
 		Vector (double x, double y, double z) : x(x), y(y), z(z) {}
 
 		Vector operator+ (const Vector &v);
+		Vector operator+= (const Vector &v);
 		Vector operator- (const Vector &v);
+		Vector operator-= (const Vector &v);
+		Vector operator* (const double lambda);
+		Vector operator/ (const double lambda);
+		
 		Vector operator- ();
 		Vector operator^ (const Vector &v);			
 

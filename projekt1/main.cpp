@@ -11,39 +11,21 @@ int main () {
 	my_net.init();
 
 	my_net.refine_mesh();
-	my_net.refine_mesh();
-	cout << my_net.Surface() <<endl;
-	my_net.minimize_mesh();
-	my_net.minimize_mesh();
-	my_net.minimize_mesh();
 
-	my_net.refine_mesh();
+	double area_before;
 	cout << my_net.Surface() <<endl;
-	my_net.minimize_mesh();
-	my_net.minimize_mesh();
-	my_net.minimize_mesh();
-	
-	my_net.refine_mesh();
-	cout << my_net.Surface() <<endl;
-	my_net.minimize_mesh();
-	my_net.minimize_mesh();
-	my_net.minimize_mesh();
-	cout << my_net.Surface() <<endl;
+	for (int i = 1; i <= 4; i++) {
+		my_net.refine_mesh();
+		cout << "Verfeinere" <<endl;
+		do {
+				area_before = my_net.Surface();
+				my_net.minimize_mesh();
+				cout << my_net.Surface() <<endl;
+		} while (my_net.Surface() - area_before <  -1e-4);
+	}
 
-	my_net.refine_mesh();
-	cout << my_net.Surface() <<endl;
-	my_net.minimize_mesh();
-	my_net.minimize_mesh();
-	my_net.minimize_mesh();
-	cout << my_net.Surface() <<endl;
-		my_net.minimize_mesh();
-	my_net.minimize_mesh();
-			my_net.minimize_mesh();
-	my_net.minimize_mesh();
-			my_net.minimize_mesh();
-	my_net.minimize_mesh();
+
 	my_net.print();
-		cout << my_net.Surface() <<endl;
 
 
 	return 0;

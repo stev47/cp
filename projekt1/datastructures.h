@@ -29,6 +29,8 @@ class Vertex : public Vector {
 		void add_triangle (Triangle* t);
 
 		void remove_triangle (Triangle* t);
+
+		Vertex operator+= (const Vector &v);
 };
 
 /**

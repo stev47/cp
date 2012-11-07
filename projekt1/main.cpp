@@ -5,13 +5,13 @@
 using namespace std;
 
 int main () {
-	Curves::TennisBall my_curve;
+	Curves::Circle my_curve;
 	Net my_net( my_curve );
 
 	my_net.init();
 
 	my_net.refine_mesh();
-
+	
 	double area_before;
 	cout << my_net.Surface() <<endl;
 	for (int i = 1; i <= 4; i++) {
@@ -21,7 +21,7 @@ int main () {
 				area_before = my_net.Surface();
 				my_net.minimize_mesh();
 				cout << my_net.Surface() <<endl;
-		} while (my_net.Surface() - area_before <  -1e-4);
+		} while (my_net.Surface() / area_before <  1 - 1e-3);
 	}
 
 

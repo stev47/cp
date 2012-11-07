@@ -53,7 +53,7 @@ class Net {
 		Vector Gradient(Vertex* v1, Triangle* t1);
 		void minimize_mesh();
 		double Surface(); 
-		bool VSurface(Vertex* v, Vertex delta, double n=1);
+		double VSurface(Vertex* v, Vector delta);
 };
 
 

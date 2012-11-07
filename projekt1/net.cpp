@@ -206,18 +206,19 @@ void Net::minimize_mesh(){ //list<Vertex*> vertices;
 				gradient += Gradient(v, *t);
 				//cout << gradient.x <<endl;
 			}
-			double n = 1e-1;
+			double n = 1;
 			/*v->x += gradient.x * 1e-1;
 			v->y += gradient.y * 1e-1;
 			v->z += gradient.z * 1e-1;
 			*/
-			//for (int i=1;i<=10;i++) {
-				//if(VSurface(v, gradient, n)) {
-				Vector tmp = gradient * n;
-				*v += tmp;
-				//}
-				//n *= 0.5;
-			//}
+			
+			for (int i=1;i<=10;i++) {
+				Vector delta = gradient * n;
+				if(VSurface(v, delta) < VSurface(v, Vertex(0,0,0) ) ) {
+					*v += delta;
+				}
+				n *= 0.5;
+			}
 
 		}
 
@@ -225,36 +226,39 @@ void Net::minimize_mesh(){ //list<Vertex*> vertices;
 }
 
 double Net::Surface() {
-	double surf=0;
-	for (list<Triangle*>::iterator it = this->triangles.begin();
-			it != this->triangles.end();it++){
+	double surf = 0;
+	for (
+		list<Triangle*>::iterator it = this->triangles.begin();
+		it != this->triangles.end();
+		it++
+	) {
 		Triangle* t = *it;
-		//Vertex v1=t.v1;
+		
 		pair<Vertex*,Vertex*> p = t->rem_points(t->v1);
 		Vertex p1 = *p.first;
 		Vertex p2 = *p.second;
-		Vertex v = *t->v1;
-		Vector n = (v - p1) ^ (v - p2);
+		
+		Vector n = (*(t->v1) - p1) ^ (*(t->v1) - p2);
 		surf += n.norm() / 2;
 	}
 	return surf;
 }
 
-bool Net::VSurface(Vertex* v, Vertex delta, double n) {
-	double surf1=0;
-	double surf2=0;
-	for (list<Triangle*>::iterator it = v->triangles.begin();
-			it != v->triangles.end();it++){
+double Net::VSurface(Vertex* v, Vector delta) {
+	double surf = 0;
+	for (
+		list<Triangle*>::iterator it = v->triangles.begin();
+		it != v->triangles.end();
+		it++
+	){
 		Triangle* t = *it;
 	
-		pair<Vertex*,Vertex*> p = t->rem_points(t->v1);
+		pair<Vertex*,Vertex*> p = t->rem_points(v);
 		Vertex p1 = *p.first;
 		Vertex p2 = *p.second;
 	
-		Vector m = (*v - p1) ^ (*v - p2);
-		surf1 += m.norm() / 2;
-		m = ((*v + (delta * n)) - p1) ^ ((*v + (delta * n)) - p2);
-		surf2 += m.norm() / 2;
+		Vector m = ((*v + delta) - p1) ^ ((*v + delta) - p2);
+		surf += (m.norm() / 2);
 	}
-	return (surf2 < surf1);
+	return surf;
 }

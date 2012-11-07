@@ -16,7 +16,7 @@ namespace Curves {
 	 * Kreiskurve mit Radius 1
 	 */
 	Vertex Circle::f (double t) {
-		Vertex v (cos(M_PI * t), sin(M_PI * t), 0, t);
+		Vertex v (cos(2 * M_PI * t), sin(2 * M_PI * t), 0, t);
 		return v;
 	}
 

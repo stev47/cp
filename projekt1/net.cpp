@@ -69,15 +69,15 @@ void Net::print () {
 	for (int i = curve_begin; i <= curve_end; i++) {
 		f << " " << i;
 	}
-	cout << endl;
-	f << endl;
+	f << " " << curve_begin;
 
+	f << endl;
 	for (list<Triangle*>::iterator it = this->triangles.begin(); it != this->triangles.end(); it++) {
 		f << "f " << (*it)->v1->id << " " << (*it)->v2->id << " " << (*it)->v3->id << endl;
 	}
-	for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
+	/*for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
 		f << "p " << (*it)->id << endl;
-	}
+	}*/
 
 	f.close();
 }

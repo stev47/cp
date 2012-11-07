@@ -48,7 +48,7 @@ namespace Curves {
 			Vertex v(
 					-1,						// x-Koordinate
 					-sin(M_PI * 4 * t),		// y-Koordinate
-					-cos(M_PI * 4 * t)+1,		// z-Koordinate
+					-cos(M_PI * 4 * t)+1,	// z-Koordinate
 					t + 1.0/4
 					);
 			return v;
@@ -56,9 +56,9 @@ namespace Curves {
 		if(t>=1.0/2 && t<=3.0/4) {
 			t -= 1.0/2;
 			Vertex v(
-					-cos(M_PI * 4 * t),		// x-Koordinate
-					sin(M_PI * 4 * t),		// y-Koordinate
-					2,						// z-Koordinate
+					-cos(M_PI * 4 * t),			// x-Koordinate
+					sin(M_PI * 4 * t),			// y-Koordinate
+					2,							// z-Koordinate
 					t + 1.0/2
 					);
 			return v;
@@ -66,13 +66,59 @@ namespace Curves {
 		if(t>=3.0/4 && t<1.0){
 			t -= 3.0/4;
 			Vertex v(
-					1,						// x-Koordinate
+					1				,		// x-Koordinate
 					-sin(M_PI * 4 * t),		// y-Koordinate
-					cos(M_PI * 4 * t)+1,		// z-Koordinate
+					cos(M_PI * 4 * t)+1,	// z-Koordinate
 					t + 3.0/4
 					);
 			return v;
 		}
 	}
+
+	/**
+	 * Gebogene Tennisballkurve, mit Überschneidung von Flächen.
+	 */
+	Vertex TennisBallB::f (double t) {
+		if(t>=0.0 && t<=1.0/4) {
+			Vertex v(
+					cos(M_PI * 4 * t),		// x-Koordinate
+					sin(M_PI * 4 * t),		// y-Koordinate
+					0,						// z-Koordinate
+					t
+					);
+			return v;
+		}
+		if(t>=1.0/4 && t<=1.0/2){
+			t -= 1.0/4;
+			Vertex v(
+					-1,								// x-Koordinate
+					0.5*(-sin(M_PI * 6 * t)),		// y-Koordinate
+					0.5*(-cos(M_PI * 6 * t))+0.5,	// z-Koordinate
+					t + 1.0/4
+					);
+			return v;
+		}
+		if(t>=1.0/2 && t<=3.0/4) {
+			t -= 1.0/2;
+			Vertex v(
+					-cos(M_PI * 4 * t),			// x-Koordinate
+					0.5,						// y-Koordinate
+					0.5-1.5*sin(M_PI * 4 * t),	// z-Koordinate
+					t + 1.0/2
+					);
+			return v;
+		}
+		if(t>=3.0/4 && t<1.0){
+			t -= 3.0/4;
+			Vertex v(
+					1				,		// x-Koordinate
+					0.5*(-sin(M_PI * 6 * (t-3.0/4))),		// y-Koordinate
+					0.5*(cos(M_PI * 6 * (t-3.0/4)))+0.5,	// z-Koordinate
+					t + 3.0/4
+					);
+			return v;
+		}
+	}
+
 
 }

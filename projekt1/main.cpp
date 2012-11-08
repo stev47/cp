@@ -7,6 +7,12 @@ using namespace std;
 int main (int argc, char* argv[]) {
 
 	int j, k;
+	bool min;
+	string file("out.obj");
+
+	if (argc > 1)
+		file = argv[1];
+	
 	cout << "Waehlen Sie eine Kurve aus: " << endl;
 	cout << "(1) Test " << endl;
 	cout << "(2) Schnitt " << endl;
@@ -19,157 +25,54 @@ int main (int argc, char* argv[]) {
 		cout << "Fehler Kurvenauswahl " << endl;
 		return 0;
 	}
-	cout << "Wie oft soll verfeinert werden? " << endl;
+	cout << "Wie oft soll verfeinert werden? [0-10] " << endl;
 	cin >> k;
+	cout << "Soll minimiert werden? [0,1]" << endl;
+	cin >> min;
+	
+	Curves::Curve *my_curve;
 	if(j == 1){
-		Curves::Test my_curve;
-		Net my_net( my_curve );
-		my_net.init();
-		my_net.refine_mesh();
-		double area_before, area_new, improvement;
-		cout.setf(ios::fixed, ios::floatfield);
-		cout.precision(6);
-		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= k; i++) {
-				cout << "Verfeinere ... ";
-				my_net.refine_mesh();
-				cout << "fertig" << endl;
-				do {
-				area_before = my_net.Surface();
-				cout << "Minimiere ... ";
-				my_net.minimize_mesh();
-				cout << (area_new = my_net.Surface());
-				improvement = (1 - (area_new / area_before));
-				cout << " (" << improvement << "%)" << endl;
-				} while (improvement > 1e-3);
-		}
-		my_net.print();
+		my_curve = new Curves::Test();
 	}
 	if(j == 2){
-		Curves::Schnitt my_curve;
-		Net my_net( my_curve );
-		my_net.init();
-		my_net.refine_mesh();
-		double area_before, area_new, improvement;
-		cout.setf(ios::fixed, ios::floatfield);
-		cout.precision(6);
-
-		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= k; i++) {
-				cout << "Verfeinere ... ";
-				my_net.refine_mesh();
-				cout << "fertig" << endl;
-				do {
-				area_before = my_net.Surface();
-				cout << "Minimiere ... ";
-				my_net.minimize_mesh();
-				cout << (area_new = my_net.Surface());
-				improvement = (1 - (area_new / area_before));
-				cout << " (" << improvement << "%)" << endl;
-				} while (improvement > 1e-3);
-		}
-		my_net.print();
+		my_curve = new Curves::Schnitt();
 	}
 	if(j == 3){
-		Curves::Circle my_curve;
-		Net my_net( my_curve );
-		my_net.init();
-		my_net.refine_mesh();
-		double area_before, area_new, improvement;
-		cout.setf(ios::fixed, ios::floatfield);
-		cout.precision(6);
-
-		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= k; i++) {
-				cout << "Verfeinere ... ";
-				my_net.refine_mesh();
-				cout << "fertig" << endl;
-				do {
-				area_before = my_net.Surface();
-				cout << "Minimiere ... ";
-				my_net.minimize_mesh();
-				cout << (area_new = my_net.Surface());
-				improvement = (1 - (area_new / area_before));
-				cout << " (" << improvement << "%)" << endl;
-				} while (improvement > 1e-3);
-		}
-		my_net.print();
+		my_curve = new Curves::Circle();
 	}
 	if(j == 4){
-		Curves::Viviani my_curve;
-		Net my_net( my_curve );
-		my_net.init();
-		my_net.refine_mesh();
-		double area_before, area_new, improvement;
-		cout.setf(ios::fixed, ios::floatfield);
-		cout.precision(6);
-
-		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= k; i++) {
-				cout << "Verfeinere ... ";
-				my_net.refine_mesh();
-				cout << "fertig" << endl;
-				do {
-				area_before = my_net.Surface();
-				cout << "Minimiere ... ";
-				my_net.minimize_mesh();
-				cout << (area_new = my_net.Surface());
-				improvement = (1 - (area_new / area_before));
-				cout << " (" << improvement << "%)" << endl;
-				} while (improvement > 1e-3);
-		}
-		my_net.print();
+		my_curve = new Curves::Viviani();
 	}
 	if(j == 5){
-		Curves::TennisBall my_curve;
-		Net my_net( my_curve );
-		my_net.init();
-		my_net.refine_mesh();
-		double area_before, area_new, improvement;
-		cout.setf(ios::fixed, ios::floatfield);
-		cout.precision(6);
-
-		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= k; i++) {
-				cout << "Verfeinere ... ";
-				my_net.refine_mesh();
-				cout << "fertig" << endl;
-				do {
-				area_before = my_net.Surface();
-				cout << "Minimiere ... ";
-				my_net.minimize_mesh();
-				cout << (area_new = my_net.Surface());
-				improvement = (1 - (area_new / area_before));
-				cout << " (" << improvement << "%)" << endl;
-				} while (improvement > 1e-3);
-		}
-		my_net.print();
+		my_curve = new Curves::TennisBall();
 	}
 	if(j == 6){
-		Curves::TennisBallB my_curve;
-		Net my_net( my_curve );
-		my_net.init();
-		my_net.refine_mesh();
-		double area_before, area_new, improvement;
-		cout.setf(ios::fixed, ios::floatfield);
-		cout.precision(6);
-
-		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= k; i++) {
-				cout << "Verfeinere ... ";
-				my_net.refine_mesh();
-				cout << "fertig" << endl;
-				do {
-				area_before = my_net.Surface();
-				cout << "Minimiere ... ";
-				my_net.minimize_mesh();
-				cout << (area_new = my_net.Surface());
-				improvement = (1 - (area_new / area_before));
-				cout << " (" << improvement << "%)" << endl;
-				} while (improvement > 1e-3);
-		}
-		my_net.print();
+		my_curve = new Curves::TennisBallB();
 	}
+	Net my_net( *my_curve );
+	my_net.init();
+	double area_before, area_new, improvement;
+	cout.setf(ios::fixed, ios::floatfield);
+	cout.precision(6);
+
+	cout << my_net.Surface() <<endl;
+	for (int i = 1; i <= k; i++) {
+		cout << "Verfeinere ... ";
+		my_net.refine_mesh();
+		cout << "fertig" << endl;
+		do {
+			area_before = my_net.Surface();
+			cout << "Minimiere ... ";
+			if (min)
+				my_net.minimize_mesh();
+			cout << (area_new = my_net.Surface());
+		
+			improvement = (1 - (area_new / area_before));
+			cout << " (" << improvement << "%)" << endl;
+		} while (improvement > 1e-7);
+	}
+	my_net.print(file);
+	
 
 	return 0;
 }

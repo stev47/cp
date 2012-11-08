@@ -5,6 +5,10 @@
 
 namespace Curves {
 
+	Vertex Curve::f (double t) {
+		return Vertex(0,0,0);
+	}
+
 	/**
 	 * Kurve zum Testen
 	 */

@@ -11,7 +11,7 @@ namespace Curves {
 	 */
 	class Curve {
 		public:
-			virtual Vertex f (double f) =0;
+			virtual Vertex f (double f);
 	};
 
 	class Test : public Curve {
@@ -29,7 +29,7 @@ namespace Curves {
 	class Viviani : public Curve {
 		double a;
 		public:
-			Viviani (double a = 5) : a(a) {}
+			Viviani (double a = 1) : a(a) {}
 			virtual Vertex f (double t);
 	};
 

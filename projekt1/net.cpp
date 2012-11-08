@@ -2,6 +2,7 @@
 #include <list>
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include "net.h"
 
 Vertex* Net::new_vertex (double x, double y, double z) {
@@ -45,11 +46,11 @@ void Net::init () {
 	v3->add_triangle(t);
 }
 
-void Net::print () {
+void Net::print (std::string file) {
 	unsigned int i = 1;
-	remove("test.obj");
-	fstream f("test.obj");
-	f.open("test.obj", ios::out);
+	remove(file.c_str());
+	fstream f(file.c_str());
+	f.open(file.c_str(), ios::out);
 	f.setf(ios::fixed, ios::floatfield);
 	f.precision(5);
 	for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
@@ -187,7 +188,7 @@ Vector Net::Gradient(Vertex* v, Triangle* t) {
 	Vertex p2 = *p.second;
 	
 	Vector n = (*v - p1) ^ (*v - p2);
-	Vector g = (n / n.norm()) ^ (p1 - p2);
+	Vector g = (n) ^ (p1 - p2);
 	return g;
 }
 
@@ -225,6 +226,10 @@ double Net::Surface() {
 		Vertex p2 = *p.second;
 		
 		Vector n = (*(t->v1) - p1) ^ (*(t->v1) - p2);
+			if (!std::isfinite(n.norm())) {
+				cout << "error" << endl;
+				exit(-1);
+			}
 		surf += n.norm() / 2;
 	}
 	return surf;

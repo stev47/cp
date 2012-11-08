@@ -32,7 +32,7 @@ class Net {
 		 */
 		virtual void init (); 
 
-		void print ();
+		void print (std::string file);
 
 		void refine_mesh ();
 		/**

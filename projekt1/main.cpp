@@ -6,7 +6,7 @@ using namespace std;
 
 int main (int argc, char* argv[]) {
 
-	int j;
+	int j, k;
 	cout << "Waehlen Sie eine Kurve aus: " << endl;
 	cout << "(1) Test " << endl;
 	cout << "(2) Schnitt " << endl;
@@ -15,6 +15,12 @@ int main (int argc, char* argv[]) {
 	cout << "(5) TennisBall " << endl;
 	cout << "(6) TennisBallB " << endl;
 	cin >> j;
+	if(j != 1 && j != 2 && j != 3 && j != 4 && j != 5 && j != 6){
+		cout << "Fehler Kurvenauswahl " << endl;
+		return 0;
+	}
+	cout << "Wie oft soll verfeinert werden? " << endl;
+	cin >> k;
 	if(j == 1){
 		Curves::Test my_curve;
 		Net my_net( my_curve );
@@ -24,7 +30,7 @@ int main (int argc, char* argv[]) {
 		cout.setf(ios::fixed, ios::floatfield);
 		cout.precision(6);
 		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= k; i++) {
 				cout << "Verfeinere ... ";
 				my_net.refine_mesh();
 				cout << "fertig" << endl;
@@ -49,7 +55,7 @@ int main (int argc, char* argv[]) {
 		cout.precision(6);
 
 		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= k; i++) {
 				cout << "Verfeinere ... ";
 				my_net.refine_mesh();
 				cout << "fertig" << endl;
@@ -74,7 +80,7 @@ int main (int argc, char* argv[]) {
 		cout.precision(6);
 
 		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= k; i++) {
 				cout << "Verfeinere ... ";
 				my_net.refine_mesh();
 				cout << "fertig" << endl;
@@ -99,7 +105,7 @@ int main (int argc, char* argv[]) {
 		cout.precision(6);
 
 		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= k; i++) {
 				cout << "Verfeinere ... ";
 				my_net.refine_mesh();
 				cout << "fertig" << endl;
@@ -124,7 +130,7 @@ int main (int argc, char* argv[]) {
 		cout.precision(6);
 
 		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= k; i++) {
 				cout << "Verfeinere ... ";
 				my_net.refine_mesh();
 				cout << "fertig" << endl;
@@ -149,7 +155,7 @@ int main (int argc, char* argv[]) {
 		cout.precision(6);
 
 		cout << my_net.Surface() <<endl;
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= k; i++) {
 				cout << "Verfeinere ... ";
 				my_net.refine_mesh();
 				cout << "fertig" << endl;
@@ -163,9 +169,6 @@ int main (int argc, char* argv[]) {
 				} while (improvement > 1e-3);
 		}
 		my_net.print();
-	}
-	else{
-		cout << "Fehler Kurvenauswahl " << endl;
 	}
 
 	return 0;

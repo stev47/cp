@@ -1,7 +1,7 @@
 # Wähle g++ als Compiler, falls nicht schon gesetzt
 CXX ?= g++
 # Compilerflags, "-g" debug
-CXXFLAGS = -g 
+CXXFLAGS = -O3 -ffast-math -flto
 
 CPP_FILES = $(wildcard *.cpp)
 OBJ_FILES = $(patsubst %.cpp,%.o,$(CPP_FILES))

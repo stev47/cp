@@ -53,22 +53,22 @@ int main (int argc, char* argv[]) {
 	my_net.init();
 	double area_before, area_new, improvement;
 	cout.setf(ios::fixed, ios::floatfield);
-	cout.precision(6);
+	cout.precision(8);
 
-	cout << my_net.Surface() <<endl;
+	cout << (area_new = my_net.Surface()) << endl;
 	for (int i = 1; i <= k; i++) {
 		cout << "Verfeinere ... ";
 		my_net.refine_mesh();
+		area_before = my_net.Surface();
 		cout << "fertig" << endl;
 		do {
-			area_before = my_net.Surface();
 			cout << "Minimiere ... ";
 			if (min)
 				my_net.minimize_mesh();
 			cout << (area_new = my_net.Surface());
-		
 			improvement = (1 - (area_new / area_before));
-			cout << " (" << improvement << "%)" << endl;
+			area_before = area_new;
+			cout << " (" << improvement * 100 << "%)" << endl;
 		} while (improvement > 1e-7);
 	}
 	my_net.print(file);

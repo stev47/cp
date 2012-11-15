@@ -225,7 +225,7 @@ namespace Curves {
 	 * Spiralkurve mit Radius 1
 	 */
 	Vertex Spirale::f (double t) {
-  if(t>=0.0 && t<=1.0/8) {
+		if(t>=0.0 && t<=1.0/16) {
 			Vertex v(
 					1-cos(M_PI * 16 * t),		// x-Koordinate
 					sin(M_PI * 16 * t),		// y-Koordinate
@@ -234,73 +234,153 @@ namespace Curves {
 					);
 			return v;
 		}
-		if(t>=1.0/8 && t<=1.0/4){
-			t -= 1.0/8;
+		if(t>=1.0/16 && t<=2.0/16) {
+			t -= 1.0/16;
 			Vertex v(
-					1-cos(M_PI * 16 * t),		// x-Koordinate
-					sin(M_PI * 16 * t),		// y-Koordinate
-					8*t,						// z-Koordinate
-					t + 1.0/8
+					1+cos(M_PI * 16 * t),		// x-Koordinate
+					-sin(M_PI * 16 * t),		// y-Koordinate
+					0,						// z-Koordinate
+					t + 1.0/16
 					);
 			return v;
 		}
-		if(t>=1.0/4 && t<=3.0/8) {
-			t -= 1.0/4;
+		if(t>=2.0/16 && t<=3.0/16){
+			t -= 2.0/16;
 			Vertex v(
 					1-cos(M_PI * 16 * t),		// x-Koordinate
 					sin(M_PI * 16 * t),		// y-Koordinate
-					2*sin(M_PI * 8 * t),		// z-Koordinate
-					t + 1.0/4
+					sin(M_PI * 8 * t),						// z-Koordinate
+					t + 2.0/16
 					);
 			return v;
 		}
-		if(t>=3.0/8 && t<1.0/2){
-			t -= 3.0/8;
+		if(t>=3.0/16 && t<=4.0/16) {
+			t -= 3.0/16;
 			Vertex v(
-					1-cos(M_PI * 16 * t),		// x-Koordinate
-					sin(M_PI * 16 * t),		// y-Koordinate
-					3*sin(M_PI * 8 * t),		// z-Koordinate
-					t + 3.0/8
+					1+cos(M_PI * 16 * t),		// x-Koordinate
+					-sin(M_PI * 16 * t),		// y-Koordinate
+					1-sin(M_PI * 8 * t),					// z-Koordinate
+					t + 3.0/16
 					);
 			return v;
 		}
-		if(t>=1.0/2 && t<5.0/8){
-			t -= 1.0/2;
+		if(t>=4.0/16 && t<=5.0/16){
+			t -= 4.0/16;
 			Vertex v(
-					1-cos(M_PI * 16 * t),		// x-Koordinate
-					sin(M_PI * 16 * t),		// y-Koordinate
-					4*sin(M_PI * 8 * t),		// z-Koordinate
-					t + 1.0/2
+					0,							// x-Koordinate
+					sin(M_PI * 16 * t),			// y-Koordinate
+					1-cos(M_PI * 16 * t),		// z-Koordinate
+					t + 4.0/16
 					);
 			return v;
 		}
-		if(t>=5.0/8 && t<3.0/4){
-			t -= 5.0/8;
+		if(t>=5.0/16 && t<=6.0/16) {
+			t -= 5.0/16;
 			Vertex v(
-					1-cos(M_PI * 16 * t),		// x-Koordinate
-					sin(M_PI * 16 * t),		// y-Koordinate
-					5*sin(M_PI * 8 * t),		// z-Koordinate
-					t + 5.0/8
+					0,		// x-Koordinate
+					-sin(M_PI * 16 * t),		// y-Koordinate
+					1+cos(M_PI * 16 * t),					// z-Koordinate
+					t + 5.0/16
 					);
 			return v;
 		}
-		if(t>=3.0/4 && t<7.0/8){
-			t -= 3.0/4;
+		if(t>=6.0/16 && t<=7.0/16){
+			t -= 6.0/16;
 			Vertex v(
-					1-cos(M_PI * 16 * t),		// x-Koordinate
-					sin(M_PI * 16 * t),		// y-Koordinate
-					6*sin(M_PI * 8 * t),		// z-Koordinate
-					t + 3.0/4
+					-1+cos(M_PI * 16 * t),							// x-Koordinate
+					sin(M_PI * 16 * t),			// y-Koordinate
+					32*t,		// z-Koordinate
+					t + 6.0/16
 					);
 			return v;
 		}
-		if(t>=7.0/8 && t<1.0){
-			t -= 7.0/8;
+		if(t>=7.0/16 && t<=8.0/16) {
+			t -= 7.0/16;
 			Vertex v(
-					1-cos(M_PI * 16 * t),		// x-Koordinate
-					sin(M_PI * 16 * t),		// y-Koordinate
-					7*sin(M_PI * 8 * t),		// z-Koordinate
-					t + 7.0/8
+					-1-cos(M_PI * 16 * t),		// x-Koordinate
+					-sin(M_PI * 16 * t),		// y-Koordinate
+					2-32*t,					// z-Koordinate
+					t + 7.0/16
+					);
+			return v;
+		}
+		if(t>=8.0/16 && t<=9.0/16){
+			t -= 8.0/16;
+			Vertex v(
+					-1+cos(M_PI * 16 * t),							// x-Koordinate
+					sin(M_PI * 16 * t),			// y-Koordinate
+					0,		// z-Koordinate
+					t + 8.0/16
+					);
+			return v;
+		}
+		if(t>=9.0/16 && t<=10.0/16) {
+			t -= 9.0/16;
+			Vertex v(
+					-1-cos(M_PI * 16 * t),		// x-Koordinate
+					-sin(M_PI * 16 * t),		// y-Koordinate
+					0,					// z-Koordinate
+					t + 9.0/16
+					);
+			return v;
+		}
+		if(t>=10.0/16 && t<=11.0/16){
+			t -= 10.0/16;
+			Vertex v(
+					-1+cos(M_PI * 16 * t),							// x-Koordinate
+					sin(M_PI * 16 * t),			// y-Koordinate
+					-32*t,		// z-Koordinate
+					t + 10.0/16
+					);
+			return v;
+		}
+		if(t>=11.0/16 && t<=12.0/16) {
+			t -= 11.0/16;
+			Vertex v(
+					-1-cos(M_PI * 16 * t),		// x-Koordinate
+					-sin(M_PI * 16 * t),		// y-Koordinate
+					-2+32*t,					// z-Koordinate
+					t + 11.0/16
+					);
+			return v;
+		}
+		if(t>=12.0/16 && t<=13.0/16){
+			t -= 12.0/16;
+			Vertex v(
+					0,							// x-Koordinate
+					sin(M_PI * 16 * t),			// y-Koordinate
+					-1+cos(M_PI * 16 * t),		// z-Koordinate
+					t + 12.0/16
+					);
+			return v;
+		}
+		if(t>=13.0/16 && t<=14.0/16) {
+			t -= 13.0/16;
+			Vertex v(
+					0,		// x-Koordinate
+					-sin(M_PI * 16 * t),		// y-Koordinate
+					-1-cos(M_PI * 16 * t),					// z-Koordinate
+					t + 13.0/16
+					);
+			return v;
+		}
+		if(t>=14.0/16 && t<=15.0/16){
+			t -= 14.0/16;
+			Vertex v(
+					1-cos(M_PI * 16 * t),							// x-Koordinate
+					sin(M_PI * 16 * t),			// y-Koordinate
+					-32*t,		// z-Koordinate
+					t + 14.0/16
+					);
+			return v;
+		}
+		if(t>=15.0/16 && t<=16.0/16) {
+			t -= 15.0/16;
+			Vertex v(
+					1+cos(M_PI * 16 * t),		// x-Koordinate
+					-sin(M_PI * 16 * t),		// y-Koordinate
+					-2+32*t,					// z-Koordinate
+					t + 15.0/16
 					);
 			return v;
 		}

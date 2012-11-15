@@ -26,6 +26,13 @@ namespace Curves {
 		virtual Vertex f (double t);
 	};
 
+	class Welle : public Curve {
+		double a;
+		public:
+			Welle (double a = 2.0) : a(a) {}
+			virtual Vertex f (double t);
+	};
+
 	class Viviani : public Curve {
 		double a;
 		public:
@@ -38,6 +45,10 @@ namespace Curves {
 	};
 
 	class TennisBallB : public Curve {
+		virtual Vertex f (double t);
+	};
+
+	class Spirale : public Curve {
 		virtual Vertex f (double t);
 	};
 

@@ -1,0 +1,181 @@
+\documentclass{beamer}
+
+
+\usepackage{color}
+\usepackage{listings}
+\usepackage{courier}
+\lstset{
+basicstyle=\footnotesize\ttfamily, % Standardschrift
+numbers=left, % Ort der Zeilennummern
+tabsize=4, % Groesse von Tabs
+}
+\lstloadlanguages{C++}
+%\DeclareCaptionFont{blue}{\color{blue}}
+ 
+%\captionsetup[lstlisting]{singlelinecheck=false, labelfont={blue}, textfont={blue}}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{8}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{ngerman}
+
+
+
+
+\title{Diskrete Minimalflächen}
+\author{Patrick Dabbert, Stephan Hilb und Martin Rösner}
+\date{\today}
+
+\usepackage{beamerthemesplit}
+
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Inhaltsverzeichnis}
+	\tableofcontents[currentsection]
+\end{frame}
+
+\section{Allgemeines}
+
+\subsection{Die Aufgabe und unsere Interpretation}
+
+\begin{frame}
+	\frametitle{Die Aufgabenstellung}
+	\begin{quote}
+		„Beschreiben Sie eine triangulierte Fläche in eine gegeben gekrümmte Raumkurve ein und versuchen Sie, eine Approximation an eine Minimalfläche zu berechnen.“
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Unsere Überlegungen dazu}
+	\begin{itemize}
+		\item
+			Kurve in parametrisierter Form: $\gamma(t)$
+		\item
+			Zur Minimierung ist ein Dreiecksgitter nötig
+			
+			$\quad \implies$ Triangulierung erforderlich
+		\item
+			Einfaches Ausgabeformat für die Visualisierung
+	\end{itemize}
+\end{frame}
+
+\subsection{Die Datenstrukturen}
+
+\begin{frame}
+	\frametitle{Vertex}
+	\lstinputlisting{vertex.cpp}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Edge}
+	\lstinputlisting{edge.cpp}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Triangle}
+	\lstinputlisting{triangle.cpp}
+\end{frame}
+
+\subsection{Das Ausgabeformat für die Visualisierung}
+
+\begin{frame}[fragile]
+	\frametitle{Das Wavefront OBJ-Format}
+	\begin{itemize}
+		\item
+			Spezifikation von Punkten im Raum durch Zeilen der Form
+			\begin{verbatim}
+v [x-Koordinate] [y-Koordinate] [z-Koordinate]
+			\end{verbatim}
+			Implizite Indizierung der Punkte nach ihrer Reihenfolge.
+		\item
+			Verbindungslinie durch $n$ Punkte:
+			\begin{verbatim}
+l [ID Punkt 1] [ID Punkt 2] ... [ID Punkt n]
+			\end{verbatim}
+		\item
+			Dreiecksfläche, definiert durch drei Punkte:
+			\begin{verbatim}
+f [ID Punkt 1] [ID Punkt 2] [ID Punkt 3]
+			\end{verbatim}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Beispiel}
+	\begin{verbatim}
+v 0 0 0
+v 1 0 0
+v 0 1 0
+v 0 0 1
+l 1 4
+f 1 2 3
+	\end{verbatim}
+\end{frame}
+
+
+\section{Triangulierung}
+
+\subsection{Vorüberlegungen}
+
+\begin{frame}
+	\frametitle{Manuelle Anfangstriangulierung}
+	Definiere „per Hand“ ein Dreiecksnetz.
+
+	Leider:
+	\begin{itemize}
+		\item
+			Mühsam aufzustellen (für jede Kurve!)
+		\item
+			Erlaubt nur bedingt Annahmen über die Orientierung und Struktur des Netzes für die Verfeinerung.
+		\item
+			Ein Parser wäre nötig zum Einlesen der Definition (oder viel Quellcode tippen)
+	\end{itemize}
+	$\implies$ Idee verworfen
+\end{frame}
+
+\begin{frame}
+	\frametitle{Iterative Verfeinerung}
+	Beginne mit einem Dreieck mit Eckpunkten $\gamma(0), \gamma(\frac 13), \gamma(\frac 23)$, verfeinere dann iterativ.
+	\begin{itemize}
+		\item
+			Eine geschlossene Kurve wird vorrausgesetzt
+		\item
+			Einfach nachzuvollziehen
+		\item
+			Es kann auch schief laufen (Beispiele später)
+	\end{itemize}
+\end{frame}
+
+\subsection{Iterative Verfeinerung}
+
+
+\section{Minimierung}
+
+\subsection{Das lokale Minimierungsproblem}
+
+\subsection{Das Gradientenverfahren}
+
+\subsection{Implementierung}
+
+
+\section{Ergebnisse}
+
+\subsection{Schöne Minimalflächen}
+
+\subsection{Weniger schöne Flächen und ihre Ursachen}
+
+\subsection{Weiterführende Überlegungen}
+
+
+
+
+
+\end{document}

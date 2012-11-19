@@ -71,6 +71,7 @@ int main (int argc, char* argv[]) {
 	cout << (area_new = my_net.Surface()) << endl;
 	for (int i = 1; i <= k; i++) {
 		cout << "Verfeinere ... ";
+		cout.flush();	// Damit obige Ausgabe sofort erscheint
 		my_net.refine_mesh();
 		area_before = my_net.Surface();
 		cout << "fertig" << endl;

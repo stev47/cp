@@ -4,12 +4,15 @@
 #include "datastructures.h"
 #include "curves.h"
 
-//template <Curve& curve>
+#define OUT_MAX_CURVE_POINTS 100
+#define OUT_CURVE_STEP 1e-3
+
 class Net {
 	Curves::Curve &curve;
+
 	protected:
 		list<Vertex*> vertices;		//!< Knotenliste
-		list<Edge*> edges;			//!< Kantenliste
+		//list<Edge*> edges;			//!< Kantenliste (nicht nötig)
 		list<Triangle*> triangles;	//!< Dreiecksliste
 
 	public:
@@ -43,14 +46,6 @@ class Net {
 		 */
 		bool halve_edge (Edge* e);
 
-		Vertex cross_product(Vertex v1, Vertex v2);
-		double Vertex_Value(Vertex v1);
-		Vertex sub(Vertex v1, Vertex v2);
-		Vertex add(Vertex v1, Vertex v2, double n=1.0);
-
-		Vertex norm(Vertex v);
-
-		Vector Gradient(Vertex* v1, Triangle* t1);
 		void minimize_mesh();
 		double Surface(); 
 		double VSurface(Vertex* v, Vector delta);

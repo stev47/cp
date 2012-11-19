@@ -6,134 +6,144 @@
 #include "net.h"
 
 Vertex* Net::new_vertex (double x, double y, double z) {
-	this->vertices.push_back(new Vertex(x,y,z));
-	return this->vertices.back();
+	Vertex* v = new Vertex(x, y, z);
+	this->vertices.push_back(v);
+	return v;
 }
+
 Vertex* Net::new_vertex (double t) {
-	this->vertices.push_back(new Vertex(this->f(t)));
-	return this->vertices.back();
+	Vertex* v = new Vertex( f(t) );
+	this->vertices.push_back(v);
+	return v;
 }
+
 Edge* Net::new_edge (Vertex* v1, Vertex* v2, bool margin) {
-	this->edges.push_back(new Edge(v1, v2, margin));
-	return this->edges.back();
+	Edge* e = new Edge(v1, v2, margin);
+	//this->edges.push_back(e);
+	return e;
 }
+
 Triangle* Net::new_triangle (Vertex* v1, Vertex* v2, Vertex* v3, Edge* e1, Edge* e2, Edge* e3) {
-	this->triangles.push_front(new Triangle(v1, v2, v3, e1, e2, e3));
-	Triangle* t = this->triangles.front();
-	//Dreieck in Knoten-Dreieckslisten eintragen 
-	t->v1->add_triangle(t);
-	t->v2->add_triangle(t);
-	t->v3->add_triangle(t);
+	Triangle* t = new Triangle(v1, v2, v3, e1, e2, e3);
+	this->triangles.push_front(t);	// Wichtig! (Beim Durchlaufen einer Liste)
 	return t;
 }
 
 /**
- * Beginne mit einem Dreieck
+ * Aufbau des Anfangsdreiecks
  */
 void Net::init () {
 	Vertex* v1 = this->new_vertex(0.0);
-	Vertex* v2 = this->new_vertex(1.0/3);
-	Vertex* v3 = this->new_vertex(2.0/3);
+	Vertex* v2 = this->new_vertex(1.0 / 3);
+	Vertex* v3 = this->new_vertex(2.0 / 3);
 
-	Edge* e1 = this->new_edge(v2, v3, true);
-	Edge* e2 = this->new_edge(v1, v3, true);
-	Edge* e3 = this->new_edge(v1, v2, true);
-
-	Triangle* t = this->new_triangle(v1, v2, v3, e1, e2, e3);
-
-	v1->add_triangle(t);
-	v2->add_triangle(t);
-	v3->add_triangle(t);
+	Triangle* t = this->new_triangle(
+		v1, v2, v3,
+		this->new_edge(v2, v3, true),
+		this->new_edge(v1, v3, true),
+		this->new_edge(v1, v2, true)
+	);
 }
 
 void Net::print (std::string file) {
-	unsigned int i = 1;
 	remove(file.c_str());
 	fstream f(file.c_str());
 	f.open(file.c_str(), ios::out);
 	f.setf(ios::fixed, ios::floatfield);
 	f.precision(5);
+
+	/*
+	 * Ausgabe der Dreiecksknoten
+	 */
+	unsigned int i = 1;
 	for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
 		f << "v " << (*it)->x << " " << (*it)->y << " " << (*it)->z << endl;
 		(*it)->id = i++;
 	}
-	int curve_begin = i;
-	for (double t = 0; t < 1; t += 0.008) {
-		Vertex v = this->f(t);
-		f << "v " << v.x << " " << v.y << " " << v.z << endl;
-		i++;
-	}
-	int curve_end = i - 1;
-	f << "l";
-	for (int i = curve_begin; i <= curve_end; i++) {
-		f << " " << i;
-	}
-	f << " " << curve_begin;
 
-	f << endl;
+	/*
+	 * Ausgabe der Kurve
+	 * Wir zerlegen die Kurve in Teilkurven für die Ausgabe,
+	 * weil Paraview nicht so viele Punkte pro Linie unterstützt.
+	 */
+	int curve_output_begin = i;
+	int curve_output = curve_output_begin;
+	double t = 0;
+	while (t < 1) {
+		while (i - curve_output < OUT_MAX_CURVE_POINTS && t < 1) {
+			Vertex v = this->f(t);
+			f << "v " << v.x << " " << v.y << " " << v.z << endl;
+			i++;
+			t += OUT_CURVE_STEP;
+		}
+		f << "l";
+		while (curve_output < i) {
+			f << " " << curve_output++;
+		}
+		curve_output--;
+		f << endl;
+	}
+	f << "l " << curve_output << " " << curve_output_begin << endl;
+
+	/*
+	 * Ausgabe der Dreiecksflächen
+	 */
 	for (list<Triangle*>::iterator it = this->triangles.begin(); it != this->triangles.end(); it++) {
 		f << "f " << (*it)->v1->id << " " << (*it)->v2->id << " " << (*it)->v3->id << endl;
 	}
-	/*for (list<Vertex*>::iterator it = this->vertices.begin(); it != this->vertices.end(); it++) {
-		f << "p " << (*it)->id << endl;
-	}*/
 
 	f.close();
 }
 
 void Net::refine_mesh () {
 	for (
-			list<Triangle*>::iterator it = this->triangles.begin();
-			it != this->triangles.end(); 
-		)	{
-		Triangle* t = (*it);	// Aktuelles Dreieck
+			list<Triangle*>::iterator t_it = this->triangles.begin();
+			t_it != this->triangles.end(); 
+	) {
+		Triangle& t = *(*t_it);	// Aktuelles Dreieck
 
 		// Kanten halbieren (dabei werden die Teilkanten erstellt)
-		bool e1_halved = this->halve_edge(t->e1);
-		bool e2_halved = this->halve_edge(t->e2);
-		bool e3_halved = this->halve_edge(t->e3);
+		bool e1_halved = this->halve_edge(t.e1);
+		bool e2_halved = this->halve_edge(t.e2);
+		bool e3_halved = this->halve_edge(t.e3);
+
 		// Neue innere Kanten erzeugen
-		Edge* ei1 = this->new_edge(t->e2->m, t->e3->m);
-		Edge* ei2 = this->new_edge(t->e1->m, t->e3->m);
-		Edge* ei3 = this->new_edge(t->e1->m, t->e2->m);
+		Edge* ei1 = this->new_edge(t.e2->m, t.e3->m);
+		Edge* ei2 = this->new_edge(t.e1->m, t.e3->m);
+		Edge* ei3 = this->new_edge(t.e1->m, t.e2->m);
+
 		// Neue Dreiecke erzeugen
 		this->new_triangle(		// Linkes Dreieck
-				t->v1, t->e3->m, t->e2->m,
-				ei1, t->e2->subedge(t->v1), t->e3->subedge(t->v1)
-				);
+				t.v1, t.e3->m, t.e2->m,
+				ei1, t.e2->subedge(t.v1), t.e3->subedge(t.v1)
+			);
 		this->new_triangle(		// Rechtes Dreieck
-				t->v2, t->e1->m, t->e3->m,
-				ei2, t->e3->subedge(t->v2), t->e1->subedge(t->v2)
-				);
+				t.v2, t.e1->m, t.e3->m,
+				ei2, t.e3->subedge(t.v2), t.e1->subedge(t.v2)
+			);
 		this->new_triangle(		// Oberes Dreieck
-				t->v3, t->e2->m, t->e1->m,
-				ei3, t->e1->subedge(t->v3), t->e2->subedge(t->v3)
-				);
+				t.v3, t.e2->m, t.e1->m,
+				ei3, t.e1->subedge(t.v3), t.e2->subedge(t.v3)
+			);
 		this->new_triangle(		// Inneres Dreieck
-				t->e1->m, t->e2->m, t->e3->m,
+				t.e1->m, t.e2->m, t.e3->m,
 				ei1, ei2, ei3
-				);
+			);
 
 		// Aufräumen
+		this->triangles.erase(t_it++);
 
-		this->triangles.erase(it++);
-		t->v1->remove_triangle(t);
-		t->v2->remove_triangle(t);
-		t->v3->remove_triangle(t);
-		delete t;
+		t.v1->remove_triangle(&t);
+		t.v2->remove_triangle(&t);
+		t.v3->remove_triangle(&t);
+		delete &t;
 
-		if (!e1_halved) {
-			this->edges.remove(t->e1);
-			delete t->e1;
-		}
-		if (!e2_halved) {
-			this->edges.remove(t->e2);
-			delete t->e2;
-		}
-		if (!e3_halved) {
-			this->edges.remove(t->e3);
-			delete t->e3;
-		}
+		if (!e1_halved) 
+			delete t.e1;
+		if (!e2_halved) 
+			delete t.e2;
+		if (!e3_halved) 
+			delete t.e3;
 	}
 }
 
@@ -147,8 +157,6 @@ bool Net::halve_edge (Edge* e) {
 	if (e->is_halved())
 		return false;
 
-	Vertex* m;
-
 	if (e->is_margin()) {
 		// Neuen Punkt auf der Kurve berechnen
 		double t1 = e->v1->t;
@@ -160,17 +168,15 @@ bool Net::halve_edge (Edge* e) {
 		if (t > 1)
 			t -= 1;
 
-		m = this->new_vertex(t);
+		e->m = this->new_vertex(t);
 	} else {
 		// Mittelpunkt
-		m = this->new_vertex(
+		e->m = this->new_vertex(
 				(e->v1->x + e->v2->x) / 2,
 				(e->v1->y + e->v2->y) / 2,
 				(e->v1->z + e->v2->z) / 2
-				);
+			);
 	}
-	// Der Kante den Mittelpunkt zuweisen
-	e->m = m;
 
 	// Neue Kanten erzeugen
 	// Die Teilkanten sind genau dann Randkanten, wenn die
@@ -181,75 +187,39 @@ bool Net::halve_edge (Edge* e) {
 	return true;
 }
 
-Vector Net::Gradient(Vertex* v, Triangle* t) {
-		
-	pair<Vertex*,Vertex*> p = t->rem_points(v);
-	Vertex p1 = *p.first;
-	Vertex p2 = *p.second;
-	
-	Vector n = (*v - p1) ^ (*v - p2);
-	Vector g = (n) ^ (p1 - p2);
-	return g;
-}
-
 void Net::minimize_mesh(){ //list<Vertex*> vertices;
-	for (  list<Vertex*>::iterator it = this->vertices.begin();
-			it != this->vertices.end(); it++)	{ 
-		Vertex* v = *it;
+	for ( list<Vertex*>::iterator v_it = this->vertices.begin(); v_it != this->vertices.end(); v_it++) { 
+		Vertex& v = *(*v_it);
 	
-		if (!v->is_margin()){
+		if (!v.is_margin()){
 			Vector gradient(0, 0, 0);
+
 			// Gradienten der umliegenden Dreiecksflächen aufsummieren
-			for (list<Triangle*>::iterator t = v->triangles.begin(); t != v->triangles.end(); t++)
-				gradient += Gradient(v, *t);
+			for (list<Triangle*>::iterator t_it = v.triangles.begin(); t_it != v.triangles.end(); t_it++)
+				gradient += v.get_gradient(*t_it);
 
-			Vector delta = gradient;
-			while (VSurface(v, delta) > VSurface(v, Vertex(0, 0, 0)))
-				delta *= 0.5;
+			// Halbiere den Gradienten so lange, bis eine Verbesserung eintritt
+			while (v.get_surrounding_surface(gradient) > v.get_surrounding_surface())
+				gradient *= 0.5;
 
-			*v += delta;
+			v += gradient;
 		}
 	}
 }
 
 double Net::Surface() {
-	double surf = 0;
+	double surface = 0;
 	for (
-		list<Triangle*>::iterator it = this->triangles.begin();
-		it != this->triangles.end();
-		it++
+		list<Triangle*>::iterator t_it = this->triangles.begin();
+		t_it != this->triangles.end();
+		t_it++
 	) {
-		Triangle* t = *it;
+		Triangle& t = *(*t_it);
 		
-		pair<Vertex*,Vertex*> p = t->rem_points(t->v1);
-		Vertex p1 = *p.first;
-		Vertex p2 = *p.second;
-		
-		Vector n = (*(t->v1) - p1) ^ (*(t->v1) - p2);
-			if (!std::isfinite(n.norm())) {
-				cout << "error" << endl;
-				exit(-1);
-			}
-		surf += n.norm() / 2;
+		// Kreuzprodukt beider Seiten ...
+		Vector n = ( *t.v1 - *t.v2 ) ^ ( *t.v1 - *t.v3 );
+		// ... halbiert ergibt die Fläche des Dreiecks
+		surface += (0.5 * n.norm());
 	}
-	return surf;
-}
-
-double Net::VSurface(Vertex* v, Vector delta) {
-	double surf = 0;
-	for (
-		list<Triangle*>::iterator it = v->triangles.begin();
-		it != v->triangles.end();
-		it++
-	){
-		Triangle* t = *it;
-	
-		pair<Vertex*,Vertex*> p = t->rem_points(v);
-		Vertex p1 = *p.first;
-		Vertex p2 = *p.second;
-	
-		Vector m = ((*v + delta) - p1) ^ ((*v + delta) - p2);
-		surf += (m.norm() / 2);
-	}
-	return surf;
+	return surface;
 }

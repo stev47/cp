@@ -20,15 +20,16 @@ class Vertex : public Vector {
 
 		Vertex (double x, double y, double z) 
 			: t(-1), Vector(x,y,z) {}
-
 		Vertex (double x, double y, double z, double t)
 			: t(t), Vector(x,y,z) {}
 
 		bool is_margin ();
 
 		void add_triangle (Triangle* t);
-
 		void remove_triangle (Triangle* t);
+
+		Vector get_gradient (Triangle* t);
+		double get_surrounding_surface (Vector delta = Vector(0, 0, 0));
 
 		Vertex operator+= (const Vector &v);
 };
@@ -47,12 +48,10 @@ class Edge {
 
 		Edge (Vertex* v1, Vertex* v2)
 			: v1(v1), v2(v2), margin(false), m(NULL) {}
-
 		Edge (Vertex* v1, Vertex* v2, bool margin) 
 			: v1(v1), v2(v2), margin(margin), m(NULL) {}
 
 		bool is_halved ();
-
 		bool is_margin () {	return margin; }
 
 		/**
@@ -70,10 +69,9 @@ class Triangle {
 		Edge *e1, *e2, *e3;			//<! Kanten
 		Triangle *t1, *t2, *t3;		//<! Angrenzende Dreiecke
 
-		Triangle (Vertex* v1, Vertex* v2, Vertex* v3, Edge* e1, Edge* e2, Edge* e3) 
-			: v1(v1), v2(v2), v3(v3), e1(e1), e2(e2), e3(e3) {}
+		Triangle (Vertex* v1, Vertex* v2, Vertex* v3, Edge* e1, Edge* e2, Edge* e3);
 
-		pair<Vertex*, Vertex*> rem_points(Vertex* v);
+		pair<Vertex*, Vertex*> get_remote_points(Vertex* v);
 };
 
 #endif

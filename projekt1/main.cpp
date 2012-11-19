@@ -2,6 +2,10 @@
 #include "net.h"
 #include "curves.h"
 
+
+#define IMPROVEMENT_THRESHOLD 1e-7 
+
+
 using namespace std;
 
 int main (int argc, char* argv[]) {
@@ -26,7 +30,7 @@ int main (int argc, char* argv[]) {
 	cin >> j;
 	if(j != 1 && j != 2 && j != 3 && j != 4 && j != 5 && j != 6 && j != 7 && j != 8){
 		cout << "Fehler Kurvenauswahl " << endl;
-		return 0;
+		return -1;
 	}
 	if(j == 4){
 		cout << "Geben Sie bitte den gewünschten Abstand ein " << endl;
@@ -38,52 +42,49 @@ int main (int argc, char* argv[]) {
 	cin >> min;
 	
 	Curves::Curve *my_curve;
-	if(j == 1){
-		my_curve = new Curves::Test();
-	}
-	if(j == 2){
-		my_curve = new Curves::Schnitt();
-	}
-	if(j == 3){
-		my_curve = new Curves::Circle();
-	}
-	if(j == 4){
-		my_curve = new Curves::Welle(a);
-	}
-	if(j == 5){
-		my_curve = new Curves::Viviani();
-	}
-	if(j == 6){
-		my_curve = new Curves::TennisBall();
-	}
-	if(j == 7){
-		my_curve = new Curves::TennisBallB();
-	}
-	if(j == 8){
-		my_curve = new Curves::Spirale();
+	switch (j) {
+		case 1: my_curve = new Curves::Test(); break;
+		case 2: my_curve = new Curves::Schnitt(); break;
+		case 3: my_curve = new Curves::Circle(); break;
+		case 4: my_curve = new Curves::Welle(a); break;
+		case 5: my_curve = new Curves::Viviani(); break;
+		case 6: my_curve = new Curves::TennisBall(); break;
+		case 7: my_curve = new Curves::TennisBallB(); break;
+		case 8: my_curve = new Curves::Spirale(); break;
 	}
 	Net my_net( *my_curve );
-	my_net.init();
-	double area_before, area_new, improvement;
+
+	/*
+	 * Ausgabeformat für floating point Zahlen
+	 */
 	cout.setf(ios::fixed, ios::floatfield);
 	cout.precision(8);
 
+	// Initialisiere mit Anfangsdreieck
+	my_net.init();
+
+	double area_before, area_new, improvement;
 	cout << (area_new = my_net.Surface()) << endl;
 	for (int i = 1; i <= k; i++) {
-		cout << "Verfeinere ... ";
+		cout << i << ". Verfeinern ... ";
 		cout.flush();	// Damit obige Ausgabe sofort erscheint
-		my_net.refine_mesh();
 		area_before = my_net.Surface();
-		cout << "fertig" << endl;
+		my_net.refine_mesh();
+		cout << "fertig ... " << (area_new = my_net.Surface());
+		improvement = (1 - (area_new / area_before));
+		area_before = area_new;
+		cout << " (" << improvement * 100 << "%)" << endl;
+		if (!min)
+			continue;
+
 		do {
 			cout << "Minimiere ... ";
-			if (min)
-				my_net.minimize_mesh();
+			my_net.minimize_mesh();
 			cout << (area_new = my_net.Surface());
 			improvement = (1 - (area_new / area_before));
 			area_before = area_new;
 			cout << " (" << improvement * 100 << "%)" << endl;
-		} while (improvement > 1e-5);
+		} while (improvement > IMPROVEMENT_THRESHOLD);
 	}
 	my_net.print(file);
 	

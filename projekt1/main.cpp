@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "net.h"
 #include "curves.h"
 
@@ -13,7 +14,7 @@ int main (int argc, char* argv[]) {
 	int j, k;
 	double a;
 	bool min;
-	string file("out.obj");
+	string file("out");
 
 	if (argc > 1)
 		file = argv[1];
@@ -66,6 +67,11 @@ int main (int argc, char* argv[]) {
 	double area_before, area_new, improvement;
 	cout << (area_new = my_net.Surface()) << endl;
 	for (int i = 1; i <= k; i++) {
+		// Ausgabe von Zwischenstadien
+		std::stringstream tmp;
+		tmp << file << i - 1 << ".obj";
+		my_net.print(tmp.str());
+
 		cout << i << ". Verfeinern ... ";
 		cout.flush();	// Damit obige Ausgabe sofort erscheint
 		area_before = my_net.Surface();
@@ -86,7 +92,9 @@ int main (int argc, char* argv[]) {
 			cout << " (" << improvement * 100 << "%)" << endl;
 		} while (improvement > IMPROVEMENT_THRESHOLD);
 	}
-	my_net.print(file);
+	std::stringstream tmp;
+	tmp << file << k << ".obj";
+	my_net.print(tmp.str());
 	
 
 	return 0;

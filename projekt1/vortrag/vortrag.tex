@@ -20,6 +20,7 @@ tabsize=4, % Groesse von Tabs
 
 \usepackage[utf8x]{inputenc}
 \usepackage{ngerman}
+\usepackage{graphicx}
 
 
 
@@ -123,57 +124,166 @@ f 1 2 3
 
 \section{Triangulierung}
 
-\subsection{Vorüberlegungen}
-
 \begin{frame}
-	\frametitle{Manuelle Anfangstriangulierung}
-	Definiere „per Hand“ ein Dreiecksnetz.
+	\frametitle{Anfangsdreieck}
 
-	Leider:
-	\begin{itemize}
-		\item
-			Mühsam aufzustellen (für jede Kurve!)
-		\item
-			Erlaubt nur bedingt Annahmen über die Orientierung und Struktur des Netzes für die Verfeinerung.
-		\item
-			Ein Parser wäre nötig zum Einlesen der Definition (oder viel Quellcode tippen)
-	\end{itemize}
-	$\implies$ Idee verworfen
+	Definiere ein Dreieck mit den Eckpunkten $\gamma(0), \gamma(\frac 13), \gamma(\frac 23)$.
+	\begin{figure}
+		\caption{Anfangstriangulierung bei einer Kreiskurve}
+		\includegraphics[width=0.8 \linewidth]{kreis0.png}
+	\end{figure}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Iterative Verfeinerung}
-	Beginne mit einem Dreieck mit Eckpunkten $\gamma(0), \gamma(\frac 13), \gamma(\frac 23)$, verfeinere dann iterativ.
-	\begin{itemize}
+	\frametitle{Vorgehen}
+
+	\begin{enumerate}[1.]
 		\item
-			Eine geschlossene Kurve wird vorrausgesetzt
+			Halbiere jede Seite (erzeuge neuen Punkt auf der Mitte)
 		\item
-			Einfach nachzuvollziehen
+			Falls die Seite eine Randseite war, verschiebe den Mittelpunkt auf die Randkurve
 		\item
-			Es kann auch schief laufen (Beispiele später)
-	\end{itemize}
+			Erzeuge neue Dreiecke durch die eben definierten Punkte.
+	\end{enumerate}
 \end{frame}
 
-\subsection{Iterative Verfeinerung}
+\begin{frame}
+	\frametitle{Kreiskurve}
+
+	\begin{figure}
+		\caption{Kreistriangulierung nach erstem Vierteln}
+		\includegraphics[width=0.8 \linewidth]{kreis1.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Kreiskurve}
+
+	\begin{figure}
+		\caption{Kreistriangulierung nach zweitem Vierteln}
+		\includegraphics[width=0.8 \linewidth]{kreis2.png}
+	\end{figure}
+\end{frame}
 
 
 \section{Minimierung}
 
+\begin{frame}
+	\begin{itemize}
+		\item
+			Betrachte nach jedem Verfeinerungsschritt nacheinander alle freien (nicht auf dem Rand liegende) Knoten
+		\item
+			Für jeden Knoten: verschiebe so, dass die Fläche aller angrenzenden Dreiecke minimial wird
+		\item
+			Wiederhole das, solange die Gesamtfläche bei jedem Schritt um einen gewissen Prozentsatz minimiert wird.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Pseudecode Beispiel}
+	\lstinputlisting{minalg.cpp}
+\end{frame}
+
 \subsection{Das lokale Minimierungsproblem}
+
+\begin{frame}
+	\begin{itemize}
+		\item
+			Was ist die optimale oder eine gute Verschiebung?
+		\item
+			Welche Implementierungsmöglichkeiten gibt es?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Mögliche Ansätze}
+	\begin{itemize}
+		\item
+			Koordinaten der umliegenden Dreieckseckpunkte in irgendeiner Weise „mitteln“
+		\item
+			Das mathematische Minimierungsproblem lösen
+		\item
+			Ein Näherungsverfahren verwenden (z.B. ein Gradientenverfahren)
+	\end{itemize}
+\end{frame}
 
 \subsection{Das Gradientenverfahren}
 
-\subsection{Implementierung}
+\begin{frame}
+	\frametitle{Der Algorithmus}
+	\begin{enumerate}[1.]
+		\item
+			Berechne den Gradienten des Flächeninhalts der umliegenden Dreiecke in Abhängigkeit des aktuellen Punktes
+		\item
+			Prüfe, ob die Fläche sich verkleinert, wenn der Punkt um den Gradient verschoben wird.
+			Wenn ja: Verschiebe den Punkt.
+			Wenn nein: Halbiere den Gradienten.
+		\item
+			Wiederhole 2. so lange, bis eine Verschiebung stattfindet
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Code Beispiel}
+	\lstinputlisting{mingradient.cpp}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Berechnung des Gradienten für ein Dreieck}
+	Minimiere das Dreieck $x_0,x_1,x_2$, verschiebe dabei $x_0$.
+
+	Der Gradient ist durch die Höhe des Dreiecks durch $x_0$ in Richtung der gegenüberliegenden Grundseite gegeben.
+	Konkret:
+	\[
+		\big((x_0 - x_1) \times (x_0 - x_1)\big) \times (x_1 - x_2);
+	\]
+\end{frame}
+
+\begin{frame}
+	\frametitle{Code}
+	\lstinputlisting{grad.cpp}
+\end{frame}
 
 
 \section{Ergebnisse}
 
-\subsection{Schöne Minimalflächen}
+\begin{frame}
+	\frametitle{Schöne Fläche}
+	Die meisten geschlossenen Kurven, ohne Überschneidungen liefern gute Ergebnisse.
+\end{frame}
 
-\subsection{Weniger schöne Flächen und ihre Ursachen}
+\begin{frame}
+	\frametitle{Weniger schöne Flächen}
+	Probleme bereiten
+	\begin{itemize}
+		\item
+			offene Kurven 
+		\item
+			Kurven mit Überschneidungen (Viviani)
+		\item
+			Fälle, in denen die Triangulierung zu stark verzerrt wird
+	\end{itemize}
+\end{frame}
 
-\subsection{Weiterführende Überlegungen}
+\begin{frame}
+	\frametitle{Weiterführende Überlegungen}	
+	\begin{itemize}
+		\item
+			Verbesserung der Struktur des Dreiecksnetzes (möglichst gleichseitige Dreiecke)
+		\item
+			Bisektion statt Viertelung zur Netzverfeinerung
+		\item
+			Andere Strategien für die Punktverschiebung
+	\end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Ende}
+	Der Quellcode und diese Prästentation sind zu finden auf
+	\begin{verbatim}
+		https://github.com/stev47/cp/tree/master/projekt1
+	\end{verbatim}
+\end{frame}
 
 
 

@@ -38,10 +38,10 @@ tabsize=4, % Groesse von Tabs
 	\titlepage
 \end{frame}
 
-\begin{frame}
-	\frametitle{Inhaltsverzeichnis}
-	\tableofcontents
-\end{frame}
+%\begin{frame}
+%	\frametitle{Inhaltsverzeichnis}
+%	\tableofcontents
+%\end{frame}
 
 \section{Allgemeines}
 
@@ -109,17 +109,17 @@ f [ID Punkt 1] [ID Punkt 2] [ID Punkt 3]
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]
-	\frametitle{Beispiel}
-	\begin{verbatim}
-v 0 0 0
-v 1 0 0
-v 0 1 0
-v 0 0 1
-l 1 4
-f 1 2 3
-	\end{verbatim}
-\end{frame}
+%\begin{frame}[fragile]
+%	\frametitle{Beispiel}
+%	\begin{verbatim}
+%v 0 0 0
+%v 1 0 0
+%v 0 1 0
+%v 0 0 1
+%l 1 4
+%f 1 2 3
+%	\end{verbatim}
+%\end{frame}
 
 
 \section{Triangulierung}
@@ -235,7 +235,7 @@ f 1 2 3
 	Der Gradient ist durch die Höhe des Dreiecks durch $x_0$ in Richtung der gegenüberliegenden Grundseite gegeben.
 	Konkret:
 	\[
-		\big((x_0 - x_1) \times (x_0 - x_1)\big) \times (x_1 - x_2);
+		\big((x_0 - x_1) \times (x_0 - x_2)\big) \times (x_1 - x_2);
 	\]
 \end{frame}
 
@@ -248,7 +248,7 @@ f 1 2 3
 \section{Ergebnisse}
 
 \begin{frame}
-	\frametitle{Schöne Fläche}
+	\frametitle{Schöne Flächen}
 	Die meisten geschlossenen Kurven, ohne Überschneidungen liefern gute Ergebnisse.
 \end{frame}
 

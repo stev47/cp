@@ -162,6 +162,7 @@ bool Net::halve_edge (Edge* e) {
 		double t1 = e->v1->t;
 		double t2 = e->v2->t;
 
+		// Parameter-Mittelungs-Magic
 		double t = (t1 + t2) / 2;
 		if (fabs(t1 - t2) > 0.5) 
 			t += 0.5;
@@ -188,7 +189,11 @@ bool Net::halve_edge (Edge* e) {
 }
 
 void Net::minimize_mesh(){ //list<Vertex*> vertices;
-	for ( list<Vertex*>::iterator v_it = this->vertices.begin(); v_it != this->vertices.end(); v_it++) { 
+	for ( 
+		list<Vertex*>::iterator v_it = this->vertices.begin();
+		v_it != this->vertices.end();
+		v_it++
+	) { 
 		Vertex& v = *(*v_it);
 	
 		if (!v.is_margin()){

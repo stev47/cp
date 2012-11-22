@@ -52,6 +52,10 @@ namespace Curves {
 		virtual Vertex f (double t);
 	};
 
+	class Helix : public Curve {
+		virtual Vertex f (double t);
+	};
+
 }
 
 #endif

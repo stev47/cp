@@ -8,6 +8,7 @@ class Vector {
 		double x, y, z;
 	
 		Vector (double x, double y, double z) : x(x), y(y), z(z) {}
+		Vector (Vector* const vector);
 
 		Vector operator+ (const Vector &v);
 		Vector operator+= (const Vector &v);
@@ -16,6 +17,7 @@ class Vector {
 		Vector operator* (const double lambda);
 		Vector operator*= (const double lambda);
 		Vector operator/ (const double lambda);
+		Vector operator/= (const double lambda);
 		
 		Vector operator- ();
 		Vector operator^ (const Vector &v);			

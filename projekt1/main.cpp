@@ -4,7 +4,7 @@
 #include "curves.h"
 
 
-#define IMPROVEMENT_THRESHOLD 1e-7 
+#define IMPROVEMENT_THRESHOLD 1e-6 
 
 
 using namespace std;
@@ -28,11 +28,8 @@ int main (int argc, char* argv[]) {
 	cout << "(6) TennisBall " << endl;
 	cout << "(7) TennisBallB " << endl;
 	cout << "(8) Spirale " << endl;
+	cout << "(9) Doppelhelix " << endl;
 	cin >> j;
-	if(j != 1 && j != 2 && j != 3 && j != 4 && j != 5 && j != 6 && j != 7 && j != 8){
-		cout << "Fehler Kurvenauswahl " << endl;
-		return -1;
-	}
 	if(j == 4){
 		cout << "Geben Sie bitte den gewünschten Abstand ein " << endl;
 		cin >> a;
@@ -52,6 +49,8 @@ int main (int argc, char* argv[]) {
 		case 6: my_curve = new Curves::TennisBall(); break;
 		case 7: my_curve = new Curves::TennisBallB(); break;
 		case 8: my_curve = new Curves::Spirale(); break;
+		case 9: my_curve = new Curves::Helix(); break;
+		default: my_curve = new Curves::Test();
 	}
 	Net my_net( *my_curve );
 

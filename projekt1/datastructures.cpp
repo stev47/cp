@@ -9,7 +9,7 @@ using namespace std;
  * Vertex
  */
 bool Vertex::is_margin () {
-	return (this->t >= 0);
+	return !(this->t < 0);
 }
 void Vertex::add_triangle (Triangle* t) {
 	this->triangles.push_back(t);		
@@ -29,7 +29,10 @@ Vector Vertex::get_gradient (Triangle* t) {
 	Vertex p1 = *p.first;
 	Vertex p2 = *p.second;
 	
-	return ((*this - p1) ^ (*this - p2)) ^ (p1 - p2);
+	Vector h = (*this - p1) ^ (*this - p2);
+	// Normieren, um den echten Gradienten zu erhalten
+	// h /= h.norm();
+	return h ^ (p1 - p2);
 }
 
 double Vertex::get_surrounding_surface (Vector delta) {

@@ -4,7 +4,9 @@
 using namespace std;
 
 Vector Vector::operator+ (const Vector &v) {
-	return Vector(this->x + v.x, this->y + v.y, this->z + v.z);
+	Vector out(*this);
+	out += v;
+	return out; 
 }
 
 Vector Vector::operator+= (const Vector &v) {
@@ -18,9 +20,7 @@ Vector Vector::operator- (const Vector &v) {
 }
 
 Vector Vector::operator-= (const Vector &v) {
-	this->x -= v.x;
-	this->y -= v.y;
-	this->z -= v.z;
+	return *this - v;
 }
 
 Vector Vector::operator* (const double lambda) {
@@ -35,6 +35,9 @@ Vector Vector::operator*= (const double lambda) {
 
 Vector Vector::operator/ (const double lambda) {
 	return Vector(this->x / lambda, this->y / lambda, this->z / lambda);
+}
+Vector Vector::operator/= (const double lambda) {
+	return *this / lambda;
 }
 
 Vector Vector::operator- () {

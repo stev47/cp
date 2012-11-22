@@ -2,6 +2,7 @@
 #include <cmath>
 #include "datastructures.h"
 #include "curves.h"
+#include <iostream>
 
 namespace Curves {
 
@@ -13,7 +14,51 @@ namespace Curves {
 	 * Kurve zum Testen
 	 */
 	Vertex Test::f (double t) {
-		return Vertex ((sin(M_PI * 8 * t)+2.0) * cos(M_PI * 2 * t), (sin(M_PI * 8 * t)+2.0) * sin(M_PI * 2 * t), cos(M_PI * 4 * t)  , t);
+		double u = 9*cos(M_PI * 2 * t);
+		double v = 9*sin(M_PI * 2 * t);
+
+		return Vertex(
+			u * cos(v),
+			u * sin(v),
+			3 * v,
+			t
+		);
+	}
+
+	/**
+	 * Kurve zum Testen
+	 */
+	Vertex Helix::f (double t) {
+		double s;
+		if (t < 0.5) {
+			s = t * 2;
+			if (s < 0.9) {
+				s *= 10.0 / 9;
+				return Vertex(
+					cos(M_PI * 2 * s),
+					sin(M_PI * 2 * s),
+					6 * s,
+					t
+				);
+			} else {
+				s = (s - 0.9) * 10;
+				return Vertex( 1 - (2*s), 0, 6, t);
+			}
+		} else {
+			s = (t - 0.5) * 2;
+			if (s < 0.9) {
+				s *= 10.0 / 9;
+				return Vertex(
+					-cos(M_PI * 2 * -s),
+					-sin(M_PI * 2 * -s),
+					6 - (6 * s),
+					t
+				);
+			} else {
+				s = (s - 0.9) * 10;
+				return Vertex( -1 + (2*s), 0, 0, t);
+			}
+		}
 	}
 
 	/**
@@ -177,48 +222,18 @@ namespace Curves {
 	}
 
 	/**
-	 * Gebogene Tennisballkurve, mit Überschneidung von Flächen.
+	 * Gebogene Tennisballkurve, auf der Einheitssphäre liegend
 	 */
 	Vertex TennisBallB::f (double t) {
-		if(t>=0.0 && t<=1.0/4) {
-			Vertex v(
-					cos(M_PI * 4 * t),		// x-Koordinate
-					sin(M_PI * 4 * t),		// y-Koordinate
-					0,						// z-Koordinate
-					t
-					);
-			return v;
-		}
-		if(t>=1.0/4 && t<=1.0/2){
-			t -= 1.0/4;
-			Vertex v(
-					-1,								// x-Koordinate
-					0.5*(-sin(M_PI * 6 * t)),		// y-Koordinate
-					0.5*(-cos(M_PI * 6 * t))+0.5,	// z-Koordinate
-					t + 1.0/4
-					);
-			return v;
-		}
-		if(t>=1.0/2 && t<=3.0/4) {
-			t -= 1.0/2;
-			Vertex v(
-					-cos(M_PI * 4 * t),			// x-Koordinate
-					0.5,						// y-Koordinate
-					0.5-1.5*sin(M_PI * 4 * t),	// z-Koordinate
-					t + 1.0/2
-					);
-			return v;
-		}
-		if(t>=3.0/4 && t<1.0){
-			t -= 3.0/4;
-			Vertex v(
-					1,										// x-Koordinate
-					0.5*(-sin(M_PI * 6 * (t-3.0/4))),		// y-Koordinate
-					0.5*(cos(M_PI * 6 * (t-3.0/4)))+0.5,	// z-Koordinate
-					t + 3.0/4
-					);
-			return v;
-		}
+		double u = cos(M_PI * 2 * t);
+		double v = sin(M_PI * 2 * t);
+
+		return Vertex(
+			u - (u*u*u / 3) + (u*v*v),
+			v - (v*v*v / 3) + (v*u*u),
+			(u*u) - (v*v),
+			t
+		);
 	}
 	
 	/**

@@ -17,5 +17,14 @@ Jede Zeile definiert einen Eckpunkt des Polygonzugs, wobei x,y die Koordinaten d
 Die Neumann-Daten n beziehen sich dabei auf den Mittelpunkt derjenigen Kante, welche durch den Punkt der aktuellen Zeile und den der darauf folgenden Zeile definiert wird.
 Im Falle der letzten Zeile bezieht sich die Neumannbedingung auf den Mittelpunkt der Kante, die durch den letzten und den ersten Punkt definiert ist (der Polygonzug ist schließlich geschlossen).
 
+Ein Beispiel könnte folgendermaßen aussehen:
+
+    0;0;4.5;1
+	0;1;8.7;9
+	1;0;7;2.0
+	1;1;6;3
+
+
+
 
 

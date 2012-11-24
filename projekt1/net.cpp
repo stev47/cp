@@ -188,7 +188,7 @@ bool Net::halve_edge (Edge* e) {
 	return true;
 }
 
-void Net::minimize_mesh(){ //list<Vertex*> vertices;
+void Net::optimize_mesh() {
 	for ( 
 		list<Vertex*>::iterator v_it = this->vertices.begin();
 		v_it != this->vertices.end();
@@ -196,23 +196,51 @@ void Net::minimize_mesh(){ //list<Vertex*> vertices;
 	) { 
 		Vertex& v = *(*v_it);
 	
-		if (!v.is_margin()){
-			Vector gradient(0, 0, 0);
+		if (v.is_margin())
+			continue;
 
-			// Gradienten der umliegenden Dreiecksflächen aufsummieren
-			for (list<Triangle*>::iterator t_it = v.triangles.begin(); t_it != v.triangles.end(); t_it++)
-				gradient += v.get_gradient(*t_it);
+		Vector center(0, 0, 0);
 
-			// Halbiere den Gradienten so lange, bis eine Verbesserung eintritt
-			while (v.get_surrounding_surface(gradient) > v.get_surrounding_surface())
-				gradient *= 0.5;
+		int i = 0;
+		for (list<Triangle*>::iterator t_it = v.triangles.begin(); t_it != v.triangles.end(); t_it++) {
+			Triangle& t = *(*t_it);
 
-			v += gradient;
+			pair<Vertex*, Vertex*> pair = t.get_remote_points(&v);
+			center += (*pair.first + *pair.second) / 2;
+			i++;
 		}
+		center /= i;
+
+		v = center;				
 	}
 }
 
-double Net::Surface() {
+double Net::minimize_mesh() {
+	double delta_global = 0;
+	for ( 
+		list<Vertex*>::iterator v_it = this->vertices.begin();
+		v_it != this->vertices.end();
+		v_it++
+	) { 
+		Vertex& v = *(*v_it);
+	
+		if (v.is_margin())
+			continue;
+
+		Vector gradient = v.get_gradient();
+
+		double delta_local;
+		// Halbiere den Gradienten so lange, bis eine Verbesserung eintritt
+		while ( (delta_local = v.get_surrounding_surface(-gradient) - v.get_surrounding_surface()) > 0)
+			gradient *= 0.5;
+
+		delta_global += delta_local;
+		v -= gradient;
+	}
+	return delta_global;
+}
+
+double Net::surface() {
 	double surface = 0;
 	for (
 		list<Triangle*>::iterator t_it = this->triangles.begin();

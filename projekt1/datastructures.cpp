@@ -23,6 +23,12 @@ Vertex Vertex::operator+= (const Vector &v) {
 	this->z += v.z;
 	return *this;
 }
+Vertex Vertex::operator= (const Vector &v) {
+	this->x = v.x;
+	this->y = v.y;
+	this->z = v.z;
+	return *this;
+}
 
 Vector Vertex::get_gradient (Triangle* t) {
 	pair<Vertex*, Vertex*> p = t->get_remote_points(this);
@@ -30,9 +36,23 @@ Vector Vertex::get_gradient (Triangle* t) {
 	Vertex p2 = *p.second;
 	
 	Vector h = (*this - p1) ^ (*this - p2);
+	
 	// Normieren, um den echten Gradienten zu erhalten
-	// h /= h.norm();
-	return h ^ (p1 - p2);
+	double norm;
+	if ((norm = h.norm()) != 0) // unschön: Teilung durch 0 umgehen
+		h /= norm;
+
+	return h ^ (p2 - p1);
+}
+
+Vector Vertex::get_gradient () {
+	Vector gradient(0, 0, 0);
+
+	// Gradienten der umliegenden Dreiecksflächen aufsummieren
+	for (list<Triangle*>::iterator t_it = triangles.begin(); t_it != triangles.end(); t_it++)
+		gradient += this->get_gradient(*t_it);
+
+	return gradient;
 }
 
 double Vertex::get_surrounding_surface (Vector delta) {

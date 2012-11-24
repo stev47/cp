@@ -28,10 +28,14 @@ class Vertex : public Vector {
 		void add_triangle (Triangle* t);
 		void remove_triangle (Triangle* t);
 
+		// Für ein Dreieck
 		Vector get_gradient (Triangle* t);
+		// Für alle umliegenden Dreiecke
+		Vector get_gradient ();
 		double get_surrounding_surface (Vector delta = Vector(0, 0, 0));
 
 		Vertex operator+= (const Vector &v);
+		Vertex operator= (const Vector &v);
 };
 
 /**

@@ -3,26 +3,17 @@ Diskrete Minimalflächen
 
 Ziel ist es, in eine gegebene gekrümmte Raumkurve, eine triangulierte Fläche mit minimalem Flächeninhalt einzubeschreiben.
 
-Raumkurve
----------
+Verwendung
+----------
 
-Wir geben eine parametrisierte Raumkurve f vor.
+Zum Kompilieren:
 
-Triangulation
--------------
+    make
 
-Für die Triangulation beginnen wir mit einem Dreieck an den Punkten f(0), f(1/3), f(2/3).
+Zum Ausführen:
 
-Die Triangulierte Fläche wird verfeinert, indem jedes Dreieck geviertelt wird.
-Dabei werden neue Knotenpunkte, die in der Mitte von Randkanten eingeführt werden auf die Raumkurve f verschoben, damit sich die Fläche an die Kurve anpasst.
+    ./minsurf [ausgabe.obj]
 
-Minimierung
------------
-
-Gradientenverfahren?
-
-Ausgabe
--------
-
-Die Ausgabe erfolgt in Form von Wavefront .obj-Dateien.
-Siehe http://www.martinreddy.net/gfx/3d/OBJ.spec für die Spezifikation.
+Die Ausgabe erfolgt in "ausgabe.obj", oder standardmäßig in "out.obj".
+Den Menü-Anweisungen folgen (eine sinnvolle Anzahl Verfeinerungen wäre z.B. 6).
+Danach die Ausgabe mit Paraview öffen.

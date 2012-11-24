@@ -46,9 +46,9 @@ class Net {
 		 */
 		bool halve_edge (Edge* e);
 
-		void minimize_mesh();
-		double Surface(); 
-		double VSurface(Vertex* v, Vector delta);
+		void optimize_mesh();
+		double minimize_mesh();
+		double surface(); 
 };
 
 

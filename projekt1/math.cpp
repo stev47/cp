@@ -13,6 +13,7 @@ Vector Vector::operator+= (const Vector &v) {
 	this->x += v.x;
 	this->y += v.y;
 	this->z += v.z;
+	return *this;
 }
 
 Vector Vector::operator- (const Vector &v) {
@@ -20,7 +21,14 @@ Vector Vector::operator- (const Vector &v) {
 }
 
 Vector Vector::operator-= (const Vector &v) {
-	return *this - v;
+	this->x -= v.x;
+	this->y -= v.y;
+	this->z -= v.z;
+	return *this;
+}
+
+double Vector::operator* (const Vector &v) {
+	return (this->x * v.x) + (this->y * v.y) + (this->z * v.z);
 }
 
 Vector Vector::operator* (const double lambda) {
@@ -31,13 +39,17 @@ Vector Vector::operator*= (const double lambda) {
 	this->x *= lambda;
 	this->y *= lambda;
 	this->z *= lambda;
+	return *this;
 }
 
 Vector Vector::operator/ (const double lambda) {
 	return Vector(this->x / lambda, this->y / lambda, this->z / lambda);
 }
 Vector Vector::operator/= (const double lambda) {
-	return *this / lambda;
+	this->x /= lambda;
+	this->y /= lambda;
+	this->z /= lambda;
+	return *this;
 }
 
 Vector Vector::operator- () {

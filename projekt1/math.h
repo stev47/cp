@@ -14,6 +14,8 @@ class Vector {
 		Vector operator+= (const Vector &v);
 		Vector operator- (const Vector &v);
 		Vector operator-= (const Vector &v);
+		double operator* (const Vector &v);
+
 		Vector operator* (const double lambda);
 		Vector operator*= (const double lambda);
 		Vector operator/ (const double lambda);

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include <vector>
 
 using namespace std;
 
@@ -29,6 +30,8 @@ struct Edge {
 
 class Domain {
 	private:
+
+		vector<string> getLineIntoTokens(istream& str);
 		// Importiert einen Polygonzug
 		void import(string file);
 

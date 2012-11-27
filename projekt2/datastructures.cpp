@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include "datastructures.h"
 #include <vector>
 
@@ -10,12 +12,7 @@ Domain::Domain(string file) {
 
 }
 
-Domain::Domain() {
-	
-
-}
-
-Domain::import(string file) {
+void Domain::import(string file) {
 	fstream f(file.c_str());
 	f.open(file.c_str(), ios::in);
 	
@@ -23,7 +20,7 @@ Domain::import(string file) {
 
 }
 
-Domain::getLineIntoTokens(istream& str){
+vector<string> Domain::getLineIntoTokens(istream& str){
 
 	string line;
 	getline(str, line);

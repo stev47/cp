@@ -1,14 +1,21 @@
 #ifndef DATASTRUCTURES_H
 #define DATASTRUCTURES_H
 
+#include <string>
+#include <list>
+
+using namespace std;
+
+struct Edge;
+
 struct Vertex {
 	// Koordinaten des Punktes
 	double x, y;
 	// Dirichletwert
 	double dirichlet;
 	// Angrenzende Kanten im Polynomzug
-	Edge& previous, next;
-}
+	Edge &previous, &next;
+};
 
 struct Edge {
 	// Eckpunkte
@@ -18,7 +25,7 @@ struct Edge {
 
 	// Ermittle den Mittelpunkt
 	Vertex get_center();
-}
+};
 
 class Domain {
 	private:
@@ -36,7 +43,7 @@ class Domain {
 
 		// Kontruktor, der aus einer Datei den Polygonzug einliest
 		Domain(string file);
-}
+};
 
 
 #endif

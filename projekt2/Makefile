@@ -12,7 +12,7 @@ OBJ_FILES = $(patsubst %.cpp,%.o,$(CPP_FILES))
 	$(CXX) $(CXXFLAGS) -c $<
 
 # Die ausführbare Datei
-minsurf: $(OBJ_FILES)
+vudr: $(OBJ_FILES)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:

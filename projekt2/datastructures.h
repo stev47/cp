@@ -15,12 +15,15 @@ struct Vertex {
 	// Dirichletwert
 	double dirichlet;
 	// Angrenzende Kanten im Polynomzug
-	Edge &previous, &next;
+	Edge *previous, *next;
+
+	Vertex (double x, double y, double dirichlet)
+		: x(x), y(y), dirichlet(dirichlet) {}
 };
 
 struct Edge {
 	// Eckpunkte
-	Vertex& v1, v2;
+	Vertex *v1, *v2;
 	// Neumannwert
 	double neumann;
 

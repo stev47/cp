@@ -29,6 +29,9 @@ struct Edge {
 
 	// Ermittle den Mittelpunkt
 	Vertex get_center();
+
+	Edge (Vertex *v1, Vertex *v2, double n)
+		:v1(v1), v2(v2), neumann(n) {}
 };
 
 class Domain {

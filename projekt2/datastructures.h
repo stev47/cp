@@ -4,21 +4,20 @@
 #include <string>
 #include <list>
 #include <vector>
+#include "math.h"
 
 using namespace std;
 
-struct Edge;
+class Edge;
 
-struct Vertex {
-	// Koordinaten des Punktes
-	double x, y;
+struct Vertex : Vector {
 	// Dirichletwert
 	double dirichlet;
 	// Angrenzende Kanten im Polynomzug
 	Edge *previous, *next;
 
 	Vertex (double x, double y, double dirichlet)
-		: x(x), y(y), dirichlet(dirichlet) {}
+		: dirichlet(dirichlet), Vector(x, y) {}
 };
 
 struct Edge {
@@ -28,27 +27,33 @@ struct Edge {
 	double neumann;
 
 	// Ermittle den Mittelpunkt
-	Vertex get_center();
+	Vector get_center();
+	// Ermittle den Normalenvektor zu dieser Kante
+	Vector get_normal();
 
-	Edge (Vertex *v1, Vertex *v2, double n)
-		:v1(v1), v2(v2), neumann(n) {}
+	Edge (Vertex *v1, Vertex *v2, double neumann);
 };
 
 class Domain {
 	private:
-
-		vector<string> getLineIntoTokens(istream& str);
+		// Eine Zeile einlesen (Knoten und Neumanndaten der nächsten Kante)
+		pair<Vertex, double> parse_line(string line);
 		// Importiert einen Polygonzug
 		void import(string file);
 
 	public:
 		// Knotenliste
-		list<Vertex> vertices;
+		list<Vertex*> vertices;
 		
 		// Funktion für die Dirichletdaten
 		double dirichlet(Vertex& v);
 		// Funktion für die Nemanndaten
 		double neumann(Edge& e);
+
+		// Exportiert einen Polygonzug in eine Datei
+		void write_to_obj(string file);
+		// Berechnet die Fläche
+		double calculate_area();
 
 		// Kontruktor, der aus einer Datei den Polygonzug einliest
 		Domain(string file);

@@ -10,11 +10,12 @@ void Domain::import (string file) {
 	ifstream ifs( file.c_str() );
 
 	double x, y, dirichlet, neumann;
+	int unterteilung, prev_unterteilung;
 	Vertex *previous_vertex, *current_vertex;
 
 	// Ersten Knoten auslesen
-	ifs >> x >> y >> dirichlet >> neumann;		
-	cout << "x: " << x << ", y: " << y << ", d: " << dirichlet << ", n: " << neumann << endl;
+	ifs >> x >> y >> dirichlet >> neumann >> unterteilung;
+	cout << "x: " << x << ", y: " << y << ", d: " << dirichlet << ", n: " << neumann << ", Unterteilung: "<< unterteilung <<endl;
 
 	// Erstellen und eintragen
 	current_vertex = new Vertex(x, y, dirichlet);
@@ -27,7 +28,8 @@ void Domain::import (string file) {
 		double previous_neumann = neumann;
 
 		// Daten auslesen
-		ifs >> x >> y >> dirichlet >> neumann;		
+		prev_unterteilung= unterteilung;
+		ifs >> x >> y >> dirichlet >> neumann >> unterteilung;		
 
 		if (ifs.fail()) {
 			// Abbrechen, falls Lesefehler und nicht am Ende der Datei
@@ -36,20 +38,20 @@ void Domain::import (string file) {
 				return;
 			} else 
 				break;
-		} else 
-			cout << "x: " << x << ", y: " << y << ", d: " << dirichlet << ", n: " << neumann << endl;
+		} else
+			cout << "x: " << x << ", y: " << y << ", d: " << dirichlet << ", n: " << neumann  << ", Unterteilung: "<< unterteilung << endl;
 
 		// Knoten erstellen
 		current_vertex = new Vertex(x, y, dirichlet);
 		vertices.push_back(current_vertex);
 
 		// Kante zum vorhergehenden Knoten aufbauen
-		Edge* last_edge = new Edge(previous_vertex, current_vertex, previous_neumann);
+		Edge* last_edge = new Edge(previous_vertex, current_vertex, previous_neumann, prev_unterteilung);
 		
 		previous_vertex = current_vertex;
 	}
 	// Letzten Knoten zum Anfang hin verbinden
-	new Edge(previous_vertex, vertices.front(), neumann);
+	new Edge(previous_vertex, vertices.front(), neumann, unterteilung);
 }
 
 void Domain::write_to_obj (string file) {

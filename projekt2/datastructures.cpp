@@ -7,8 +7,8 @@ using namespace std;
  * Kante
  */
 
-Edge::Edge (Vertex* v1, Vertex* v2, double neumann)
-		: v1(v1), v2(v2), neumann(neumann) {
+Edge::Edge (Vertex* v1, Vertex* v2, double neumann, int unterteilung)
+		: v1(v1), v2(v2), neumann(neumann), unterteilung(unterteilung) {
 	// Sich bei den Knoten bekannt machen
 	v1->next = this;
 	v2->previous = this;

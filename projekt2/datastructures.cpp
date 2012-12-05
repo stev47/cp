@@ -32,16 +32,18 @@ Domain::Domain (string file) {
 
 double Domain::calculate_area () {
 
-	double area = 0;
+	double area = 0.0;
 	for (
 		list<Vertex*>::iterator v_it = vertices.begin();
-		v_it != vertices.end()--;
+		v_it != --vertices.end();
 	) {
 		Vertex* current = *v_it;
 		Vertex* next = *(++v_it);
 
 		// Kreuzprodukt
 		area += (current->x * next->y) - (next->x * current->y);
+		cout << current->x << next->x << current->y << next->y << endl;
+		cout << area << endl;
 	}
 	area += (vertices.back()->x * vertices.front()->y) - (vertices.front()->x * vertices.back()->y);
 	area *= 0.5;

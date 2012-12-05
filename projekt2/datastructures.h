@@ -56,6 +56,10 @@ class Domain {
 		// Berechnet die Fläche
 		double calculate_area();
 
+		vector<double> get_x_coordinates();
+		
+		vector<double> get_y_coordinates();
+
 		// Kontruktor, der aus einer Datei den Polygonzug einliest
 		Domain(string file);
 };

@@ -55,15 +55,16 @@ void Domain::import (string file) {
 }
 
 void Domain::write_to_obj (string file) {
+	remove( file.c_str() );
 	ofstream ofs( file.c_str() );
-	
+
 	// Knoten ausgeben
 	for (
 		list<Vertex*>::iterator v_it = vertices.begin();
 		v_it != vertices.end();
 		v_it++
 	) {
-		ofs << "v " << (*v_it)->x << " " << (*v_it)->y << " 0" << endl;
+		ofs << "v " << (*v_it)->previous->v1->x << " " << (*v_it)->next->v2->y << " 0" << endl;
 	}
 	
 	// Kantenlinien zeichnen
@@ -71,4 +72,9 @@ void Domain::write_to_obj (string file) {
 		ofs << "l " << (i - 1) << " " << i << endl;
 	}
 	ofs << "l " << vertices.size() << " " << 1 << endl;
+
+		// Knoten ausgeben
+	for (int i = 1; i <= vertices.size(); i++) {
+		ofs << "p " << i << endl;
+	}
 }

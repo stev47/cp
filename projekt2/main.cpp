@@ -8,6 +8,11 @@ int main (int argc, char* argv[]) {
 
 	Domain mydomain("beispielpolygon.txt");
 
+	cout << mydomain.vertices.front()->next->get_interpoint(0.2).x << endl;
+	cout << mydomain.vertices.front()->next->get_interpoint(0.2).y << endl;
+	
+	mydomain.refine();
+	
 	/*
 	 * Für die Gruppe, die die Koordinaten als Vector braucht:
 	 */
@@ -18,6 +23,8 @@ int main (int argc, char* argv[]) {
 		cout << x_coords[i] << " " << y_coords[i] << endl;
 	}
 
+	
+	
 	mydomain.write_to_obj("test.obj");
 
 	/*

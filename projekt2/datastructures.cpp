@@ -3,6 +3,16 @@
 
 using namespace std;
 
+
+
+Vertex Vertex::operator+ (const Vector &v) {
+	Vertex out(*this);
+
+	out.x += v.x;
+	out.y += v.y;
+	
+	return out;
+}
 /*
  * Kante
  */
@@ -22,6 +32,9 @@ Vector Edge::get_center () {
 	return Vector( 0.5 * (v1->x + v2->x), 0.5 * (v1->y + v2->y) );
 }
 
+Vector Edge::get_interpoint (double t) {
+	return ((*v2 - *v1) * t) + *v1;
+}
 /*
  * Gebiet
  */
@@ -79,31 +92,44 @@ vector<double> Domain::get_y_coordinates () {
 	return x_coords;
 }
 
-/*
+
 void Domain::refine() {
 	for (
 		list<Vertex*>::iterator v_it = vertices.begin();
 		v_it != vertices.end();
-		v_it++;
 	){
-		Vertex* v = *v_it;
+		Vertex* vbegin = *v_it;
+		Vertex* vend = vbegin->next->v2;
+
+		int num_edges = vbegin->next->unterteilung;
+		Vector richtung = (*vend - *vbegin) / num_edges;
 		
-		cout << v->x << endl;
+		double neumann = vbegin->next->neumann;
+
 		
-		Vertex vend=v1.next.v2;
-		int u=v1.next.unterteilung;
-		Vektor richtung=(v2-v1)/u;
-		int neumann=u1.v1.next.neumann;
-		//hier eventuell alte kanten löschen
-		for (int i =1; i<=u; i++){
-			v2=v1+richtung;
-			next=new edge(v1,v2, neumann, 1);
-			v1.next=*next
+		// v_it zeigt jetzt auf vend
+		v_it++;
+		
+		Vertex* v1 = vbegin;
+		for (int i = 1; i < num_edges; i++) {
+			Vertex* v2 = new Vertex(*v1 + richtung);
 			
+			vertices.insert(v_it, v2);
+			
+			Edge* edge = new Edge(v1, v2, neumann, 1);
+
+			v1->next = edge;
+			v2->previous = edge;
+
+			v1 = v2;
 		}
+
+		Edge* edge = new Edge(v1, vend, neumann, 1);
+		v1->next = edge;
+		vend->previous = edge;
 
 	}
 	
 }
 
-*/
+

@@ -49,11 +49,12 @@ class Domain {
 	public:
 		// Knotenliste
 		list<Vertex*> vertices;
-		
+		// Boolian Abfrage ob eine Dirichlet- bzw Neumannfunktion vorhanden ist
+		double dirichletf, neumannf;
 		// Funktion für die Dirichletdaten
-		double dirichlet(Vertex& v);
+		double get_dirichlet(double x, double y);
 		// Funktion für die Nemanndaten
-		double neumann(Edge& e);
+		double get_neumann(double x1, double x2, double y1, double y2);
 
 		// Exportiert einen Polygonzug in eine Datei
 		void write_to_obj(string file);

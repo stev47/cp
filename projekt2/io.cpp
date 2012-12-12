@@ -13,12 +13,20 @@ void Domain::import (string file) {
 	int unterteilung, prev_unterteilung;
 	Vertex *previous_vertex, *current_vertex;
 
+	// Neuman bzw. Dirichletfunktion abfragen ob vorhanden
+	ifs >> dirichletf >> neumannf;
+	cout << "Dirichletfunktion vorhanden: " << dirichletf << ", Neumannfunktion vorhanden: " << neumannf << endl;
+	
 	// Ersten Knoten auslesen
 	ifs >> x >> y >> dirichlet >> neumann >> unterteilung;
-	cout << "x: " << x << ", y: " << y << ", d: " << dirichlet << ", n: " << neumann << ", Unterteilung: "<< unterteilung <<endl;
 
 	// Erstellen und eintragen
+	if(dirichletf == 1) {
+		dirichlet = get_dirichlet(x, y);
+	}
+
 	current_vertex = new Vertex(x, y, dirichlet);
+	
 	vertices.push_back(current_vertex);
 
 	previous_vertex = current_vertex;
@@ -38,20 +46,35 @@ void Domain::import (string file) {
 				return;
 			} else 
 				break;
-		} else
-			cout << "x: " << x << ", y: " << y << ", d: " << dirichlet << ", n: " << neumann  << ", Unterteilung: "<< unterteilung << endl;
+		}
 
+		if(dirichletf == 1){
+			dirichlet = get_dirichlet(x, y);
+		}
 		// Knoten erstellen
 		current_vertex = new Vertex(x, y, dirichlet);
 		vertices.push_back(current_vertex);
 
+		if(neumannf == 1){
+			previous_neumann = get_neumann(previous_vertex->x, current_vertex->x, previous_vertex->y, current_vertex->y);
+		}
 		// Kante zum vorhergehenden Knoten aufbauen
 		Edge* last_edge = new Edge(previous_vertex, current_vertex, previous_neumann, prev_unterteilung);
-		
 		previous_vertex = current_vertex;
+	}
+	if(neumannf == 1){
+		neumann = get_neumann(previous_vertex->x, vertices.front()->x, previous_vertex->y, vertices.front()->y);
 	}
 	// Letzten Knoten zum Anfang hin verbinden
 	new Edge(previous_vertex, vertices.front(), neumann, unterteilung);
+
+	for (
+		list<Vertex*>::iterator v_it = vertices.begin();
+		v_it != vertices.end();
+		v_it++
+	) {
+		cout << "x: " << (*v_it)->x << " y: " << (*v_it)->y << " d: " << (*v_it)->dirichlet << " n: " << (*v_it)->next->neumann << " u: " << (*v_it)->next->unterteilung << endl;
+	}
 }
 
 void Domain::write_to_obj (string file) {

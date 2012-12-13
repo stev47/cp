@@ -4,8 +4,15 @@ Vernetzung, Diskretisierung der Randbedingungen
 Einleseformat für Polygonzug und Randbedingungen
 ------------------------------------------------
 
+Eine zusätzliche erste Zeile enthält zwei boolian Werte, die abfragen, ob eine Dirichlet- bzw. eine Neumannfunktion
+vorliegt oder die Werte mit den daten übergeben werden.
+Der erste Wert für die Dirichletfunktion.
+Der zweite Wert für die Neumannfunktion.
+"0" wenn die Werte in den Daten enthalten sind und "1" wenn eine Funktion implementiert ist, die die werte berechnet.
+
 Die Daten sollen Zeilenweise vorliegen in folgendem Format:
 
+    [dirichletf] [neumannf]
     [x1] [y1] [d1] [n1] [u1]
     [x2] [y2] [d2] [n2] [u2]
     ...

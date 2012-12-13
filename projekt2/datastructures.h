@@ -49,8 +49,8 @@ class Domain {
 	public:
 		// Knotenliste
 		list<Vertex*> vertices;
-		// Boolian Abfrage ob eine Dirichlet- bzw Neumannfunktion vorhanden ist
-		double dirichletf, neumannf;
+		// Boolean Abfrage ob eine Dirichlet- bzw Neumannfunktion vorhanden ist
+		bool dirichletf, neumannf;
 		// Funktion für die Dirichletdaten
 		double get_dirichlet(double x, double y);
 		// Funktion für die Nemanndaten

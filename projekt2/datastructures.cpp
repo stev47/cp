@@ -121,19 +121,29 @@ void Domain::refine() {
 		
 		Vertex* v1 = vbegin;
 		for (int i = 1; i < num_edges; i++) {
+			
 			Vertex* v2 = new Vertex(*v1 + richtung);
+			if(dirichletf == true){
+				v2->dirichlet = get_dirichlet(v2->x, v2->y);
+			}
 			
 			vertices.insert(v_it, v2);
-			
-			Edge* edge = new Edge(v1, v2, neumann, 1);
 
+			Edge* edge = new Edge(v1, v2, neumann, 1);
+			if(neumannf == true){
+				edge->neumann = get_neumann(v1->x, v2->x, v1->y, v2->y);
+			}
+			
 			v1->next = edge;
 			v2->previous = edge;
 
 			v1 = v2;
 		}
-
+		
 		Edge* edge = new Edge(v1, vend, neumann, 1);
+		if(neumannf == true){
+			edge->neumann = get_neumann(v1->x, vend->x, v1->y, vend->y);
+		}
 		v1->next = edge;
 		vend->previous = edge;
 

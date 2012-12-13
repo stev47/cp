@@ -35,7 +35,9 @@ Ein Beispiel könnte folgendermaßen aussehen:
     1 1 6e-15 3 6
     0 1 8.7 9 2
 
+TODO:
 
-
+- Interpolieren der Cirichlet und Neumanndaten
+- D/N Daten gegeben?
 
 

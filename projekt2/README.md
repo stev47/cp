@@ -37,7 +37,5 @@ Ein Beispiel könnte folgendermaßen aussehen:
 
 TODO:
 
-- Interpolieren der Cirichlet und Neumanndaten
-- D/N Daten gegeben?
-
+-Beispiel Funktion übergeben
 

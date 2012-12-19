@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <limits>
 #include "datastructures.h"
 
 
@@ -19,7 +20,27 @@ void Domain::import (string file) {
 	cout << "Dirichletfunktion vorhanden: " << dirichletf << ", Neumannfunktion vorhanden: " << neumannf << endl;
 	
 	// Ersten Knoten auslesen
-	ifs >> x >> y >> dirichlet >> neumann >> unterteilung;
+	ifs >> x >> y >> dirichlet;
+	
+	if (ifs.fail()) {
+		dirichlet = numeric_limits<double>::quiet_NaN();
+		ifs.clear();
+		ifs.ignore();
+	}
+	cout << dirichlet<<endl;
+
+	
+	ifs >> neumann;
+		if (ifs.fail()) {
+		neumann = numeric_limits<double>::quiet_NaN();
+		ifs.clear();
+		ifs.ignore();
+	}
+		cout << neumann<<endl;
+
+	ifs >> unterteilung;
+		cout << unterteilung<<endl;
+
 
 	// Erstellen und eintragen
 	if(dirichletf == true) {
@@ -38,7 +59,19 @@ void Domain::import (string file) {
 
 		// Daten auslesen
 		prev_unterteilung= unterteilung;
-		ifs >> x >> y >> dirichlet >> neumann >> unterteilung;		
+		ifs >> x >> y >> dirichlet;
+		if (ifs.fail()) {
+			dirichlet = numeric_limits<double>::quiet_NaN();
+			ifs.clear();
+			ifs.ignore();
+		}
+		ifs >> neumann;
+		if (ifs.fail()) {
+			neumann = numeric_limits<double>::quiet_NaN();
+			ifs.clear();
+			ifs.ignore();
+		}
+		ifs>> unterteilung;
 
 		if (ifs.fail()) {
 			// Abbrechen, falls Lesefehler und nicht am Ende der Datei

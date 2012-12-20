@@ -42,6 +42,7 @@ void Domain::import (string file) {
 		cout << unterteilung<<endl;
 
 
+	
 	// Erstellen und eintragen
 	if(dirichletf == true) {
 		dirichlet = get_dirichlet(x, y);
@@ -58,6 +59,7 @@ void Domain::import (string file) {
 		double previous_neumann = neumann;
 
 		// Daten auslesen
+		
 		prev_unterteilung= unterteilung;
 		ifs >> x >> y >> dirichlet;
 		if (ifs.fail()) {
@@ -103,13 +105,13 @@ void Domain::import (string file) {
 	new Edge(previous_vertex, vertices.front(), neumann, unterteilung);
 
 	cout.setf(ios::fixed, ios::floatfield);
-	cout.precision(2);
+	cout.precision(3);
 	for (
 		list<Vertex*>::iterator v_it = vertices.begin();
 		v_it != vertices.end();
 		v_it++
 	) {
-		cout << "x: " << (*v_it)->x << " y: " << (*v_it)->y << " d: " << (*v_it)->dirichlet << " n: " << (*v_it)->next->neumann << " u: " << (*v_it)->next->unterteilung << endl;
+		cout << "x: " << (*v_it)->x << "\t" << " y: " << (*v_it)->y << "\t" << " d: " << (*v_it)->dirichlet << "\t" << " n: " << (*v_it)->next->neumann <<  "\t" << " u: " << (*v_it)->next->unterteilung << endl;
 	}
 }
 
@@ -117,7 +119,7 @@ void Domain::write_to_obj (string file) {
 	remove( file.c_str() );
 	ofstream ofs( file.c_str() );
 	cout.setf(ios::fixed, ios::floatfield);
-	cout.precision(2);
+	cout.precision(3);
 
 	// Knoten ausgeben
 	for (
@@ -126,7 +128,7 @@ void Domain::write_to_obj (string file) {
 		v_it++
 	) {
 		ofs << "v " << (*v_it)->previous->v1->x << " " << (*v_it)->next->v2->y << " 0" << endl;
-		cout << "x: " << (*v_it)->x << " y: " << (*v_it)->y << " d: " << (*v_it)->dirichlet << " n: " << (*v_it)->next->neumann << " u: " << (*v_it)->next->unterteilung << endl;
+		cout << "x: " << (*v_it)->x << "\t" << " y: " << (*v_it)->y << "\t" << " d: " << (*v_it)->dirichlet << "\t" << " n: " << (*v_it)->next->neumann << "\t" << " u: " << (*v_it)->next->unterteilung << endl;
 	}
 	
 	// Kantenlinien zeichnen

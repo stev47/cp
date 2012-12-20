@@ -46,11 +46,12 @@ Domain::Domain (string file) {
 	import(file);
 }
 
-double Domain::get_dirichlet (double x, double y) {
+double Domain::get_dirichlet(double x, double y) {
+	cout << "virtual old" << endl;
 	return 0.0;
 }
 
-double Domain::get_neumann (double x1, double x2, double y1, double y2) {
+double Domain::get_neumann(double x1, double x2, double y1, double y2) {
 	return 0.0;
 }
 

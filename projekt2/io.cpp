@@ -41,6 +41,7 @@ void Domain::import (string file) {
 	// Erstellen und eintragen
 	if(dirichletf == true) {
 		dirichlet = get_dirichlet(x, y);
+		cout << "dirichlet " << dirichlet <<"x " << x << endl;
 	}
 
 	current_vertex = new Vertex(x, y, dirichlet);

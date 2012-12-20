@@ -40,7 +40,7 @@ struct Edge {
 };
 
 class Domain {
-	private:
+	protected:
 		// Eine Zeile einlesen (Knoten und Neumanndaten der nächsten Kante)
 		pair<Vertex, double> parse_line(string line);
 		// Importiert einen Polygonzug
@@ -52,9 +52,9 @@ class Domain {
 		// Boolean Abfrage ob eine Dirichlet- bzw Neumannfunktion vorhanden ist
 		bool dirichletf, neumannf;
 		// Funktion für die Dirichletdaten
-		double get_dirichlet(double x, double y);
+		virtual double get_dirichlet(double x, double y);
 		// Funktion für die Nemanndaten
-		double get_neumann(double x1, double x2, double y1, double y2);
+		virtual double get_neumann(double x1, double x2, double y1, double y2);
 
 		// Exportiert einen Polygonzug in eine Datei
 		void write_to_obj(string file);
@@ -69,6 +69,8 @@ class Domain {
 
 		// Kontruktor, der aus einer Datei den Polygonzug einliest
 		Domain(string file);
+
+		Domain() {};
 };
 
 

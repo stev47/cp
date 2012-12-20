@@ -111,7 +111,7 @@ void Domain::import (string file) {
 		v_it != vertices.end();
 		v_it++
 	) {
-		cout << "x: " << (*v_it)->x << "\t" << " y: " << (*v_it)->y << "\t" << " d: " << (*v_it)->dirichlet << "\t" << " n: " << (*v_it)->next->neumann <<  "\t" << " u: " << (*v_it)->next->unterteilung << endl;
+		//cout << "x: " << (*v_it)->x << "\t" << " y: " << (*v_it)->y << "\t" << " d: " << (*v_it)->dirichlet << "\t" << " n: " << (*v_it)->next->neumann <<  "\t" << " u: " << (*v_it)->next->unterteilung << endl;
 	}
 }
 
@@ -127,7 +127,7 @@ void Domain::write_to_obj (string file) {
 		v_it != vertices.end();
 		v_it++
 	) {
-		ofs << "v " << (*v_it)->previous->v1->x << " " << (*v_it)->next->v2->y << " 0" << endl;
+		ofs << "v " << (*v_it)->x << " " << (*v_it)->y << " 0" << endl;
 		cout << "x: " << (*v_it)->x << "\t" << " y: " << (*v_it)->y << "\t" << " d: " << (*v_it)->dirichlet << "\t" << " n: " << (*v_it)->next->neumann << "\t" << " u: " << (*v_it)->next->unterteilung << endl;
 	}
 	

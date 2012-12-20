@@ -6,7 +6,7 @@ using namespace std;
 
 int main (int argc, char* argv[]) {
 
-	Domain mydomain("data/beispielpolygon.txt");
+	Domain mydomain("data/beispielpolygon01.txt");
 	
 	mydomain.refine();
 

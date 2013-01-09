@@ -71,7 +71,6 @@ tabsize=4, % Groesse von Tabs
 \begin{frame}[fragile]
 	\frametitle{Das Eingabeformat}
 	\lstinputlisting{Eingabedaten.cpp}
-
 \end{frame}
 
 \begin{frame}[fragile]
@@ -98,112 +97,56 @@ tabsize=4, % Groesse von Tabs
 
 \begin{frame}
 	\frametitle{verwende obiges Beispiel}
-	
 \end{frame}
+
 
 
 \section{Alternative f\"ur Randbedingungen als Funktion}
 
 \begin{frame}
+	\frametitle{Dirichlet- bzw. Neumann-Daten als Funktion}
+	\begin{itemize}
+		\item Die daf\"ur vorgesehenen Funktionen ''get\_dirichlet''  und ''get\_neumann''  implementieren
+		\item Setzen der Abfragevariablen ''dirichletf'' und ''neumannf''
+		\item Die Eingabedatei an den entsprechenden Stellen mit nicht-Zahlwerten bef\"ullen
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
 	\frametitle{Pseudecode Beispiel}
+	\lstinputlisting{function.cpp}
 \end{frame}
 
-\section{Generieren einer Randdiskretisierung mit Gitterweite h}
+
+
+\section{Generieren einer Randdiskretisierung mit Unterteilungen u}
 
 \begin{frame}
+	\frametitle{Unterteilungen}
 	\begin{itemize}
-		\item
-			Was ist die optimale oder eine gute Verschiebung?
-		\item
-			Welche ImplementierungsmÃÂ¶glichkeiten gibt es?
+		\item Die Eingabedatei an der entsprechenden Stelle mit der Anzahl der Unterteilungen bef\"ullen
+		\item Anzahl der Unterteilungen gr\"o\ss er eins
+		\item 
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{MÃÂ¶gliche AnsÃâ¬tze}
-	\begin{itemize}
-		\item
-			Koordinaten der umliegenden Dreieckseckpunkte in irgendeiner Weise ''mitteln''
-		\item
-			Das mathematische Minimierungsproblem l\"osen
-		\item
-			Ein N\"aherungsverfahren verwenden (z.B. ein Gradientenverfahren)
-	\end{itemize}
+	\frametitle{Unterteilung}
+	\includegraphics[scale=0.3]{snapshot1.png}
 \end{frame}
 
-\section{Adaptive Netzverfeinerung}
 
-\begin{frame}
-	\frametitle{Der Algorithmus}
-	\begin{enumerate}[1.]
-		\item
-			Berechne den Gradienten des FlÃâ¬cheninhalts der umliegenden Dreiecke in AbhÃâ¬ngigkeit des aktuellen Punktes
-		\item
-			PrÃÅfe, ob die FlÃâ¬che sich verkleinert, wenn der Punkt um den Gradient verschoben wird.
-			Wenn ja: Verschiebe den Punkt.
-			Wenn nein: Halbiere den Gradienten.
-		\item
-			Wiederhole 2. so lange, bis eine Verschiebung stattfindet
-	\end{enumerate}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Code Beispiel}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Berechnung des Gradienten fÃÅr ein Dreieck}
-	Minimiere das Dreieck $x_0,x_1,x_2$, verschiebe dabei $x_0$.
-
-	Der Gradient ist durch die HÃÂ¶he des Dreiecks durch $x_0$ in Richtung der gegenÃÅberliegenden Grundseite gegeben.
-	Konkret:
-	\[
-		\big((x_0 - x_1) \times (x_0 - x_2)\big) \times (x_1 - x_2);
-	\]
-\end{frame}
-
-\begin{frame}
-	\frametitle{Code}
-\end{frame}
 
 
 \section{Ergebnisse}
 
-\begin{frame}
-	\frametitle{SchÃÂ¶ne FlÃâ¬chen}
-	Die meisten geschlossenen Kurven, ohne ÃÂberschneidungen liefern gute Ergebnisse.
-\end{frame}
-
-\begin{frame}
-	\frametitle{Weniger schÃÂ¶ne FlÃâ¬chen}
-	Probleme bereiten
-	\begin{itemize}
-		\item
-			offene Kurven 
-		\item
-			Kurven mit ÃÂberschneidungen (Viviani)
-		\item
-			FÃâ¬lle, in denen die Triangulierung zu stark verzerrt wird
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{WeiterfÃÅhrende ÃÂberlegungen}	
-	\begin{itemize}
-		\item
-			Verbesserung der Struktur des Dreiecksnetzes (mÃÂ¶glichst gleichseitige Dreiecke)
-		\item
-			Bisektion statt Viertelung zur Netzverfeinerung
-		\item
-			Andere Strategien fÃÅr die Punktverschiebung
-	\end{itemize}
-\end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Ende}
-	Der Quellcode und diese PrÃâ¬stentation sind zu finden auf
+	Der Quellcode und diese Pr\"astentation sind zu finden auf
 	\begin{verbatim}
-		https://github.com/stev47/cp/tree/master/projekt1
+		https://github.com/stev47/cp/tree/master/projekt2
 	\end{verbatim}
 \end{frame}
 

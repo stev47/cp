@@ -23,7 +23,6 @@ class Domain {
 		void refine();
 
 		vector<double> get_x_coordinates();
-
 		vector<double> get_y_coordinates();
 
 		// Kontruktor, der aus einer Datei den Polygonzug einliest

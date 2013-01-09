@@ -71,7 +71,6 @@ tabsize=4, % Groesse von Tabs
 \begin{frame}[fragile]
 	\frametitle{Das Eingabeformat}
 	\lstinputlisting{Eingabedaten.cpp}
-
 \end{frame}
 
 \begin{frame}[fragile]
@@ -105,6 +104,16 @@ tabsize=4, % Groesse von Tabs
 \section{Alternative f\"ur Randbedingungen als Funktion}
 
 \begin{frame}
+	\frametitle{Dirichlet- bzw. Neumann-Daten als Funktion}
+	\begin{itemize}
+		\item Die daf\"ur vorgesehenen Funktionen ''get\_dirichlet''  und ''get\_neumann''  implementieren
+		\item Setzen der Abfragevariablen ''dirichletf'' und ''neumannf''
+		\item Die Eingabedatei an den entsprechenden Stellen mit nicht-Zahlwerten bef\"ullen
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
 	\frametitle{Pseudecode Beispiel}
 	\lstinputlisting{function.cpp}
 \end{frame}
@@ -114,8 +123,21 @@ tabsize=4, % Groesse von Tabs
 \section{Generieren einer Randdiskretisierung mit Unterteilungen u}
 
 \begin{frame}
+	\frametitle{Unterteilungen}
+	\begin{itemize}
+		\item Die Eingabedatei an der entsprechenden Stelle mit der Anzahl der Unterteilungen bef\"ullen
+		\item Eine For-Schleife \"uber die Vertex-Liste pr\"uft zun\"achst, ob Neumann-Daten existieren
+		\item Eine innere For-Schleife generiert die Zwischenpunkte
+		\begin{itemize}
+			\item Neumann-Daten werden einfach nur kopiert (default)
+			\item Dirichlet-Daten werde zwischen den zwei Punkten interpoliert (default)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Unterteilung}
-	\includegraphics[scale=0.3]{snapshot2.png}
+	\includegraphics[scale=0.3]{snapshot1.png}
 \end{frame}
 
 

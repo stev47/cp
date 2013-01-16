@@ -1,0 +1,16 @@
+AlternatingGroup( [ 1 .. 5 ] ) 60
+AlternatingGroup( [ 1 .. 6 ] ) 360
+AlternatingGroup( [ 1 .. 7 ] ) 2520
+
+AlternatingGroup( [ 1 .. 5 ] ) 60
+Group( [ (3,5)(4,6), (1,2,5)(3,4,6) ] ) 60
+Error, usage: SpecialLinearGroup( [<filter>, ]<d>, <R> ) called from
+opr( IsMatrixGroup, n, q ) called from
+cons( IsPermGroup, arg[1], arg[2] ) called from
+PSL( 2, n ) called from
+<function>( <arguments> ) called from read-eval-loop
+Entering break read-eval-print loop ...
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+brk> quit;
+gap> quit;

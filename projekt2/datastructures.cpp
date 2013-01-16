@@ -28,7 +28,8 @@ Edge::Edge (Vertex* v1, Vertex* v2, double neumann, int unterteilung)
 }
 
 Vector Edge::get_normal () {
-	return ~(*v1 - *v2);
+	Vector temp = (~(*v1 - *v2));
+	return temp * (-1.0 /sqrt(temp * temp));
 }
 
 Vector Edge::get_center () {

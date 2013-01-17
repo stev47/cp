@@ -1,0 +1,19 @@
+liste := [];
+for n in [1..10] do
+  Add(liste,AlternatingGroup(n));
+  #Append(liste, PSL(2,n+1));
+od;
+Add(liste, PSL(3,3));
+Add(liste, PSU(3,3));
+Add(liste, MathieuGroup(11));
+for n in liste do
+   if not IsAbelian(n) then 
+    if Order(n)<=10000 then
+      if IsSimpleGroup(n) then
+	Print(n);
+	Print("\n");
+      fi;
+     fi;
+  fi;
+
+od;

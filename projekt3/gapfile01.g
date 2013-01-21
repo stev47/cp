@@ -61,6 +61,31 @@ od;
 Liste02 := List(Liste01, l -> StructureDescription(l));
 Print(Liste02, "\n");
 
-Print(ConjugacyClassesSubgroups(Liste01[1]), "\n");
+#Print(ConjugacyClassesSubgroups(Liste01[1]), "\n");
+#Print(List(ConjugacyClassesSubgroups(Liste01[1]), Representative), "\n");
+
+Liste03:=[];
+#minimal einfach? (alle untergruppen auflösbar):
+for G in Liste01 do
+	minimal:=1;
+	for U in List(ConjugacyClassesSubgroups(G), Representative) do
+		#Print(U);
+		if not IsSolvableGroup(U)  then  #IsSolvableGroup(U) klappt nicht IsPolycyclicGroup(U)
+			if not U=G then
+				minimal:=0;
+				Print("fail");
+				break;
+			fi;
+		fi;
+	od;
+	if minimal=1 then
+		Add(Liste03, G);
+	fi;
+od;
+Print("\n Minimale eifache Gruppen \n");
+#Print (Liste03, "\n");
+Liste04 := List(Liste03, l -> StructureDescription(l));
+Print(Liste04, "\n");
+
 
 LogTo();

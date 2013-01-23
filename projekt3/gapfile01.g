@@ -1,49 +1,21 @@
-LogTo("text.txt");
 Liste := [];
-Print("Alternierende Gruppen \n");
 #Schleife ueber die Ordnung
 for n in [1..10] do
 	#Alternierende Gruppe erstellen
-	G := AlternatingGroup(n);
-	#wenn Gruppe einfach dann ausgeben
-	if IsSimpleGroup(G) and Order(G)<=10000 and IsAbelian(G) = false then
-		Print(G, " ", Order(G), " ", " Alt(", n, ") \n");
-		Add(Liste, G);
-	fi;
+	Add(Liste, AlternatingGroup(n));
 od;
-Print("\n");
-Print("Projektive spezielle lineare Gruppen  PSL(2,q) \n");
 for n in [2..30] do
+	# ist q primzahlpotenz? (Körpergrade sind Primzahlpotenzen)
 	if IsPrimePowerInt(n) then
-		H := PSL(2,n);
-		if IsSimpleGroup(H) and Order(H)<=10000 and IsAbelian(H) = false then
-			Print(H, " ", Order(H), " PSL(2,", n, ") \n");
-			Add(Liste, H);
-		fi;
+		Add(Liste, PSL(2,n));
 	fi;
 od;
-Print("\n");
-Print("Projektive spezielle lineare Gruppe  PSL(3,3) \n");
-K := PSL(3,3);
-if IsSimpleGroup(K) and Order(K)<=10000 and IsAbelian(K) = false then
-	Print(K, " ", Order(K), " PSL(3,3) \n");
-	Add(Liste, K);
-fi;
-Print("\n");
-Print("Projektive spezielle unitaere Gruppe  PSU(3,3) \n");
-L := PSU(3,3);
-if IsSimpleGroup(L) and Order(L)<=10000 and IsAbelian(L) = false then
-	Print(L, " ", Order(L), " PSU(3,3) \n");
-	Add(Liste, L);
-fi;
-Print("\n");
-Print("Mathieu-Gruppe \n");
-M := MathieuGroup(11);
-if IsSimpleGroup(M) and Order(M)<=10000 and IsAbelian(M) = false then
-	Print(M, " ", Order(M), " Mathieu-Gruppe \n");
-	Add(Liste, M);
-fi;
-Print("\n");
+Add(Liste, PSL(3,3));
+Add(Liste, PSU(3,3));
+Add(Liste, MathieuGroup(11));
+
+Liste := Filtered(Liste, g -> (IsSimpleGroup(g) and (not IsAbelian(g)) and Order(g) <= 10000));
+
 k := Size(Liste);
 u := IsomorphismGroups(AlternatingGroup(3),AlternatingGroup(4));
 Liste01 := [];
@@ -59,6 +31,7 @@ for i in [1..k] do
 	fi;
 od;
 Liste02 := List(Liste01, l -> StructureDescription(l));
+Print("Liste aller endlichen, einfachen, nicht-abelschen Gruppen bis Ordnung 10000: \n");
 Print(Liste02, "\n");
 
 #Print(ConjugacyClassesSubgroups(Liste01[1]), "\n");
@@ -73,7 +46,7 @@ for G in Liste01 do
 		if not IsSolvableGroup(U)  then  #IsSolvableGroup(U) klappt nicht IsPolycyclicGroup(U)
 			if not U=G then
 				minimal:=0;
-				Print("fail");
+				#Print("fail");
 				break;
 			fi;
 		fi;
@@ -82,10 +55,7 @@ for G in Liste01 do
 		Add(Liste03, G);
 	fi;
 od;
-Print("\n Minimale eifache Gruppen \n");
+Print("\nMinimale einfache Gruppen \n");
 #Print (Liste03, "\n");
 Liste04 := List(Liste03, l -> StructureDescription(l));
 Print(Liste04, "\n");
-
-
-LogTo();

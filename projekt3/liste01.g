@@ -1,4 +1,4 @@
-Liste01 := function()
+Liste01 := function ()
 
 Liste := [];
 #Schleife ueber die Ordnung

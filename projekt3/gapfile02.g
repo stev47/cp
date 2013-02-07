@@ -1,5 +1,3 @@
-Read("gapfile01.g");
-
 G := AlternatingGroup(8);
 H := PSL(3,4);
 Print("G = ", G, " ", Order(G), "\nH = ", H, " ", Order(G), "\n");

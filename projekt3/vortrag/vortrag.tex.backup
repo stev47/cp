@@ -1,0 +1,209 @@
+\documentclass{beamer}
+
+
+\usepackage{color}
+\usepackage{listings}
+\usepackage{courier}
+\lstset{
+basicstyle=\tiny\ttfamily, % Standardschrift
+numbers=left, % Ort der Zeilennummern
+tabsize=4, % Groesse von Tabs
+}
+\lstloadlanguages{C++}
+%\DeclareCaptionFont{blue}{\color{blue}}
+ 
+%\captionsetup[lstlisting]{singlelinecheck=false, labelfont={blue}, textfont={blue}}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{8}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{ngerman}
+\usepackage{graphicx}
+
+
+
+
+\title{Kleine Einfache Gruppen}
+\author{Patrick Dabbert, Stephan Hilb und Martin R\"osner}
+\date{\today}
+
+\usepackage{beamerthemesplit}
+
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Inhaltsverzeichnis}
+%	\tableofcontents
+%\end{frame}
+
+\section{Aufgabe 1}
+
+\begin{frame}
+	\frametitle{Die Aufgabenstellung}
+	\begin{quote}
+	Aufgabe 1:\\
+	Fertigen Sie eine Liste der endlichen einfachen nicht-abelschen Gruppen bis Ordnung 10.000 an.
+	Sie dürfen hierbei verwenden, dass diese in folgender Liste enthalten sind: $A_n, PSL(2,q), PSL(3,3),
+	PSU(3,3)$ und $M_{11}$. Verwenden sie, dass die Ordnung eines endlichen Körpers eine Primzahlpotenz ist.
+	Welche der von ihnen gefundenen Gruppen sind minimal einfach?
+		 
+	\end{quote}
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{Definition:Einfache Gruppen}
+	\begin{quote}
+	 einfache Gruppen Definition
+		 
+	\end{quote}
+\end{frame}
+\begin{frame}
+	\frametitle{Definition Minimal Einfache Gruppen}
+	\begin{quote}
+	 minimal einfache Gruppen Definition
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösungsschritte}
+	\begin{quote}
+	 einfache Gruppen Definition
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Implementierung in GAP}
+	\begin{quote}
+	 einfache Gruppen Definition
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ergebnis}
+	\begin{quote}
+	 Tabelle ergebnis
+		 
+	\end{quote}
+\end{frame}
+
+
+
+\section{Aufgabe 2}
+
+\begin{frame}
+	\frametitle{Die Aufgabenstellung}
+	\begin{quote}
+	Aufgabe 2:\\
+	Zeigen Sie, dass $A_8$ und $PSL(3,4)$ nicht isomorph sind.
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösungsschritte}
+	\begin{quote}
+	 einfache Gruppen Definition
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Implementierung in GAP}
+	\begin{quote}
+	 einfache Gruppen Definition
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ergebnis}
+	\begin{quote}
+	 Tabelle ergebnis
+		 
+	\end{quote}
+\end{frame}
+
+
+\section{Aufgabe 3}
+
+\begin{frame}
+	\frametitle{Die Aufgabenstellung}
+	\begin{quote}
+	Aufgabe 2:\\
+	Zeigen Sie, dass $A_8$ und $PSL(3,4)$ nicht isomorph sind.
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösungsschritte}
+	\begin{quote}
+	 einfache Gruppen Definition
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Implementierung in GAP}
+	\begin{quote}
+	 einfache Gruppen Definition
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ergebnis}
+	\begin{quote}
+	 Tabelle ergebnis
+		 
+	\end{quote}
+\end{frame}
+
+\section{Aufgabe 2}
+
+\begin{frame}
+	\frametitle{Die Aufgabenstellung}
+	\begin{quote}
+	Aufgabe 2:\\
+	Zeigen Sie, dass $A_8$ und $PSL(3,4)$ nicht isomorph sind.
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösungsschritte}
+	\begin{quote}
+	 einfache Gruppen Definition
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Implementierung in GAP}
+	\begin{quote}
+	 einfache Gruppen Definition
+		 
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ergebnis}
+	\begin{quote}
+	 Tabelle ergebnis
+		 
+	\end{quote}
+\end{frame}
+
+\end{document}

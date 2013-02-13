@@ -1,5 +1,5 @@
 Liste01 := function ()
-
+local Liste, Liste01, Liste02;
 Liste := [];
 #Schleife ueber die Ordnung
 for n in [1..10] do

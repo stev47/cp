@@ -62,32 +62,48 @@ tabsize=4, % Groesse von Tabs
 \begin{frame}
 	\frametitle{Definition:Einfache Gruppen}
 	\begin{quote}
-	 einfache Gruppen Definition
+	 Eine Gruppe heißt einfach wenn sie nur 1 und sich selbst als Normalteiler besitzt.
 		 
 	\end{quote}
 \end{frame}
 \begin{frame}
 	\frametitle{Definition Minimal Einfache Gruppen}
 	\begin{quote}
-	 minimal einfache Gruppen Definition
-		 
+	 Eine einfache Gruppe G heißt minimal einfach, wenn alle echten Untergruppen von G auflösbar sind.
 	\end{quote}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Lösungsschritte}
 	\begin{quote}
-	 einfache Gruppen Definition
+	 \begin{enumerate}[1.]
+	  \item gegebene Gruppen in Liste eintragen
+	  \item Überprüfen ob Gruppen Einfach, Abelsch und Ordnung kleiner 10000.
+	  \item Gruppen auf Isomorphie prüfen
+	  \item Untergruppen auf Auflösbarkeit prüfen (hierbei reicht es die die Konjugationsklassen der Untergruppen
+	  zu betrachten) $\Rightarrow$ Minimal einfach
+	 \end{enumerate}
+
 		 
 	\end{quote}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Implementierung in GAP}
-	\begin{quote}
-	 einfache Gruppen Definition
+	 \lstinputlisting{liste01.g}
 		 
-	\end{quote}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Implementierung in GAP}
+	 \lstinputlisting{liste01.1.g}
+		 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Implementierung in GAP}
+	 \lstinputlisting{gapfile01.g}
+		 
 \end{frame}
 
 \begin{frame}
@@ -114,17 +130,14 @@ tabsize=4, % Groesse von Tabs
 \begin{frame}
 	\frametitle{Lösungsschritte}
 	\begin{quote}
-	 einfache Gruppen Definition
+	 Überprüfe für $A_8$ und $PSL(3,4)$ für welche Ordnungen Elemente vorkommen.
 		 
 	\end{quote}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Implementierung in GAP}
-	\begin{quote}
-	 einfache Gruppen Definition
-		 
-	\end{quote}
+	\lstinputlisting{gapfile02.g}
 \end{frame}
 
 \begin{frame}
@@ -151,7 +164,12 @@ tabsize=4, % Groesse von Tabs
 \begin{frame}
 	\frametitle{Lösungsschritte}
 	\begin{quote}
-	 einfache Gruppen Definition
+	 \begin{enumerate}
+	  \item Benutze erste Liste aus Aufgabe 1
+	  \item Überprüfe für jede Gruppe ob nicht Triviale Partitionen vorliegen
+	  \item Liegen solche vor, so bestimme alle Partitionen
+	 \end{enumerate}
+
 		 
 	\end{quote}
 \end{frame}
@@ -159,7 +177,8 @@ tabsize=4, % Groesse von Tabs
 \begin{frame}
 	\frametitle{Implementierung in GAP}
 	\begin{quote}
-	 einfache Gruppen Definition
+	 \lstinputlisting{gapfile03.g}
+
 		 
 	\end{quote}
 \end{frame}
@@ -185,16 +204,17 @@ tabsize=4, % Groesse von Tabs
 
 \begin{frame}
 	\frametitle{Lösungsschritte}
-	\begin{quote}
-	 einfache Gruppen Definition
-		 
-	\end{quote}
+	\begin{enumerate}
+	 \item Benutze erste Liste aus Teil eins.
+	 \item Überprüfe die Gruppen darauf ob sie N Gruppen sind
+	 \item wenn ja: Gib Isomorphietyp usw an. 		 
+	\end{enumerate}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Implementierung in GAP}
 	\begin{quote}
-	 einfache Gruppen Definition
+	 \lstinputlisting{gapfile04.g}
 		 
 	\end{quote}
 \end{frame}

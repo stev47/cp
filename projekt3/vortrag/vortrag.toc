@@ -1,5 +1,5 @@
-\beamer@endinputifotherversion {3.10pt}
+\beamer@endinputifotherversion {3.07pt}
 \beamer@sectionintoc {1}{Aufgabe 1}{2}{0}{1}
-\beamer@sectionintoc {2}{Aufgabe 2}{8}{0}{2}
-\beamer@sectionintoc {3}{Aufgabe 3}{12}{0}{3}
-\beamer@sectionintoc {4}{Aufgabe 4}{16}{0}{4}
+\beamer@sectionintoc {2}{Aufgabe 2}{10}{0}{2}
+\beamer@sectionintoc {3}{Aufgabe 3}{14}{0}{3}
+\beamer@sectionintoc {4}{Aufgabe 4}{18}{0}{4}

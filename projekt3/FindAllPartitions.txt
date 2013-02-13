@@ -1,0 +1,144 @@
+##########################################################################################################################
+##### Computerpraktikum, Block III ; 
+##### Leo Margolis, Universitaet Stuttgart, WiSe 1012/13
+#####
+##### 
+##### Gruppe VII: Fabio Valvano, Huy Nguyen, Dmitriy Sevkovych
+##### Thema 1.2: Partitionen von Untergruppen
+#####
+##### Aufgabe 1a) 
+##### Schreibe eine GAP-Funktion "FindAllPartitions(G)", welche fuer eine gegebene Gruppe G alle
+##### nicht-trivialen Partitionen von G bestimmt.
+##########################################################################################################################
+
+
+FindAllPartitions := function(G)
+
+ local i, j, k, a, b, temp, subgrps, combs, some_combs, partitions ;
+
+
+###
+###
+
+
+ if Size(G) = infinity then
+	
+	Print(G, " ist keine endliche Gruppe! Bitte eine endliche Gruppe eingeben.\n");
+
+	return false;
+
+ fi;
+
+
+###
+###
+
+
+# 1. Schritt: 
+# Finde alle echten Untergruppen von G, entferne zudem die triviale Untergruppe aus der Liste der betrachteten Untergruppen "subgroups". 
+# Teste, welche Vereinigungen von Untergruppen wieder die gesamte Gruppe G ergeben. Behalte diejenigen Vereinigungen, welche das erfÃ¼llen, 
+# in der Liste "some_combs".
+ 
+ subgrps := AllSubgroups(G);
+ 
+ for i in subgrps do
+
+	if ( IsTrivial(i) = true ) or ( Order(i) = Order(G) ) then
+
+		Remove(subgrps, Position(subgrps,i));
+
+	fi;
+ od;
+
+
+ combs := Combinations( subgrps );
+ some_combs := [] ;
+
+ for k in [1..Length( combs )] do
+ 
+	temp := Union( Set( combs[k]{ [1..Length( combs[k] )] } ) );
+
+	if temp = Set( G ) then
+
+		Append(some_combs, [ combs[k]{[1..Length( combs[k])]} ] );
+
+	fi;
+ od;
+
+
+###
+###
+
+
+# 2. Schritt:
+# Teste, ob fÃ¼r alle Kombinationen der Untergruppen aus "some_combs" paarweise der Schnitt trivial ist.
+# Falls eine Kombination diese Eigenschaft nicht besitzt, wird sie aus der Liste "some_combs" entfernt.
+
+a := 0;
+b := 0;
+
+for k in [1..Length( some_combs )] do
+
+
+	for i in [1..Length( some_combs[k] )] do
+
+		if b = 1 then
+
+			b := 0;
+			break;
+
+		else
+
+			for j in [1..Length( some_combs[k] )] do  
+
+				if a = 1 then
+
+					a := 0;
+					break;
+				
+				else
+	
+					if i<>j then
+				
+						temp := Intersection( some_combs[k][i], some_combs[k][j] );
+	
+						
+						if IsTrivial(temp) = false then
+							
+							Unbind( some_combs[k] );
+					
+							a := 1; 
+							b := 1;
+
+						fi;
+	
+					fi;	
+
+
+				fi;
+	
+
+			od;
+
+
+		fi;
+
+	od;
+
+ 
+ od;
+
+
+###
+###
+
+
+# Entferne nun die LÃ¶cher aus der Liste der Ã¼berprÃ¼ften Kombinationen. Diejenigen Kombinationen, welche den Test Ã¼berstanden 
+# haben, sind genau die gesuchten Partitionen von G:
+
+ partitions := SSortedList( some_combs );
+
+ Print("\nDie Gruppe ", G, " besitzt die folgenden nicht-trivialen Partitionen:\n", partitions);
+
+ end; 
+############################################### function FindAllPartitions ###############################################

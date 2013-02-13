@@ -2,7 +2,7 @@ IsNGroup := function(G)
 
 local a,i,j,L,L_2,l,l_2;
 a:=0;
-L:=PrimeDivisors(Order(G));
+L:=PrimeDivisors(Order(G)); #funktioniert nur mit 64bit Version von GAP
 l:=Length(L);
 
 for i in [1..l] do

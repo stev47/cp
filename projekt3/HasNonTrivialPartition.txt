@@ -1,0 +1,225 @@
+##########################################################################################################################
+##### Computerpraktikum, Block III ; 
+##### Leo Margolis, Universitaet Stuttgart, WiSe 1012/13
+#####
+##### 
+##### Gruppe VII: Fabio Valvano, Huy Nguyen, Dmitriy Sevkovych
+##### Thema 1.2: Partitionen von Untergruppen
+#####
+##### Aufgabe 1b) 
+##### Schreibe eine GAP-Funktion, welche von einer gegebenen Gruppe G entscheidet, ob diese 
+##### eine nicht-triviale Partition besitzt.
+##########################################################################################################################
+
+
+
+HasNonTrivialPartition := function(G)
+
+
+# Lokal definierte Variablen:
+
+ local a, i, j, k, l, m, n, o, p, I, temp, temp_list, C, C_triv_int, combs,  partitions;
+
+###
+###
+
+# IDEE: Anstatt Partitionen von der Gruppe G zu betrachten, verwende ein Lemma von Suzuki, welches besagt, dass
+# eine Partition genau dann existiert, wenn .... 
+
+ C := ConjugacyClassesSubgroups(G);  	# Liste von Listen von (Unter-)Gruppen.
+ C_triv_int := [ ]; 			# Liste von Listen von sich trivial schneidenden Gruppen.
+
+
+# 1. Schritt:
+# Bestimme diejenigen Untergruppen, welche paarweise einen trivialen Schnitt haben. AnschlieÃend (im 2. Schritt)
+# wollen wir diese Untergruppen vereinigen und so nach Partitionen suchen.
+# Beachte: "C" ist eine Liste von Listen, weshalb wir wieder Schritt fÃ¼r Schritt einzelne Listen "C[k]" untersuchen. 
+
+ for k in [1..Length(C)] do
+
+	temp := 0;
+	temp_list := [ ];
+	
+
+	if Length( List( C[k] ) ) > 1 then
+
+		for j in [2..Length( List( C[k] ) )] do
+
+			if Size( Intersection(C[k][1],C[k][j]) ) = 1 then
+
+					temp := temp + 1;
+
+			fi;			
+
+		od;
+
+
+		if temp = ( Length( List( C[k] ))-1 ) then
+
+			Add(C_triv_int, C[k]);
+
+		fi;
+
+	
+	fi;
+
+	if Length( List( C[k] ) ) = 1 and Order( List( C[k] )[1]  ) <> 1 and Order( List( C[k] )[1] ) <> Order(G) then
+
+		Add(C_triv_int, C[k]);
+	
+	fi;	
+
+ od;
+
+
+###
+###
+
+
+# 2. Schritt:
+# Suche Partitionen auf den Untergruppen der Konjugiertenklassen. Wegen der oben erwÃ¤hnten Ãquivalenz impliziert die Existenz einer nicht-trivialen
+# Partition der Konjugiertenklassen die Existenz einer nicht-trivialen Partition von G. 
+
+ for l in [1..Length( C_triv_int )] do
+
+
+	 for k in [1..Length( List( C_triv_int ) )] do 
+
+		combs := Combinations( C_triv_int, k );
+	
+
+		for i in [1..Length( combs )] do
+	
+			a := 0;
+			temp_list := [];
+
+			for j in [1..Length( combs[i] )] do
+
+				for m in [1..Length( List( combs[i][j] ) )] do
+
+					Append( temp_list, [List(combs[i][j])[m]] ); 
+
+				od; # for m
+
+			od; # for j
+
+
+### 
+
+
+			for m in [1..Length( List( combs[i] ) ) ] do
+
+
+				for n in [1..Length( List( combs[i] ) )] do
+
+
+					for o in [1..Length( List( combs[i][n] ) )] do
+
+
+						if m<>n then
+								
+							if  Order( Intersection( combs[i][m][1], combs[i][n][o] ) ) > 1 then
+
+								a := 1;
+
+
+							fi;
+		
+						fi;
+
+						if a = 1 then
+
+							break;
+
+						fi;
+
+					od; # for o
+					
+
+					if a = 1 then
+
+						break;
+
+					fi;	
+
+				od; # for n
+			
+
+				if a = 1 then
+
+					break;
+
+				fi;
+
+
+			od; # for m 
+
+
+### ÃberprÃ¼fe zweite Partitionseigenschaft fÃ¼r Elemente aus "temp_list", fÃ¼r die der Schnitt trivial ist (dargestellt durch "a = 0" ).
+
+
+			if a = 0 then
+
+				a := 0;
+
+
+				### Erstelle eine Liste von Untergruppen "temp":		
+				temp := [ ];				
+
+				for m in [1..Length( temp_list )] do
+				
+					for n in [1..Length( List( temp_list[m] ) )] do
+	
+						Add( temp, List( temp_list[m] )[n] );
+
+					od; 
+
+				od; 
+
+
+				### PrÃ¼fe, ob Vereinigung der Listenelemente die Gruppe G ergibt:
+				if Set( temp ) = Set( G ) then
+
+					Print("\nPartition gefunden! Teste, ob die Partition trivial ist:\n");
+
+	
+					for p in [1..Length( combs[i] ) ] do
+														
+
+						if  Order(combs[i][p][1]) = Order(G) then
+
+							Print("Die Partition ist trivial. Fahre mit der Suche fort.");
+							Print("\n\n");							
+
+							a := 1;
+
+						fi;	
+							
+					od;
+							
+					if a = 0 then
+
+						Print("Nicht-triviale Partition gefunden!\n");
+						
+						return true;
+
+					fi;
+		
+				fi;
+
+			fi;
+			
+		od; 
+
+	od;
+
+ od;
+
+
+
+ Print("Die Suche ist beendet. Keine nicht-triviale Partition von der Gruppe ", G, " gefunden!\n");
+
+ return false;
+
+end;
+############################################### function HasNonTrivialPartition ###############################################

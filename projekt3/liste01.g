@@ -16,6 +16,7 @@ Add(Liste, PSL(3,3));
 Add(Liste, PSU(3,3));
 Add(Liste, MathieuGroup(11));
 
+#Eigenschaften für einfache Gruppen überprüfen.
 Liste := Filtered(Liste, g -> (IsSimpleGroup(g) and (not IsAbelian(g)) and Order(g) <= 10000));
 
 #Isomorphe Gruppen ausschliessen

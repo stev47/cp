@@ -1,0 +1,7 @@
+G = AlternatingGroup( [ 1 .. 8 ] ) 20160
+H = Group( [ ( 3, 4, 5)( 7, 9, 8)(10,14,18)(11,17,20)(12,15,21)(13,16,19),
+ ( 1, 2, 6, 7,11, 3,10)( 4,14, 8,15,16,20,13)( 5,18, 9,19,21,17,12) ] ) 20160
+Sind G und H isomorph? 
+fail
+In G gibt es Elemente der Ordnung: [ 1, 2, 3, 4, 5, 6, 7, 15 ]
+In H gibt es Elemente der Ordnung: [ 1, 2, 3, 4, 5, 7 ]

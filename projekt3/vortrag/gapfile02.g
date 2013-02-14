@@ -14,4 +14,5 @@ for x in H do
 	fi;
 od;
 Sort(Liste01); Sort(Liste02);
-Print("In G gibt es Elemente der Ordnung: ", Liste01, "\n","In H gibt es Elemente der Ordnung: ", Liste02,  "\n");
+Print("In G gibt es Elemente der Ordnung: ", Liste01, "\n","In H gibt es Elemente der Ordnung
+: ", Liste02,  "\n");

@@ -1,5 +1,23 @@
-\beamer@endinputifotherversion {3.07pt}
+\beamer@endinputifotherversion {3.10pt}
 \beamer@sectionintoc {1}{Aufgabe 1}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{Aufgabenstellung}{2}{0}{1}
+\beamer@subsectionintoc {1}{2}{Definitionen}{3}{0}{1}
+\beamer@subsectionintoc {1}{3}{L\IeC {\"o}sungsschritte}{5}{0}{1}
+\beamer@subsectionintoc {1}{4}{Implementierung}{6}{0}{1}
+\beamer@subsectionintoc {1}{5}{Ergebnisse}{9}{0}{1}
 \beamer@sectionintoc {2}{Aufgabe 2}{10}{0}{2}
+\beamer@subsectionintoc {2}{1}{Aufgabenstellung}{10}{0}{2}
+\beamer@subsectionintoc {2}{2}{L\IeC {\"o}sungsschritte}{11}{0}{2}
+\beamer@subsectionintoc {2}{3}{Implementierung}{12}{0}{2}
+\beamer@subsectionintoc {2}{4}{Ergebnisse}{13}{0}{2}
 \beamer@sectionintoc {3}{Aufgabe 3}{14}{0}{3}
+\beamer@subsectionintoc {3}{1}{Aufgabenstellung}{14}{0}{3}
+\beamer@subsectionintoc {3}{2}{L\IeC {\"o}sungsschritte}{15}{0}{3}
+\beamer@subsectionintoc {3}{3}{Implementierung}{16}{0}{3}
+\beamer@subsectionintoc {3}{4}{Ergebnisse}{17}{0}{3}
 \beamer@sectionintoc {4}{Aufgabe 4}{18}{0}{4}
+\beamer@subsectionintoc {4}{1}{Aufgabenstellung}{18}{0}{4}
+\beamer@subsectionintoc {4}{2}{L\IeC {\"o}sungsschritte}{19}{0}{4}
+\beamer@subsectionintoc {4}{3}{Implementierung}{20}{0}{4}
+\beamer@subsectionintoc {4}{4}{Ergebnisse}{21}{0}{4}
+\beamer@sectionintoc {5}{Zusammenfassung}{21}{0}{5}

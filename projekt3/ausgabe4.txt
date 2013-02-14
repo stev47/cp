@@ -1,0 +1,117 @@
+Liste aller N-Gruppen davon: 
+==== A7 ====
+Syl2G-isomorphietyp: D8
+Syl3G-isomorphietyp: C3 x C3
+Zentrum: C2
+Zentralisator C2
+Normalisator D8
+
+==== A5 ====
+Syl2G-isomorphietyp: C2 x C2
+Syl3G-isomorphietyp: C3
+Zentrum: C2 x C2
+Zentralisator C2 x C2
+Normalisator A4
+
+==== PSL(3,2) ====
+Syl2G-isomorphietyp: D8
+Syl3G-isomorphietyp: C3
+Zentrum: C2
+Zentralisator C2
+Normalisator D8
+
+==== PSL(2,8) ====
+Syl2G-isomorphietyp: C2 x C2 x C2
+Syl3G-isomorphietyp: C9
+Zentrum: C2 x C2 x C2
+Zentralisator C2 x C2 x C2
+Normalisator (C2 x C2 x C2) : C7
+
+==== A6 ====
+Syl2G-isomorphietyp: D8
+Syl3G-isomorphietyp: C3 x C3
+Zentrum: C2
+Zentralisator C2
+Normalisator D8
+
+==== PSL(2,11) ====
+Syl2G-isomorphietyp: C2 x C2
+Syl3G-isomorphietyp: C3
+Zentrum: C2 x C2
+Zentralisator C2 x C2
+Normalisator A4
+
+==== PSL(2,13) ====
+Syl2G-isomorphietyp: C2 x C2
+Syl3G-isomorphietyp: C3
+Zentrum: C2 x C2
+Zentralisator C2 x C2
+Normalisator A4
+
+==== PSL(2,16) ====
+Syl2G-isomorphietyp: C2 x C2 x C2 x C2
+Syl3G-isomorphietyp: C3
+Zentrum: C2 x C2 x C2 x C2
+Zentralisator C2 x C2 x C2 x C2
+Normalisator ((C2 x C2 x C2 x C2) : C5) : C3
+
+==== PSL(2,17) ====
+Syl2G-isomorphietyp: D16
+Syl3G-isomorphietyp: C9
+Zentrum: C2
+Zentralisator C2
+Normalisator D16
+
+==== PSL(2,19) ====
+Syl2G-isomorphietyp: C2 x C2
+Syl3G-isomorphietyp: C9
+Zentrum: C2 x C2
+Zentralisator C2 x C2
+Normalisator A4
+
+==== PSL(2,23) ====
+Syl2G-isomorphietyp: D8
+Syl3G-isomorphietyp: C3
+Zentrum: C2
+Zentralisator C2
+Normalisator D8
+
+==== PSL(2,25) ====
+Syl2G-isomorphietyp: D8
+Syl3G-isomorphietyp: C3
+Zentrum: C2
+Zentralisator C2
+Normalisator D8
+
+==== PSL(2,27) ====
+Syl2G-isomorphietyp: C2 x C2
+Syl3G-isomorphietyp: C3 x C3 x C3
+Zentrum: C2 x C2
+Zentralisator C2 x C2
+Normalisator A4
+
+==== PSL(3,3) ====
+Syl2G-isomorphietyp: QD16
+Syl3G-isomorphietyp: (C3 x C3) : C3
+Zentrum: C2
+Zentralisator C2
+Normalisator QD16
+
+==== PSU(3,3) ====
+Syl2G-isomorphietyp: (C4 x C4) : C2
+Syl3G-isomorphietyp: (C3 x C3) : C3
+Zentrum: C4
+Zentralisator C4
+Normalisator (C4 x C4) : C2
+
+==== M11 ====
+Syl2G-isomorphietyp: QD16
+Syl3G-isomorphietyp: C3 x C3
+Zentrum: C2
+Zentralisator C2
+Normalisator QD16
+
+[ "A7", "A5", "PSL(3,2)", "PSL(2,8)", "A6", "PSL(2,11)", "PSL(2,13)", 
+  "PSL(2,16)", "PSL(2,17)", "PSL(2,19)", "PSL(2,23)", "PSL(2,25)", 
+  "PSL(2,27)", "PSL(3,3)", "PSU(3,3)", "M11" ]
+

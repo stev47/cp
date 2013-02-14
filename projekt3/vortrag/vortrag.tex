@@ -22,7 +22,7 @@ tabsize=4, % Groesse von Tabs
 \usepackage{ngerman}
 \usepackage{graphicx}
 
-
+\usepackage{longtable}
 
 
 \title{Kleine Einfache Gruppen}
@@ -44,11 +44,12 @@ tabsize=4, % Groesse von Tabs
 %\end{frame}
 
 \section{Aufgabe 1}
+\subsection{Aufgabenstellung}
 
 \begin{frame}
 	\frametitle{Die Aufgabenstellung}
 	\begin{quote}
-	Aufgabe 1:\\
+	\textbf{Aufgabe 1:}\\
 	Fertigen Sie eine Liste der endlichen einfachen nicht-abelschen Gruppen bis Ordnung 10.000 an.
 	Sie dürfen hierbei verwenden, dass diese in folgender Liste enthalten sind: $A_n, PSL(2,q), PSL(3,3),
 	PSU(3,3)$ und $M_{11}$. Verwenden sie, dass die Ordnung eines endlichen Körpers eine Primzahlpotenz ist.
@@ -57,10 +58,11 @@ tabsize=4, % Groesse von Tabs
 	\end{quote}
 \end{frame}
 
+\subsection{Definitionen}
 
 
 \begin{frame}
-	\frametitle{Definition:Einfache Gruppen}
+	\frametitle{Definition: Einfache Gruppen}
 	\begin{quote}
 	 Eine Gruppe heißt einfach wenn sie nur 1 und sich selbst als Normalteiler besitzt.
 		 
@@ -72,6 +74,8 @@ tabsize=4, % Groesse von Tabs
 	 Eine einfache Gruppe G heißt minimal einfach, wenn alle echten Untergruppen von G auflösbar sind.
 	\end{quote}
 \end{frame}
+
+\subsection{Lösungsschritte}
 
 \begin{frame}
 	\frametitle{Lösungsschritte}
@@ -87,45 +91,59 @@ tabsize=4, % Groesse von Tabs
 		 
 	\end{quote}
 \end{frame}
+\subsection{Implementierung}
 
 \begin{frame}
-	\frametitle{Implementierung in GAP}
+	\frametitle{Implementierung in GAP (Liste01.g)}
 	 \lstinputlisting{liste01.g}
 		 
 \end{frame}
 
 \begin{frame}
-	\frametitle{Implementierung in GAP}
+	\frametitle{Implementierung in GAP (Liste01.g)}
 	 \lstinputlisting{liste01.1.g}
 		 
 \end{frame}
 
 \begin{frame}
-	\frametitle{Implementierung in GAP}
+	\frametitle{Implementierung in GAP (gapfile01.g)}
 	 \lstinputlisting{gapfile01.g}
 		 
 \end{frame}
+\subsection{Ergebnisse}
 
 \begin{frame}
 	\frametitle{Ergebnis}
-	\begin{quote}
-	 Tabelle ergebnis
+	 
+\begin{tabular}{ll}
+einfach & 	[ ''A7'', ''A5'', ''PSL(3,2)'', ''PSL(2,8)'',\\
+&		 ''A6'', ''PSL(2,11)'', ''PSL(2,13)'', \\
+&		 ''PSL(2,16)'',''PSL(2,17)'', ''PSL(2,19)'', \\
+&		 ''PSL(2,23)'',''PSL(2,25)'', ''PSL(2,27)'', \\
+&		''PSL(3,3)'', ''PSU(3,3)'',''M11'' ]\\
+minimal einfach & [ ''A5'', ''PSL(3,2)'', ''PSL(2,8)'', \\ 
+&		''PSL(2,13)'', ''PSL(2,17)'',''PSL(2,23)'', \\
+&		''PSL(2,27)'', ''PSL(3,3)'' ]
+	 \end{tabular}\\
+	 
+	 \textbf{Anmerkung}: PSL(3,2)$\cong$ PSL(2,7)
 		 
-	\end{quote}
 \end{frame}
 
 
 
 \section{Aufgabe 2}
+\subsection{Aufgabenstellung}
 
 \begin{frame}
 	\frametitle{Die Aufgabenstellung}
 	\begin{quote}
-	Aufgabe 2:\\
+	\textbf{Aufgabe 2:}\\
 	Zeigen Sie, dass $A_8$ und $ PSL(3,4)$ nicht isomorph sind.
 		 
 	\end{quote}
 \end{frame}
+\subsection{Lösungsschritte}
 
 \begin{frame}
 	\frametitle{Lösungsschritte}
@@ -134,32 +152,39 @@ tabsize=4, % Groesse von Tabs
 		 
 	\end{quote}
 \end{frame}
+\subsection{Implementierung}
 
 \begin{frame}
-	\frametitle{Implementierung in GAP}
+	\frametitle{Implementierung in GAP (gapfile02.g)}
 	\lstinputlisting{gapfile02.g}
 \end{frame}
+\subsection{Ergebnisse}
 
 \begin{frame}
 	\frametitle{Ergebnis}
 	\begin{quote}
-	 Tabelle ergebnis
-		 
+	  \textbf{Ausgabe}:
+	  \lstinputlisting{ausgabe2.txt}
+	  Es gibt also in $A_8$ Elemente von Ordnung 6 und 15, aber nicht in PSL(3,4). 
+	  $\Rightarrow  A_8 \ncong PSL(3,4)$
+		  
 	\end{quote}
 \end{frame}
 
 
 \section{Aufgabe 3}
+\subsection{Aufgabenstellung}
 
 \begin{frame}
 	\frametitle{Die Aufgabenstellung}
 	\begin{quote}
-	Aufgabe3:\\
+	\textbf{Aufgabe 3}:\\
 	(In Zusammenarbeit mit Partitionen-Gruppe)\\
 	Bestimmen Sie, welche der von ihnen bestimmten Gruppen eine nicht-triviale Partition von Untergruppen besitzt.
 
 	\end{quote}
 \end{frame}
+\subsection{Lösungsschritte}
 
 \begin{frame}
 	\frametitle{Lösungsschritte}
@@ -167,64 +192,92 @@ tabsize=4, % Groesse von Tabs
 	 \begin{enumerate}
 	  \item Benutze erste Liste aus Aufgabe 1
 	  \item Überprüfe für jede Gruppe ob nicht Triviale Partitionen vorliegen
-	  \item Liegen solche vor, so bestimme alle Partitionen
+	  \item Wenn ja, speichere die Gruppe in eine Liste
 	 \end{enumerate}
 
 		 
 	\end{quote}
 \end{frame}
+\subsection{Implementierung}
 
 \begin{frame}
-	\frametitle{Implementierung in GAP}
+	\frametitle{Implementierung in GAP (gapfile03.g)}
 	\begin{quote}
 	 \lstinputlisting{gapfile03.g}
 
 		 
 	\end{quote}
 \end{frame}
+\subsection{Ergebnisse}
 
 \begin{frame}
 	\frametitle{Ergebnis}
 	\begin{quote}
-	 Tabelle ergebnis
+	 Programm rechnet noch, Zwischenergebnisse ohne $A_7$ bis PSL(3,3):\\
+	 A5, PSL(3,2), PSL(2,8), A6 PSL(2,11), PSL(2,13), PSL(2,16), PSL(2,17), PSL(2,19), PSL(2,23), PSL(2,25), PSL(2,27)  (Alle bisher geprüften)
+	 
+	 
 		 
 	\end{quote}
 \end{frame}
 
 \section{Aufgabe 4}
+\subsection{Aufgabenstellung}
 
 \begin{frame}
 	\frametitle{Die Aufgabenstellung}
 	\begin{quote}
-	Aufgabe 4:\\
+	\textbf{Aufgabe 4:}\\
 	(In Zusammenarbeit mit Sylowgruppen-Gruppe) Bestimmen Sie, welche der von Ihnen gefundenen Gruppen N-Gruppen sind. Geben Sie außerdem für 
 	$ P \in Syl_2(G) $ und $ P \in Syl_3(G) $ die Isomorphietypen von P, Z(P), $ C_G(P) $ und $ N_G(P) $ an, wobei G eine Gruppe aus ihrer Liste ist.
 	\end{quote}
 \end{frame}
+\subsection{Lösungsschritte}
 
 \begin{frame}
 	\frametitle{Lösungsschritte}
 	\begin{enumerate}
 	 \item Benutze erste Liste aus Teil eins.
 	 \item Überprüfe die Gruppen darauf ob sie N Gruppen sind
-	 \item wenn ja: Gib Isomorphietyp usw an. 		 
+	 \item wenn ja: Gib Isomorphietyp , Z(P), $ C_G(P) $ und $ N_G(P) $ an. 		 
 	\end{enumerate}
 \end{frame}
+\subsection{Implementierung}
 
 \begin{frame}
-	\frametitle{Implementierung in GAP}
+	\frametitle{Implementierung in GAP (gapfile04.g)}
 	\begin{quote}
 	 \lstinputlisting{gapfile04.g}
 		 
 	\end{quote}
 \end{frame}
+\subsection{Ergebnisse}
 
 \begin{frame}
 	\frametitle{Ergebnis}
-	\begin{quote}
-	 Tabelle ergebnis
+\begin{quote}
+ Alle getesteten Gruppen sind N-Gruppen. (Genaueres siehe Tabelle)
+\end{quote}
 		 
-	\end{quote}
+\section{Zusammenfassung}
+\end{frame}
+\begin{frame}
+\begin{tabular}{ll}
+einfach & 	[ ''A7'', ''A5'', ''PSL(3,2)'', ''PSL(2,8)'',\\
+&		 ''A6'', ''PSL(2,11)'', ''PSL(2,13)'', \\
+&		 ''PSL(2,16)'',''PSL(2,17)'', ''PSL(2,19)'', \\
+&		 ''PSL(2,23)'',''PSL(2,25)'', ''PSL(2,27)'', \\
+&		''PSL(3,3)'', ''PSU(3,3)'',''M11'' ]\\
+minimal einfach & [ ''A5'', ''PSL(3,2)'', ''PSL(2,8)'', \\ 
+&		''PSL(2,13)'', ''PSL(2,17)'',''PSL(2,23)'', \\
+&		''PSL(2,27)'', ''PSL(3,3)'' ]\\
+N-Gruppen & 	[ ''A7'', ''A5'', ''PSL(3,2)'', ''PSL(2,8)'',\\
+&		 ''A6'', ''PSL(2,11)'', ''PSL(2,13)'', \\
+&		 ''PSL(2,16)'',''PSL(2,17)'', ''PSL(2,19)'', \\
+&		 ''PSL(2,23)'',''PSL(2,25)'', ''PSL(2,27)'', \\
+&		''PSL(3,3)'', ''PSU(3,3)'',''M11'' ]\\
+
+	 \end{tabular}\\
 \end{frame}
 
 \end{document}

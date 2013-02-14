@@ -1,0 +1,524 @@
+Test e)
+
+ Untersuchte Gruppen[ "1", "C2", "C3", "C4", "C2 x C2", "C5", "S3", "C6", "C7", "C8", "C4 x C2", "D8", 
+  "Q8", "C2 x C2 x C2", "C9", "C3 x C3", "D10", "C10", "C11", "C3 : C4", "C12", "A4", "D12", "C6 x C2", 
+  "C13", "D14", "C14", "C15" ]
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe 1 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C2 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C3 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C4 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C2 x C2 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+some_combs [ [ Group( [ f1 ] ), Group( [ f2 ] ), Group( [ f1*f2 ] ) ] ]
+
+Die Gruppe Group( [ f1, f2 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C5 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe S3 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+some_combs [ [ Group( [ f1 ] ), Group( [ f2 ] ), Group( [ f1*f2 ] ), Group( [ f1*f2^2 ] ) ] ]
+
+Die Gruppe Group( [ f1, f2 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C6 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C7 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C8 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C4 x C2 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe D8 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+some_combs 
+[ ,,,,,,,,,,,,,,,,, [ Group( [ f1 ] ), Group( [ f2 ] ), Group( [ f3, f1*f2 ] ), Group( [ f1*f3 ] ), 
+      Group( [ f2*f3 ] ) ] ]
+
+Die Gruppe Group( [ f1, f2, f3 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe Q8 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C2 x C2 x C2 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+some_combs [ ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, 
+  [ Group( [ f1 ] ), Group( [ f2 ] ), Group( [ f3 ] ), Group( [ f1*f2 ] ), Group( [ f1*f3 ] ), 
+      Group( [ f2*f3 ] ), Group( [ f1*f2*f3 ] ) ],,,,,,,,,,,,,,,,,,,,,,, 
+  [ Group( [ f1 ] ), Group( [ f2 ] ), Group( [ f3 ] ), Group( [ f1*f2, f1*f3 ] ), Group( [ f1*f2*f3 ] ) ],,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, 
+  [ Group( [ f1 ] ), Group( [ f2 ] ), Group( [ f1*f2, f3 ] ), Group( [ f1*f3 ] ), Group( [ f2*f3 ] ) ],,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, 
+  [ Group( [ f1 ] ), Group( [ f2, f1*f3 ] ), Group( [ f3 ] ), Group( [ f1*f2 ] ), Group( [ f2*f3 ] ) ],,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,, 
+  [ Group( [ f1 ] ), Group( [ f2, f3 ] ), Group( [ f1*f2 ] ), Group( [ f1*f3 ] ), Group( [ f1*f2*f3 ] ) ],,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, 
+  [ Group( [ f2 ] ), Group( [ f3 ] ), Group( [ f1*f2 ] ), Group( [ f1*f3 ] ), Group( [ f1, f2*f3 ] ) ],,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, 
+  [ Group( [ f2 ] ), Group( [ f1, f3 ] ), Group( [ f1*f2 ] ), Group( [ f2*f3 ] ), Group( [ f1*f2*f3 ] ) ],,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,,,,,,,,, [ Group( [ f1, f2 ] ), Group( [ f3 ] ), Group( [ f1*f3 ] ), Group( [ f2*f3 ] ), 
+      Group( [ f1*f2*f3 ] ) ] ]
+
+Die Gruppe Group( [ f1, f2, f3 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C9 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C3 x C3 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+some_combs [ [ Group( [ f1 ] ), Group( [ f2 ] ), Group( [ f1*f2 ] ), Group( [ f1*f2^2 ] ) ] ]
+
+Die Gruppe Group( [ f1, f2 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe D10 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+some_combs 
+[ [ Group( [ f1 ] ), Group( [ f2 ] ), Group( [ f1*f2 ] ), Group( [ f1*f2^2 ] ), Group( [ f1*f2^3 ] ), 
+      Group( [ f1*f2^4 ] ) ] ]
+
+Die Gruppe Group( [ f1, f2 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C10 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C11 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C3 : C4 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C12 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe A4 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+some_combs 
+[ ,, [ Group( [ f1 ] ), Group( [ f2 ] ), Group( [ f3 ] ), Group( [ f1*f2 ] ), Group( [ f1*f3 ] ), 
+      Group( [ f2*f3 ] ), Group( [ f1*f2*f3 ] ) ],,,,,, 
+  [ Group( [ f1 ] ), Group( [ f2, f3 ] ), Group( [ f1*f2 ] ), Group( [ f1*f3 ] ), Group( [ f1*f2*f3 ] ) ] ]
+
+Die Gruppe Group( [ f1, f2, f3 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe D12 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+Error, user interrupt in
+  tnum := TNUM_OBJ_INT( list ); called from 
+Reversed( CanonicalPcgsWrtFamilyPcgs( G ) ) called from
+Set( combs[k]{[ 1 .. Length( combs[k] ) ]} ) called from
+FindAllPartitions( j ) called from
+<function "unknown">( <arguments> )
+ called from read-eval loop at line 66 of Test_e.txt
+you can 'return;'
+brk> quit;
+gap> Read("FindAllPartitions.txt");
+Syntax error: warning: unbound global variable in FindAllPartitions.txt line 165
+ Print("\nDie Gruppe ", StrucutureDescription(G), " besitzt die folgenden nicht-trivialen Partitionen:\n\n"\
+);
+                                             ^
+gap> Read("FindAllPartitions.txt");
+gap> Read("Test_e.txt");
+#I  Already logging to Ergebnis_Test_e.txt
+Test e)
+
+ Untersuchte Gruppen[ "1", "C2", "C3", "C4", "C2 x C2", "C5", "S3", "C6", "C7", "C8", "C4 x C2", "D8", 
+  "Q8", "C2 x C2 x C2", "C9", "C3 x C3", "D10", "C10", "C11", "C3 : C4", "C12", "A4", "D12", "C6 x C2", 
+  "C13", "D14", "C14", "C15" ]
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe 1 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C2 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C3 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C4 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C2 x C2 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+Die Gruppe Group( [ f1, f2 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C5 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe S3 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+Die Gruppe Group( [ f1, f2 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C6 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C7 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C8 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C4 x C2 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe D8 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+Die Gruppe Group( [ f1, f2, f3 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe Q8 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C2 x C2 x C2 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+Die Gruppe Group( [ f1, f2, f3 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C9 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C3 x C3 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+Die Gruppe Group( [ f1, f2 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe D10 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+Die Gruppe Group( [ f1, f2 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C10 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C11 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C3 : C4 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C12 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe A4 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+Die Gruppe Group( [ f1, f2, f3 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe D12 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+Die Gruppe Group( [ f1, f2, f3 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C6 x C2 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C13 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe D14 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+Die Gruppe Group( [ f1, f2 ] ) besitzt die folgenden nicht-trivialen Partitionen:
+
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C14 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C15 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+Ergebnis von Test e)
+Die kleinste Gruppe, welche mehrere nicht-triviale Partitionen besitzt, ist: C2 x C2 x C2
+Diese Gruppe hat 8 Elemente.

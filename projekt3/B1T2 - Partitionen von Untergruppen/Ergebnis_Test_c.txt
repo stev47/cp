@@ -1,0 +1,123 @@
+Test c)
+
+ Untersuchte Gruppen[ "1", "C2", "C3", "C4", "C2 x C2", "C5", "S3", "C6", "C7", "C8", "C4 x C2", "D8", 
+  "Q8", "C2 x C2 x C2", "C9", "C3 x C3", "D10", "C10" ]
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe 1 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C2 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C3 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C4 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C2 x C2 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C5 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe S3 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C6 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C7 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C8 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C4 x C2 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe D8 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe Q8 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C2 x C2 x C2 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C9 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C3 x C3 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe D10 auf nicht-triviale Partitionen.
+
+Partition gefunden! Teste, ob die Partition trivial ist:
+Nicht-triviale Partition gefunden!
+
+
+##########################################################################################
+Starte die Untersuchung der Gruppe C10 auf nicht-triviale Partitionen.
+
+Die Suche ist beendet. Keine nicht-triviale Partition gefunden!
+
+
+Ergebnis von Test c)
+Die kleinste nicht zyklische Gruppe, welche eine nicht-triviale Partition besitzt, ist: C4 x C2
+Diese Gruppe hat 8 Elemente.

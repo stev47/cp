@@ -1,0 +1,90 @@
+##########################################################################################################################
+##### Computerpraktikum, Block III ; 
+##### Leo Margolis, Universitaet Stuttgart, WiSe 1012/13
+#####
+##### 
+##### Gruppe VII: Fabio Valvano, Huy Nguyen, Dmitriy Sevkovych
+##### Thema 1.2: Partitionen von Untergruppen
+#####
+##### Aufgabe 2, Test e)
+##### Finde die kleinste Gruppe, welche mehrere nicht-triviale Partition besitzt.
+##########################################################################################################################
+
+ LogTo("Ergebnis_Test_e.txt");
+
+ L := [ ];
+ MonitoredGroups := [ ];
+ GroupsWithNonTrivialPartition := [ ];
+ GroupSizeList := [ ];
+
+
+###
+
+
+ Print("Test e)\n");
+
+
+###
+
+
+ for i in [1..15] do
+
+	L[i] := AllGroups(i);
+
+	for j in L[i] do
+	
+		Add( MonitoredGroups,  StructureDescription(j) );
+
+	od;
+
+ od;
+
+ Print ("\n Untersuchte Gruppen", MonitoredGroups, "\n");
+
+
+###
+
+
+ for i in [1..Length(L)] do
+
+	for j in L[i] do
+
+		if HasNonTrivialPartition(j) = true then
+
+			temp := FindAllPartitions(j);
+
+			if Length( temp ) > 1 then;
+
+				Add(GroupsWithNonTrivialPartition, j);
+	
+			fi;
+
+		fi;
+
+	od;
+
+ od;
+
+ #Print ("\nGroupsWithNonTrivialPartition ", GroupsWithNonTrivialPartition, "\n\n");
+
+
+###
+
+ for i in GroupsWithNonTrivialPartition do
+
+	Add(GroupSizeList, NrTuples(i,1) );
+
+ od;
+
+ #Print ("GroupSizeList ", GroupSizeList, "\n\n");
+
+
+###
+
+
+ Print("\n\nErgebnis von Test e)\n"); 
+ Print("Die kleinste Gruppe, welche mehrere nicht-triviale Partitionen besitzt, ist: ", StructureDescription( GroupsWithNonTrivialPartition[ Position( GroupSizeList, Minimum( GroupSizeList ) ) ]), "\n" ) ;
+ Print("Diese Gruppe hat ", Minimum(GroupSizeList), " Elemente.\n");
+
+ 
+ LogTo( );

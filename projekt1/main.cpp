@@ -31,6 +31,7 @@ int main (int argc, char* argv[]) {
 	cout << "(7) TennisBallB " << endl;
 	cout << "(8) Spirale " << endl;
 	cout << "(9) Doppelhelix " << endl;
+	cout << "(10) Kreisspirale " << endl;
 	cin >> j;
 	if(j == 4){
 		cout << "Geben Sie bitte den gewünschten Abstand ein " << endl;
@@ -52,6 +53,7 @@ int main (int argc, char* argv[]) {
 		case 7: my_curve = new Curves::TennisBallB(); break;
 		case 8: my_curve = new Curves::Spirale(); break;
 		case 9: my_curve = new Curves::Helix(); break;
+		case 10: my_curve = new Curves::Kreisspirale(); break;
 		default: my_curve = new Curves::Test();
 	}
 	Net my_net( *my_curve );

@@ -14,7 +14,7 @@ namespace Curves {
 	 * Kurve zum Testen
 	 */
 	Vertex Test::f (double t) {
-		double u = 4*cos(M_PI * 2 * t);
+		/*double u = 4*cos(M_PI * 2 * t);
 		double v = 4*sin(M_PI * 2 * t);
 
 		return Vertex(
@@ -22,9 +22,36 @@ namespace Curves {
 			u * sin(v),
 			3 * v,
 			t
+		);*/
+
+		double r = 3;
+		double R = 15;
+		double n = 12;
+
+		return Vertex(
+			cos(2*M_PI*t) * (R + r * cos(n * 2*M_PI*t)),
+			sin(2*M_PI*t) * (R + r * cos(n * 2*M_PI*t)),
+			r * sin(n * 2*M_PI*t),
+			t
 		);
 	}
 
+
+	/**
+	 * Kreisspirale
+	 */
+	Vertex Kreisspirale::f (double t) {
+		double r = 3; 	//<! Radius der Spiralkreise
+		double n = 12;	//<! Anzahl der Spiralkreise
+		double R = 15;	//<! Radius des Gesamtkreises
+
+		return Vertex(
+			cos(2*M_PI*t) * (R + r * cos(n * 2*M_PI*t)),
+			sin(2*M_PI*t) * (R + r * cos(n * 2*M_PI*t)),
+			r * sin(n * 2*M_PI*t),
+			t
+		);
+	}
 	/**
 	 * Kurve zum Testen
 	 */

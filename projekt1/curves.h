@@ -18,6 +18,10 @@ namespace Curves {
 		virtual Vertex f (double t);
 	};
 	
+	class Kreisspirale : public Curve {
+		virtual Vertex f (double t);
+	};
+
 	class Schnitt : public Curve {
 		virtual Vertex f (double t);
 	};

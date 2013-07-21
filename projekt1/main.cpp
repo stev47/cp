@@ -56,6 +56,9 @@ int main (int argc, char* argv[]) {
 	}
 	Net my_net( *my_curve );
 
+	cout << "=========================================" << endl;
+
+
 	/*
 	 * Ausgabeformat für floating point Zahlen
 	 */
@@ -68,16 +71,16 @@ int main (int argc, char* argv[]) {
 	my_net.init();
 
 	double area_before, area, improvement;
-	cout << (area = my_net.surface()) << endl;
+	cout << "Anfang ...\t" << (area = my_net.surface()) << endl;
 	for (int i = 1; i <= k; i++) {
 		/*
 		 * Verfeinerung und Flächen(änderungs)berechnung
 		 */
-		cout << i << ". Verfeinern ... ";
+		cout << "Verfeinern ...\t";
 		cout.flush();	// Damit obige Ausgabe sofort erscheint
 		area_before = my_net.surface();
 		my_net.refine_mesh();
-		cout << "fertig ... " << (area = my_net.surface());
+		cout << (area = my_net.surface());
 		improvement = (1 - (area / area_before));
 		area_before = area;
 		cout << " (" << improvement * 100 << "%)" << endl;
@@ -86,44 +89,39 @@ int main (int argc, char* argv[]) {
 			continue;
 
 		/*
+		 * Test zum zusätzlichen Optimieren der Dreiecksnetzstruktur
+		 *
+		double area_new;
+		cout << "\rOptimieren ...\t" << endl;
+		cout.flush();	// Damit obige Ausgabe sofort erscheint
+		area_before = my_net.surface();
+		//for (int j = 0; j < 50; j++)
+		cout << "fertig ... " << (area_new = my_net.surface());
+		improvement = (1 - (area_new / area_before));
+		area_before = area_new;
+		cout << " (" << improvement * 100 << "%)";
+
+		*/
+
+		/*
 		 * Minimierung und Flächen(änderungs)berechnung
 		 */
 		do {
-			cout << "Minimiere ... ";
+			cout << "\rMinimieren ...\t";
 			cout.flush();	// Damit obige Ausgabe sofort erscheint
 
 			double delta = my_net.minimize_mesh();
 
-			cout << "fertig ... " << (area + delta); // Neue Fläche
+			cout << (area + delta); // Neue Fläche
 			improvement = 1 - ((area + delta) / area); // Relative Verbesserung
 			cout << " (" 
 				<< improvement * 100
-				<< "%)"	<< endl; 
+				<< "%)";//	<< endl; 
 
 			area += delta;
 		} while (improvement > IMPROVEMENT_THRESHOLD);
+		cout << endl;
 
-		/*
-		 * Test zum zusätzlichen Optimieren der Dreiecksnetzstruktur
-		 *
-		cout << "Optimieren ... " << endl;
-		cout.flush();	// Damit obige Ausgabe sofort erscheint
-		area_before = my_net.surface();
-		for (int j = 0; j < 50; j++)
-		cout << "fertig ... " << (area_new = my_net.surface());
-		improvement = (1 - (area_new / area_before));
-		area_before = area_new;
-		cout << " (" << improvement * 100 << "%)" << endl;
-
-		do {
-			cout << "Minimiere ... ";
-			my_net.minimize_mesh();
-			cout << (area_new = my_net.surface());
-			improvement = (1 - (area_new / area_before));
-			area_before = area_new;
-			cout << " (" << improvement * 100 << "%)" << endl;
-		} while (improvement > IMPROVEMENT_THRESHOLD);
-		*/
 	}
 	my_net.print(file);
 	

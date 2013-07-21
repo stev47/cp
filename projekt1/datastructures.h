@@ -34,8 +34,12 @@ class Vertex : public Vector {
 		Vector get_gradient ();
 		double get_surrounding_surface (Vector delta = Vector(0, 0, 0));
 
-		Vertex operator+= (const Vector &v);
-		Vertex operator= (const Vector &v);
+		Vertex& operator+= (const Vector &v);
+		Vector operator- (const Vertex &v) const;
+		Vertex& operator-= (const Vector &v);
+		Vertex& operator*= (const double lambda);
+		Vertex& operator/= (const double lambda);
+		Vertex& operator= (const Vector &v);
 };
 
 /**

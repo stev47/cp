@@ -17,13 +17,34 @@ void Vertex::add_triangle (Triangle* t) {
 void Vertex::remove_triangle (Triangle* t) {
 	this->triangles.remove(t);		
 }
-Vertex Vertex::operator+= (const Vector &v) {
+Vector Vertex::operator- (const Vertex &v) const {
+	return Vector(this->x - v.x, this->y - v.y, this->z - v.z);
+}
+Vertex& Vertex::operator+= (const Vector &v) {
 	this->x += v.x;
 	this->y += v.y;
 	this->z += v.z;
 	return *this;
 }
-Vertex Vertex::operator= (const Vector &v) {
+Vertex& Vertex::operator-= (const Vector &v) {
+	this->x -= v.x;
+	this->y -= v.y;
+	this->z -= v.z;
+	return *this;
+}
+Vertex& Vertex::operator*= (const double lambda) {
+	this->x *= lambda;
+	this->y *= lambda;
+	this->z *= lambda;
+	return *this;
+}
+Vertex& Vertex::operator/= (const double lambda) {
+	this->x /= lambda;
+	this->y /= lambda;
+	this->z /= lambda;
+	return *this;
+}
+Vertex& Vertex::operator= (const Vector &v) {
 	this->x = v.x;
 	this->y = v.y;
 	this->z = v.z;
@@ -32,15 +53,18 @@ Vertex Vertex::operator= (const Vector &v) {
 
 Vector Vertex::get_gradient (Triangle* t) {
 	pair<Vertex*, Vertex*> p = t->get_remote_points(this);
-	Vertex p1 = *p.first;
-	Vertex p2 = *p.second;
+	Vertex& p1 = *p.first;
+	Vertex& p2 = *p.second;
 	
 	Vector h = (*this - p1) ^ (*this - p2);
 	
 	// Normieren, um den echten Gradienten zu erhalten
-	double norm;
-	if ((norm = h.norm()) != 0) // unschön: Teilung durch 0 umgehen
+	double norm = h.norm();
+	if (norm != 0) { // unschön: Teilung durch 0 umgehen
 		h /= norm;
+	} else {
+		h *= 1e100;
+	}
 
 	return h ^ (p2 - p1);
 }
@@ -56,6 +80,7 @@ Vector Vertex::get_gradient () {
 }
 
 double Vertex::get_surrounding_surface (Vector delta) {
+	Vector deltaVertex = *this + delta;
 	double surface = 0;
 	for (
 		list<Triangle*>::iterator t_it = this->triangles.begin();
@@ -64,7 +89,7 @@ double Vertex::get_surrounding_surface (Vector delta) {
 	){
 		pair<Vertex*, Vertex*> p = (*t_it)->get_remote_points(this);
 	
-		Vector m = ( (*this + delta) - *p.first ) ^ ( (*this + delta) - *p.second );
+		Vector m = ( deltaVertex - *p.first ) ^ ( deltaVertex - *p.second );
 		surface += (0.5 * m.norm());
 	}
 	return surface;

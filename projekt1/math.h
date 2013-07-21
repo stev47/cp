@@ -10,21 +10,29 @@ class Vector {
 		Vector (double x, double y, double z) : x(x), y(y), z(z) {}
 		Vector (Vector* const vector);
 
-		Vector operator+ (const Vector &v);
-		Vector operator+= (const Vector &v);
-		Vector operator- (const Vector &v);
-		Vector operator-= (const Vector &v);
-		double operator* (const Vector &v);
+		/* Additives Inverse */
+		Vector operator- ();
 
-		Vector operator* (const double lambda);
+		/* Addition */
+		Vector operator+ (const Vector &v) const;
+		Vector& operator+= (const Vector &v);
+		Vector operator- (const Vector &v) const;
+		Vector& operator-= (const Vector &v);
+
+		/* Skalarmultiplikation */
+		Vector operator* (const double lambda) const;
 		Vector operator*= (const double lambda);
-		Vector operator/ (const double lambda);
+		Vector operator/ (const double lambda) const;
 		Vector operator/= (const double lambda);
 		
-		Vector operator- ();
-		Vector operator^ (const Vector &v);			
+		/* Skalarprodukt */
+		double operator* (const Vector &v) const;
 
-		double norm ();
+		/* Kreuzprodukt */
+		Vector operator^ (const Vector &v) const;
+
+		/* Euklidische Vektornorm */
+		double norm () const;
 };
 
 
